@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/astaxie/beego"
-	"juhe/jhgateway/controllers/gateway"
+	"dongfeng-pay/jhgateway/controllers/gateway"
 )
 
 func init() {

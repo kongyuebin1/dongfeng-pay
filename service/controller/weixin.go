@@ -10,7 +10,7 @@
 package controller
 
 import (
-	"juhe/service/models"
+	"dongfeng-pay/service/models"
 )
 
 type WeiXinImpl struct {

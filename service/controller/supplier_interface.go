@@ -10,7 +10,7 @@
 package controller
 
 import (
-	"juhe/service/models"
+	"dongfeng-pay/service/models"
 )
 
 //定义扫码支付的返回值

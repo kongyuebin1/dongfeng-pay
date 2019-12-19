@@ -3,10 +3,10 @@ package main
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	_ "juhe/jhmerchant/routers"
-	"juhe/jhmerchant/sys"
-	"juhe/jhmerchant/utils"
-	"juhe/service/service_init"
+	_ "dongfeng-pay/jhmerchant/routers"
+	"dongfeng-pay/jhmerchant/sys"
+	"dongfeng-pay/jhmerchant/utils"
+	"dongfeng-pay/service/service_init"
 )
 
 func init() {

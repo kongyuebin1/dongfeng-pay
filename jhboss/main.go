@@ -3,10 +3,10 @@ package main
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
-	_ "juhe/jhboss/routers"
-	_ "juhe/service/message_queue"
-	_ "juhe/service/models"
-	"juhe/service/service_init"
+	_ "dongfeng-pay/jhboss/routers"
+	_ "dongfeng-pay/service/message_queue"
+	_ "dongfeng-pay/service/models"
+	"dongfeng-pay/service/service_init"
 )
 
 func main() {

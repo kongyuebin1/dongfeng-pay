@@ -12,7 +12,7 @@ package message_queue
 import (
 	"github.com/astaxie/beego/logs"
 	"github.com/go-stomp/stomp"
-	"juhe/service/common"
+	"dongfeng-pay/service/common"
 	"os"
 	"time"
 )

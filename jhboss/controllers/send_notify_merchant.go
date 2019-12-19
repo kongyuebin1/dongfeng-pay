@@ -14,8 +14,8 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/httplib"
 	"github.com/astaxie/beego/logs"
-	"juhe/service/common"
-	"juhe/service/models"
+	"dongfeng-pay/service/common"
+	"dongfeng-pay/service/models"
 	"strings"
 )
 

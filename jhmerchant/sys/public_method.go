@@ -11,7 +11,7 @@ package sys
 
 import (
 	"fmt"
-	"juhe/jhmerchant/sys/enum"
+	"dongfeng-pay/jhmerchant/sys/enum"
 	"math/rand"
 	"os"
 	"strconv"

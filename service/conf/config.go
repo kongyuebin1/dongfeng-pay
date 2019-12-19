@@ -14,5 +14,5 @@ package conf
 //	DB_PORT     = "3306"
 //	DB_USER     = "root"
 //	DB_PASSWORD = ""
-//	DB_BASE     = "juhe_pay"
+//	DB_BASE     = "dongfeng-pay_pay"
 //)

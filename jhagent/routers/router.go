@@ -3,7 +3,7 @@ package routers
 import (
 	"github.com/astaxie/beego"
 	"github.com/dchest/captcha"
-	"juhe/jhagent/controllers"
+	"dongfeng-pay/jhagent/controllers"
 )
 
 func init() {

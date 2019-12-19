@@ -10,9 +10,9 @@
 package service_init
 
 import (
-	_ "juhe/service/message_queue"
-	"juhe/service/models"
-	"juhe/service/controller"
+	_ "dongfeng-pay/service/message_queue"
+	"dongfeng-pay/service/models"
+	"dongfeng-pay/service/controller"
 )
 
 func InitAll() {

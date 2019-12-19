@@ -3,11 +3,11 @@ package main
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
-	"juhe/jhmicro/notify"
-	"juhe/jhmicro/order_settle"
-	"juhe/jhmicro/pay_for"
-	"juhe/jhmicro/query"
-	"juhe/service/service_init"
+	"dongfeng-pay/jhmicro/notify"
+	"dongfeng-pay/jhmicro/order_settle"
+	"dongfeng-pay/jhmicro/pay_for"
+	"dongfeng-pay/jhmicro/query"
+	"dongfeng-pay/service/service_init"
 )
 
 func main() {

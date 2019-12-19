@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	_ "juhe/jhgateway/routers"
-	"juhe/service/service_init"
+	_ "dongfeng-pay/jhgateway/routers"
+	"dongfeng-pay/service/service_init"
 )
 
 func main() {

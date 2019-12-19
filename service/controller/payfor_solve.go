@@ -13,10 +13,10 @@ import (
 	"fmt"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
-	"juhe/service/common"
-	"juhe/service/message_queue"
-	"juhe/service/models"
-	"juhe/service/utils"
+	"dongfeng-pay/service/common"
+	"dongfeng-pay/service/message_queue"
+	"dongfeng-pay/service/models"
+	"dongfeng-pay/service/utils"
 	"strings"
 )
 

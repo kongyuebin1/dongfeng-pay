@@ -14,7 +14,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
-	"juhe/service/conf"
+	"dongfeng-pay/service/conf"
 )
 
 func Init() {

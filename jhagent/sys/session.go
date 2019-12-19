@@ -11,7 +11,7 @@ package sys
 
 import (
 	"github.com/astaxie/beego"
-	"juhe/jhagent/sys/enum"
+	"dongfeng-pay/jhagent/sys/enum"
 )
 
 func InitSession() {
