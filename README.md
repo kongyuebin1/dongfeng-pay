@@ -12,3 +12,16 @@ boss管理后台示意图
 ![Image text](http://139.196.82.110/doc/boss4.png)
 ![Image text](http://139.196.82.110/doc/boss5.png)
 ![Image text](http://139.196.82.110/doc/boss6.png)
+
+商户后台部分截图
+![Image_text](http://139.196.82.110/doc/merchant1.png)
+![Image text](http://139.196.82.110/doc/merchant2.png)
+
+代理后台部分截图
+![Image_text](http://139.196.82.110/doc/agent1.png)
+![Image text](http://139.196.82.110/doc/agent2.png)
+![Image text](http://139.196.82.110/doc/agent3.png)
+
+# 后话
+1：因为是模拟了三方的支付系统，所有很多功能都是实现了（你懂得）。
+2：还有一部分功能没有写上去，有需要的可以在上面进行二次开发。
