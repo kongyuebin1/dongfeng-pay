@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>收银台</title>
+    <link rel="shortcut icon" type="tmpay/image/x-icon" href="../../static/img/icon.ico">
+    <link rel="stylesheet" type="text/css" href="../../static/css/hy_basic.css">
+</head>
+
+<body style="">
+<div class="tastesdk-box" style="margin-top: 15%;">
+    <div class="main">
+        <div class="typedemo" style="height: 600px;">
+            <div style="z-index:100;background:#000000;position:absolute;left:0px;top:0px;display:none;"
+                 id="cover"></div>
+            <div class="container">
+                <div class="c-box1 clearfix">
+                    <div class="bt_border-green">
+                        <div class="hy-hd0815 vip20130401 c30 clearfix">
+                            <div class="pay_box fl">
+                                <ul class="disc">
+                                {{if eq .statusCode "00"}}
+                                    <h3><img src="../../static/img/barcode/joker.png"></h3>
+                                    <li>
+                                        交易金额：{{.orderPrice}}
+                                    </li>
+                                    <li>
+                                        交易订单号：{{.orderNo}}
+                                    </li>
+                                {{else}}
+                                    <li>
+                                        交易失败：{{.statusMsg}}
+                                    </li>
+                                {{end}}
+                                    <li>
+                                        交易状态：<span id="status">等待支付</span>
+                                    </li>
+                                    <li>
+                                        此订单5分钟内交易有效!
+                                    </li>
+                                    <br>
+                                    <li style="float: right;list-style: none;">
+                                        <a href="/youxi" style="text-decoration: none;" class="c00">返回支付页</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    //每隔2秒检测cookie中订单状态
+    var count = 0;
+    setInterval('getSession()', 3000);
+    function getSession() {
+        if (count <= 300) {
+            $.ajax({
+                type: "GET",
+                url: "/queryOrderStatus.py/" +{{.orderNo}},
+                dataType: "JSON",
+                success: function (res) {
+                    console.info(res.code);
+                    if (res.code == "9") {
+                        $("#status").val(res.tradeStatus);
+                        window.location.href = "/queryOrder.py/";
+                    }
+                }
+            });
+            count++;
+        }
+    }
+</script>
+</body>
+</html>

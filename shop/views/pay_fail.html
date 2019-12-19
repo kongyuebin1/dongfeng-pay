@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>收银台</title>
+    <link rel="shortcut icon" type="tmpay/image/x-icon" href="../static/img/icon.ico">
+    <link rel="stylesheet" type="text/css" href="../static/css/hy_basic.css">
+</head>
+
+<body style="">
+<div class="tastesdk-box" style="margin-top: 15%;">
+    <div class="main">
+        <div class="typedemo" style="height: 600px;">
+            <div style="z-index:100;background:#000000;position:absolute;left:0px;top:0px;display:none;"
+                 id="cover"></div>
+            <div class="container">
+                <div class="c-box1 clearfix">
+                    <div class="bt_border-green">
+                        <div class="hy-hd0815 vip20130401 c30 clearfix">
+                            <div class="pay_box fl">
+
+
+                                <h3><img src="../static/img/pay_fail.png">支付失败!</h3>
+                                <ul class="disc">
+                                    <li>
+                                        银行卡已扣款
+                                        <p class="c999">可能是由于网络传输发生故障或延时造成的，请稍后再次查看订单状态，勿重复支付。</p>
+                                    </li>
+                                    <li>
+                                        银行卡未扣款
+                                        <p class="c999">请选择其他支付方式完成支付。<a
+                                                href="/payfor.py" class="c00">返回支付页</a>
+                                        </p>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

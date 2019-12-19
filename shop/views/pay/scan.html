@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>
+        {{.payTypeName}}    </title>
+    <link href="../../static/css/pay.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+<div class="body">
+    <h1 class="mod-title">
+        <span class="ico_log
+        ico-0"></span>
+    </h1>
+    <div class="mod-ct">
+        <div class="order">
+        </div>
+        <div class="amount" id="money" style="font-size: 8px;">
+            <label style="color: red;font-size: 30px;">￥{{.price}}</label>        </div>
+        <div class="paybtn" style="display: none;" id="btnalipay">
+            <div class="payalipaybtn" style="display: none;">
+                {{.openApp}}
+            </div>
+
+            <h1 style="font-size:1.5em;color:red;">1.截图保存二维码到手机</h1>
+            <h1 style="font-size:1.5em;color:red;">2.打开对应的app进行支付</h1>            <div id="openalipay" style="display: none"></div>
+        </div>
+        <div style="color:blue;font-size:13px; display: block;">
+            方式一：直接打开app进行支付APP扫码支付！<br/>            方式二：截图保存到相册，再打开app扫一扫，从相册选择图片！<br>            温馨提示：请不要重复支付，不要修改金额，否则无法到账 </div>        <div class="qrcode-img-wrapper" data-role="qrPayImgWrapper">
+        <div data-role="qrPayImg" class="qrcode-img-area">
+            <div class="ui-loading qrcode-loading" data-role="qrPayImgLoading" style="display: none;"></div>
+            <div style="position: relative;display: inline-block;">
+                <div id="show_qrcode" style="padding:8px;"></div>
+                <img src="{{.qrCode}}" width="200px" height="200px">
+            </div>
+        </div>
+    </div>
+
+        <div class="time-item" style="padding-top: 5px">
+            <div class="time-item" id="msg"><h2>付款即时到账，未到账可联系我们。                    <br>订单号：{{.orderNo}}</h2></div>
+
+        </div>
+       {{/* <div class="tip">
+            <div class="tip-text">
+                <i src="../../static/img/epay.jpg" width="30" height="30"></i>                <p id="showtext">打开
+                各大银行APP [扫一扫]</p>
+            </div>
+        </div>*/}}
+        <div class="tip-text">
+        </div>
+    </div>
+
+</div>
+
+<br>
+<script type="text/javascript" src="../../static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    //每隔2秒检测cookie中订单状态
+    var count = 0;
+    /*setInterval('getSession()', 3000);
+    function getSession() {
+        if (count <= 300) {
+            $.ajax({
+                type: "GET",
+                url: "/queryOrderStatus.py/" +{{.orderNo}},
+                dataType: "JSON",
+                success: function (res) {
+                    console.info(res.code);
+                    if (res.code == "9") {
+                        $("#status").val(res.tradeStatus);
+                        window.location.href = "/queryOrder.py/";
+                    }
+                }
+            });
+            count++;
+        }*/
+    }
+</script>
+</body>
+</html>
+

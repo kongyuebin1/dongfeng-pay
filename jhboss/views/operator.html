@@ -1,0 +1,491 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>商户后台</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+	<style type="text/css" media="screen">
+		.first-input-group .basic-url, .operator-input-group .basic-url {
+			width: 210px;
+		}
+		.status-input-group .basic-url, .operator-input-group .basic-url {
+			width: 150px;
+		}
+		.change-operator-remark {
+			width: 220px;
+			height: 100px;
+		}
+		.operator-name-error, .operator-password-error, .operator-role-error {
+			display: inline-block;
+			margin-left: 20px;
+			margin-top: 6px;
+			color: red;
+		}
+		.add-operator-button {
+			margin-bottom: 10px;
+			margin-left: 10px;
+		}
+		#userId {
+			padding-left: 10px;
+			padding-bottom: 10px;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="search">
+		<div>
+			<span>操作员名称</span>
+			<input type="text" class="operator-name" value="" placeholder="模糊匹配">
+		</div>
+		<div>
+			<button type="button" class="btn btn-default operator-name-search">搜索</button>
+		</div>
+	</div>
+
+	<div class="add-menu">
+		<button type="button" class="btn btn-default btn-xs glyphicon glyphicon-plus add-operator-button" data-toggle="modal" data-target="#addOperatorModal">新加操作员</button>
+	</div>
+	<!-- 添加操作员的模态框 -->
+	<div class="modal fade" id="addOperatorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="addPowerButton">添加新的操作员</h4>
+	      </div>
+			
+	      <div class="modal-body modal-body-menu">
+	      	<div class="input-group first-input-group">
+			  <span class="input-group-addon basic-addon">登录账号</span>
+			  <input type="text" class="form-control basic-url operator-account" value="">
+			  <span class="operator-name-error"></span>
+			</div>
+			<div class="input-group first-input-group">
+			  <span class="input-group-addon basic-addon">初始密码</span>
+			  <input type="password" class="form-control basic-url operator-password" value="">
+			  <span class="operator-password-error"></span>
+			</div>
+
+			<div class="input-group operator-input-group">
+	      		<span class="input-group-addon basic-addon">角色分配</span>
+      			<div class="select-content">
+      				<select id="operator-role-select">
+      					<option value="none">请选择</option>
+      				</select>
+	      		</div>
+	      		<span class="operator-role-error"></span>
+	      	</div>
+	      	<div class="input-group status-input-group">
+	      		<span class="input-group-addon basic-addon">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</span>
+      			<div class="select-content">
+      				<select id="operator-status-select">
+      					<option value="active">激活</option>
+      					<option value="unactive">冻结</option>
+      				</select>
+	      		</div>
+	      	</div>
+	      	<div>
+			  <span class="operator-remark-word">操作员描述:</span>
+			  <textarea class="operator-remark"></textarea>
+			</div>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default cancel-operator" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary save-operator">保存</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- end 模态框 -->
+	<!-- 修改操作员信息的模态框 -->
+	<div class="modal fade" id="editOperatorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="editOperatorButton">添加新的操作员</h4>
+	      </div>
+			
+	      <div class="modal-body modal-body-menu">
+	      	<div class="input-group first-input-group" id="userId">
+	      		<span>用户id：</span>
+	      		<span class="userId"></span>
+	      	</div>
+			<div class="input-group first-input-group">
+			  <span class="input-group-addon basic-addon">修改密码</span>
+			  <input type="password" class="form-control basic-url change-operator-password" value="">
+			  <span class="change-operator-password-error"></span>
+			</div>
+
+			<div class="input-group first-input-group">
+			  <span class="input-group-addon basic-addon">确认密码</span>
+			  <input type="password" class="form-control basic-url veritfy-operator-password" value="">
+			  <span class="veritfy-operator-password-error"></span>
+			</div>
+
+			<div class="input-group first-input-group">
+			  <span class="input-group-addon basic-addon">修改昵称</span>
+			  <input type="text" class="form-control basic-url change-operator-nick" value="">
+			  <span class="change-operator-password-error"></span>
+			</div>
+
+			<div class="input-group operator-input-group">
+	      		<span class="input-group-addon basic-addon">修改角色</span>
+      			<div class="select-content">
+      				<select id="change-operator-role-select">
+      					<option value="none">请选择</option>
+      				</select>
+	      		</div>
+	      		<span class="change-operator-role-error"></span>
+	      	</div>
+	      	
+	      	<div>
+			  <span class="operator-remark-word">操作员描述:</span>
+			  <textarea class="change-operator-remark"></textarea>
+			</div>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default change-cancel-operator" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary change-save-operator">保存</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- end 模态框 -->
+	<div class="menu-table">
+		<table>
+			<thead class="thead-dark">
+				<tr>
+					<th>序列号</th>
+					<th>账号</th>
+					<th>角色</th>
+					<th>昵称</th>
+					<th>备注</th>
+					<th>状态</th>
+					<th>创建时间</th>
+					<th>编辑</th>
+				</tr>
+			</thead>
+			<tbody id="operator_table_body">
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页插件 -->
+	<div class="cut_page">
+		<li>
+			每页显示
+			<select id="display_count">
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+		</li>
+		
+		<li class="current_total_page">第<span class="current_page">0</span>/<span class="total_page">0</span>页</li>
+		<li class="pre_page">上一页</li>
+		<li class="next_page">下一页</li>
+		<li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+	</div>
+	
+	<script>
+		function getOperatorData() {
+			let operatorName = $(".operator-name").val();
+			let displayCount = $("#display_count").val();
+			let currentPage = $(".current_page").html();
+			let totalPage = $(".total_page").html();
+			let jumpPage = $(".jump_page input").val();
+			return dataJSON = {
+				"operatorName":operatorName,
+				"displayCount":displayCount,
+				"currentPage":currentPage,
+				"totalPage":totalPage,
+				"jumpPage":jumpPage
+			};
+		}
+		function operatorAjax(dataJSON, hostUrl) {
+			$.ajax({
+				url: hostUrl,
+				data: dataJSON,
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+						return;
+					}
+					if (hostUrl.indexOf("/get/allRole") != -1) {
+						loadRoleListToModal(res);
+					} else if (hostUrl.indexOf("/add/operator") != -1) {
+						addOperator(res);
+					} else if (hostUrl.indexOf("/get/operator") != -1) {
+						showOperatorList(res);
+					} else if (hostUrl.indexOf("/delete/operator") != -1) {
+						alert("删除成功");
+						operatorAjax(getOperatorData(), "/get/operator");
+					} else if (hostUrl.indexOf("/freeze/operator") != -1) {
+						alert("冻结成功");
+						operatorAjax(getOperatorData(), "/get/operator");
+					} else if (hostUrl.indexOf("/unfreeze/operator") != -1) {
+						alert("解冻成功");
+						operatorAjax(getOperatorData(), "/get/operator");
+					}
+				},
+
+				error: function() {
+					alert("系统异常，请稍后再试");
+				}
+			});
+		}
+		$(".change-save-operator").click(function() {
+			clearChangeContent();
+			let userId = $(".userId").html();
+			let password = $(".change-operator-password").val();
+			let changePassword = $(".veritfy-operator-password").val();
+			let nick = $(".change-operator-nick").val();
+			let role = $("#change-operator-role-select").val();
+			let remark = $(".change-operator-remark").val();
+
+			if (role == "none") {
+				$(".change-operator-role-error").html("*角色不能为空");
+				return;
+			} else if ((password.length > 0 || changePassword.length > 0) && password != changePassword) {
+				$(".change-operator-password-error").html("修改");
+				return;
+			}
+
+			$.ajax({
+				url: "/edit/operator",
+				data: {
+					"userId":userId,
+					"password":password,
+					"changePassword":changePassword,
+					"nick":nick,
+					"role":role,
+					"remark":remark
+				},
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						$(res.Key).val(res.Msg);
+					} else if (res.Code == -2){
+						alert(res.Msg);
+						$(".change-cancel-operator").trigger("click");
+					} else {
+						alert("修改成功");
+						$(".change-cancel-operator").trigger("click");
+						operatorAjax(getOperatorData(), "/get/operator");
+					}
+				},
+				error: function() {
+					alert("系统异常，请稍后再试");
+				}
+			});
+		});
+		function showOperatorList(res) {
+			if (res.OperatorList.length == 0) {
+				$("#operator_table_body").html("没有数据可显示");
+			} else {
+				$(".current_page").html(res.CurrentPage);
+				$(".total_page").html(res.TotalPage);
+				$("#display_count option").each(function() {
+					if ($(this).text() == res.DisplayCount) {
+						$(this).attr('selected', true);
+					}
+				});
+				$(".jump_page input").val("");
+				let str = "";
+				for (let i = 0; i < res.OperatorList.length; i ++) {
+					let v = res.OperatorList[i];
+					let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+						  "<th>" + v.UserId + "</th>" + "<th>" + v.RoleName + "</th>" + "<th>" + v.Nick + "</th>" +
+						  "<th>" + v.Remark + "</th>" + "<th>" + v.Status + "</th>" +
+						  "<th>" + v.CreateTime + "</th>";
+
+					tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' + 
+					'<button type="button" value="' + v.UserId +'" class="btn btn-default" onclick="editOperator(this.value);"><span class="glyphicon glyphicon-pencil"></span></button>' +
+					'<button type="button" value="' + v.UserId +'" class="btn btn-default" onclick="freezeOperator(this.value);"><span>冻结</span></button>' +
+					'<button type="button" value="' + v.UserId +'" class="btn btn-default" onclick="unfreezeOperator(this.value);"><span>解冻</span></button>' +
+					'<button type="button" value="' + v.UserId +'" class="btn btn-default" onclick="deleteOperator(this.value);"><span class="glyphicon glyphicon-trash"></span></button>' + 
+					'</div>' + "</th>" + "</tr>";
+					str = str + tmp;
+					str = str.replace(/unactive/, "冻结").replace(/active/, "激活");
+				}
+				$("#operator_table_body").html(str);
+				operatorAjax({}, "/get/allRole");
+			}
+		}
+		function clearChangeContent() {
+			$(".change-operator-password-error").html("");
+			$(".veritfy-operator-password-error").html("");
+			$(".change-operator-role-error").html("");
+			$(".change-operator-remark").html("");
+		}
+		function editOperator(userId) {
+			let dataJSON = {"userId":userId};
+			$.ajax({
+				url: "/get/editOperator",
+				data: dataJSON,
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.OperatorList.length == 0) {
+						alert("获取单个操作者信息失败");
+					} else {
+						let o = res.OperatorList[0];
+						$(".userId").html(o.UserId);
+						$("#change-operator-role-select option").each(function() {
+							if (o.Role == $(this).val()) {
+								$(this).attr("selected", "selected");
+							}
+						});
+						$(".change-operator-nick").val(o.Nick);
+						$(".change-operator-remark").html(o.Remark);
+						$("#editOperatorModal").modal();
+					}
+				},
+
+				error: function() {
+					alert("获取单个操作者信息失败");
+				}
+			});
+		}
+
+		function freezeOperator(userId) {
+			let dataJSON = getOperatorData();
+			dataJSON["operatorName"] = userId;
+			operatorAjax(dataJSON, "/freeze/operator");
+		}
+
+		function unfreezeOperator(userId) {
+			let dataJSON = getOperatorData();
+			dataJSON["operatorName"] = userId;
+			operatorAjax(dataJSON,  "/unfreeze/operator");
+		}
+
+		function deleteOperator(userId) {
+			if (!window.confirm("是否要删除？")) {
+				return;
+			}
+			operatorAjax({"userId":userId},"/delete/operator");
+		} 
+		//当每页显示数更改后，执行的操作
+		$("#display_count").change(function() {
+			let dataJSON = getOperatorData();
+			operatorAjax(dataJSON, "/get/operator");
+		});
+
+		//点击上一页的按钮
+		$(".pre_page").click(function() {
+			let dataJSON = getOperatorData();
+
+			if (dataJSON["currentPage"] == 1) {
+				return;
+			}
+			dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) - 1;
+			operatorAjax(dataJSON, "/get/operator");
+		});
+	    //点击下一页的按钮时
+	    $(".next_page").click(function() {
+	 		let dataJSON = getOperatorData();
+
+			if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+				return;
+			}
+
+			dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+			operatorAjax(dataJSON, "/get/operator");
+	    });
+	    //点击跳转那一页的按钮
+	    $(".jump_page button").click(function() {
+	  		let dataJSON = getOperatorData();
+
+			if (dataJSON["jumpPage"].length <= 0) {
+				return;
+			}
+			operatorAjax(dataJSON, "/get/operator");
+	    });
+
+		function addOperator(res) {
+			if (res.Code == -1) {
+				$(res.Key).html(res.Msg);
+			} else {
+				alert(res.Msg);
+				$(".cancel-operator").trigger('click');		
+				operatorAjax(getOperatorData(), "/get/operator");
+			}
+		}
+
+		function loadRoleListToModal(res) {
+			if (res.Code != 200) {
+				return;
+			}
+			let str = '<option value="none">请选择</option>';
+			for (let i = 0; i < res.RoleInfoList.length; i ++) {
+				let r = res.RoleInfoList[i];
+				str +=  '<option value="' + r.RoleUid + '">' + r.RoleName + '</option>';
+			}
+			$("#operator-role-select").html(str);
+			$("#change-operator-role-select").html(str);
+		}
+
+		function clearContent() {
+			$(".operator-remark").val("");
+			$(".operator-account").val("");
+			$(".operator-password").val("");
+			$(".operator-name-error").html("");
+			$(".operator-password-error").html("");
+		}
+		$(".add-operator-button").click(function() {
+			clearContent();
+		});
+
+		$(".save-operator").click(function() {
+			$(".operator-name-error").html("");
+			$(".operator-password-error").html("");
+			$(".operator-role-error").html("");
+
+			let operatorAccount = $(".operator-account").val();
+			let operatorPassword = $(".operator-password").val();
+			let operatorRole = $("#operator-role-select").val();
+			let status = $("#operator-status-select").val();
+			let remark = $(".operator-remark").val();
+
+			if (operatorAccount.length <= 0) {
+				$(".operator-name-error").html("*登录账号不能为空");
+				return;
+			}
+			if (operatorPassword.length <= 0) {
+				$(".operator-password-error").html("*初始密码不能为空");
+				return;
+			}
+			if (operatorRole == "none") {
+				$(".operator-role-error").html("请选择角色");
+				return;
+			}
+			let dataJSON = {
+				"operatorAccount" : operatorAccount,
+				"operatorPassword" : operatorPassword,
+				"operatorRole" : operatorRole,
+				"status" : status,
+				"remark" : remark
+			};
+			operatorAjax(dataJSON, "/add/operator");
+		});
+
+		$(function() {
+			operatorAjax(getOperatorData(), "/get/operator");
+		});
+
+		$(".operator-name-search").click(function() {
+			operatorAjax(getOperatorData(),"/get/operator");
+		});
+	</script>
+</body>
+</html>

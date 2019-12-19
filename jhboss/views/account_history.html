@@ -1,0 +1,219 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>后台管理</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+	<link rel="stylesheet" type="text/css" href="../static/lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+	<script src="../static/js/filter.js"></script>
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="../static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="../static/js/basic.js"></script>
+	<style>
+		#account-history-table-body tr {
+			height: 30px;
+		}
+        .account-history-record .search {
+            margin: 0;
+            padding: 0;
+        }
+        .search label {
+            font-weight: normal;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 20px;
+        }
+        .search label select {
+            height: 30px;
+        }
+	</style>
+</head>
+<body>
+<div class="account-history-record">
+	<div class="search">
+        <label for="">
+            开始时间：
+            <input type="text" name="" value="" id="account-history-start-time" class="start-time" value="">
+        </label>
+        <label for="">
+            结束时间：
+            <input type="text" name="" value="" id="account-history-end-time" class="end-time" value="">
+        </label>
+        <label for="">
+            账户名称：
+            <input type="text" id="account-history-name" value="">
+        </label>
+        <label for="">
+            账户编号：
+            <input type="text" id="account-history-no" value="">
+        </label>
+        <label for="">
+            动账类型：
+            <select id="account-history-type">
+                <option value="">请选择</option>
+                <option value="plus-amount">加款</option>
+                <option value="sub-amount">减款</option>
+                <option value="freeze-amount">冻结</option>
+                <option value="unfreeze-amount">解冻</option>
+            </select>
+        </label>
+
+        <button type="button" class="btn btn-primary" id="account-history-search">搜索</button>
+	</div>
+	
+	<div class="menu-table">
+		<table>
+			<thead class="thead-dark">
+				<tr>
+					<th>序列号</th>
+					<th>账户编号</th>
+					<th>账户名称</th>
+					<th>动账类型</th>
+					<th>动账金额</th>
+					<th>当前余额</th>
+					<th>动账时间</th>
+				</tr>
+			</thead>
+			<tbody id="account-history-table-body">
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页插件 -->
+	<div class="cut_page">
+		<li>
+			每页显示
+			<select id="display_count">
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+		</li>
+		
+		<li class="current_total_page">第<span class="current_page">0</span>/<span class="total_page">0</span>页</li>
+		<li class="pre_page">上一页</li>
+		<li class="next_page">下一页</li>
+		<li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+	</div>
+</div>
+
+<script>
+	function getAccountHistoryCutPageValues() {
+		let displayCount = $("#display_count").val();
+		let currentPage = $(".current_page").html();
+		let totalPage = $(".total_page").html();
+		let jumpPage = $(".jump_page input").val();
+		let accountHistoryName = $("#account-history-name").val();
+		let accountHistoryNo = $("#account-history-no").val();
+		let operatorType = $("#account-history-type").val();
+		let startTime = $("#account-history-start-time").val();
+		let endTime = $("#account-history-end-time").val();
+
+		return {
+			"displayCount":displayCount,
+			"currentPage":currentPage,
+			"totalPage":totalPage,
+			"jumpPage":jumpPage,
+			"accountHistoryName":accountHistoryName,
+			"accountHistoryNo":accountHistoryNo,
+			"operatorType":operatorType,
+			"startTime":startTime,
+			"endTime":endTime
+		};
+	}
+	function setAccountHistoryCutPageValues(res) {
+		$(".current_page").html(res.CurrentPage);
+		$(".total_page").html(res.TotalPage);
+		$("#display_count option").each(function() {
+			if ($(this).text() == res.DisplayCount) {
+				$(this).attr('selected', true);
+			}
+		});
+		$(".jump_page input").val("");
+	}
+
+	function showAccountHistoryList(res) {
+        setAccountHistoryCutPageValues(res);
+		let str = "";
+		for (let i = 0; i < res.AccountHistoryList.length; i ++) {
+			let v = res.AccountHistoryList[i];
+			let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+				  "<th>" + v.AccountUid + "</th>" + "<th>" + v.AccountName + "</th>" + "<th>" + v.Type + "</th>" +
+				  "<th>" + v.Amount + "</th>" + "<th>" + v.Balance + "</th>" + "<th>" + v.CreateTime + "</th>";
+			tmp = tmp.replace("plus_amount", "加款").replace("sub_amount", "减款").replace("unfreeze_amount", "解冻").replace("freeze_amount", "冻结");
+			str = str + tmp;
+		}
+		
+		$("#account-history-table-body").html(str);
+	}
+	function ajaxAccountHistoryList(dataJSON) {
+		$.ajax({
+			url:"/get/account/history",
+			data: dataJSON,
+
+			success: function(res) {
+				if (res.Code == 404) {
+					window.parent.location = "/login.html";
+				} else if (res.Code == -1) {
+					alert("获取账户数据列表失败");
+				} else {
+					showAccountHistoryList(res);
+				}
+			},
+			error: function(res) {
+				alert("系统异常，请稍后再试");
+			} 
+		});
+	}
+	$("#account-history-search").click(function() {
+		let dataJSON = getAccountHistoryCutPageValues();
+		ajaxAccountHistoryList(dataJSON);
+	});
+	//当每页显示数更改后，执行的操作
+	$("#display_count").change(function() {
+		let dataJSON = getAccountHistoryCutPageValues();
+		ajaxAccountHistoryList(dataJSON);
+	});
+
+	//点击上一页的按钮
+	$(".pre_page").click(function() {
+		let dataJSON = getAccountHistoryCutPageValues();
+
+		if (dataJSON["currentPage"] == 1) {
+			return;
+		}
+		dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) - 1;
+		ajaxAccountHistoryList(dataJSON);
+	});
+    //点击下一页的按钮时
+    $(".next_page").click(function() {
+ 		let dataJSON = getAccountHistoryCutPageValues();
+		if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+			return;
+		}
+		dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+		ajaxAccountHistoryList(dataJSON);
+    });
+    //点击跳转那一页的按钮
+    $(".jump_page button").click(function() {
+  		let dataJSON = getAccountHistoryCutPageValues();
+
+		if (dataJSON["jumpPage"].length <= 0) {
+			return;
+		}
+		ajaxAccountHistoryList(dataJSON);	
+    });
+   
+    $(function() {
+		let day = new Date(new Date().getTime() - 86400000);
+    	let s = dateFtt("yyyy-MM-dd hh:mm:ss", day);
+    	$(".start-time").val(s);
+    	ajaxAccountHistoryList(getAccountHistoryCutPageValues());
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理后台</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <script src="../static/js/filter.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="../static/js/basic.js"></script>
+    <style>
+        .search label {
+            font-weight: normal;
+            padding-right: 20px;
+        }
+
+        .order-record .search div {
+            height: 20px;
+        }
+        #search-order-supplier-name, #select-merchant-name,#search-notify-pay-type {
+            height: 30px;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="self_notify">
+    <div class="search form-inline">
+        <label for="">
+            <span>开始时间：</span>
+            <input type="text" name="" id="search-notify-start-time" class="start-time" value="">
+        </label>
+        <label for="">
+            <span>结束时间：</span>
+            <input type="text" name=""  id="search-notify-end-time" class="end-time" value="">
+        </label>
+        <label for="">
+            <span>商户名称：</span>
+            <select name="" id="select-merchant-name">
+            </select>
+        </label>
+        <label for="">
+            <span>商户名称：</span>
+            <select name="" id="search-order-supplier-name">
+            </select>
+        </label>
+
+        <label for="">
+            <span>回调类型：</span>
+            <select name="" id="notify-type">
+                <option value="">请选择</option>
+                <option value="order">支付回调</option>
+                <option value="payfor">代付回调</option>
+            </select>
+        </label>
+
+        <label for="">
+            <input type="button" class="btn btn-primary" value="开始" onclick="startNotify()">
+        </label>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">回调日志</h3>
+        </div>
+        <div class="panel-body" style="color: red;">
+        </div>
+    </div>
+    <script>
+        function getSearchValues() {
+            let startTime = $("#search-notify-start-time").val();
+            let endTime = $("#search-notify-end-time").val();
+            let merchantUid = $("#select-merchant-name").val();
+            let notifyType = $("#notify-type").val();
+
+            return {
+                "startTime": startTime,
+                "endTime":endTime,
+                "merchantUid":merchantUid,
+                "notifyType":notifyType
+            };
+        }
+        function sendNotify(bankOrderId) {
+            $.ajax({
+                url:"/self/send/notify",
+                data: {
+                    "bankOrderId":bankOrderId
+                },
+                success: function () {
+                }
+            });
+        }
+        function startNotify() {
+            if (!confirm("是否开始执行批量回调操作")){
+                return;
+            }
+            let dataJSON = getSearchValues();
+            $.ajax({
+                url: "/get/notify/bankOrderId/list",
+                data: dataJSON,
+                success: function (res) {
+                    if (res.Code == 404){
+                        window.parent.location = "/login.html";
+                    } else if (res.Code == 200) {
+                        $(".panel-body").html("回调处理中......");
+                        for (let i = 0;  i < res.NotifyIdList.length; i++) {
+                            sendNotify(res.NotifyIdList[i]);
+                            $(".panel-body").html("回调完毕");
+                        }
+                    }
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        $(function () {
+            let day = new Date(new Date().getTime() - 86400000);
+            let s = dateFtt("yyyy-MM-dd hh:mm:ss", day);
+            $("#search-notify-start-time").val(s);
+            setSupplier();
+            setMerchant();
+            /*let dataJSON = getOrderSearchValues();
+            AjaxOrderList(dataJSON);*/
+        });
+    </script>
+</body>
+</html>

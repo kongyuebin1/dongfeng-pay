@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>收银台</title>
+    <link rel="shortcut icon" type="tmpay/image/x-icon" href="../static/img/icon.ico">
+    <link rel="stylesheet" type="text/css" href="../static/css/hy_basic.css">
+    <link href="../static/css/cashier.css" rel="stylesheet">
+</head>
+
+<body style="">
+<div class="tastesdk-box" style="margin-top: 15%;">
+    <div class="main">
+        <div class="typedemo" style="height: 600px;">
+            <div style="z-index:100;background:#000000;position:absolute;left:0px;top:0px;display:none;"
+                 id="cover"></div>
+            <div class="container">
+                <div class="c-box1 clearfix">
+                    <div class="bt_border-green">
+                        <div class="hy-hd0815 vip20130401 c30 clearfix">
+                            <div class="pay_box fl">
+
+
+                                <h3><img src="../static/img/pay_ok1.png">支付成功!</h3>
+                                <ul class="disc">
+                                    <li>交易订单号：{{.orderNo}}</li>
+                                    <li>付款金额：{{.orderPrice}} 元</li>
+                                    <li>交易时间：{{.orderTime}}</li>
+                                    <li><button type="button" onclick="javascript:window.location.href='{{.hrefUrl}}'" class="pcdemo-btn sbpay-btn">返回商城</button></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>收银台</title>
+    <link rel="shortcut icon" type="tmpay/image/x-icon" href="../../static/img/icon.ico">
+    <link rel="stylesheet" type="text/css" href="../../static/css/hy_basic.css">
+    <link href="../../static/css/cashier.css" rel="stylesheet">
+</head>
+
+<body style="">
+<form action="/payfor_kj.py/" method="post">
+    <div class="" style="margin-top: 15%;">
+        <div class="">
+            <div class="">
+                <div style="z-index:100;background:#000000;position:absolute;left:0px;top:0px;display:none;"
+                     id="cover"></div>
+                <div class="container">
+                    <div class="c-box1 clearfix">
+                        <div class="bt_border-green">
+                            <div class="hy-hd0815 vip20130401 c30 clearfix" style="height: 300px">
+                                <div class="pay_box fl">
+                                    <h3 style="position: absolute;left: 200px;"><img
+                                            src="../../static/img/pay-icon_user.png">&nbsp;&nbsp;请输入持卡人信息:</h3>
+                                    <br><br>
+                                    <ul class="disc" style="position: absolute;left: 280px;">
+                                        <li><span>身份证号：</span>
+                                            <input type="text" id="IDCard" name="IDCard"
+                                                   style="float: right;width: 148px" required/>
+                                        </li>
+                                        <li style="list-style: none;">
+                                            <span style="font-size: 13px;color: red;" id="vIDCard"></span>
+                                        </li>
+                                        <li><span>银行卡号：</span>
+                                            <input type="text" id="IDBank" name="IDBank"
+                                                   style="float: right;width: 148px" required/>
+                                        </li>
+                                        <li style="list-style: none;">
+                                            <span style="font-size: 13px;color: red;" id="vIDBank"></span>
+                                        </li>
+                                        <li><span>持卡人：</span>
+                                            <input type="text" id="userId" name="userId"
+                                                   style="float: right;width: 148px" required/>
+                                        </li>
+                                        <li><span>银行预留手机号：</span>
+                                            <input type="text" id="phone" name="phone" style="float: right;width: 148px"
+                                                   required/>
+                                        </li>
+                                        <li style="list-style: none;">
+                                            <span style="font-size: 13px;color: red;" id="vphone"></span>
+                                        </li>
+                                    {{/*<li><span>短信验证码：</span>*/}}
+                                    {{/*<input type="text" id="phoneCode" name="phoneCode"*/}}
+                                    {{/*style="float: right;width: 148px"*/}}
+                                    {{/*required/>*/}}
+                                    {{/*<button class="pcdemo-btn sbpay-btn"*/}}
+                                    {{/*style="width: 93px;line-height:25px;height:25px;background-color: #9a9a9a;position: absolute; left: 260px"*/}}
+                                    {{/*type="button"*/}}
+                                    {{/*onclick="javascript:history.go(-1);">重发短信验证码*/}}
+                                    {{/*</button>*/}}
+                                    {{/*</li>*/}}
+                                    </ul>
+                                    <div style="position: absolute; margin-top: 200px;left: 380px">
+                                        <button class="pcdemo-btn sbpay-btn" style="font-size: 20px" type="submit">提交
+                                        </button>
+                                        <button class="pcdemo-btn sbpay-btn"
+                                                style="width: 43px;background-color: #9a9a9a" type="button"
+                                                onclick="javascript:history.go(-1);">返回
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="text" name="kj" value="{{.kj}}" style="display: none"/>
+    <input type="text" name="orderNo" value="{{.orderNo}}" style="display: none"/>
+    <input type="text" name="money" value="{{.money}}" style="display: none"/>
+    <input type="text" name="productName" value="{{.productName}}" style="display: none" />
+</form>
+<script type="text/javascript" src="../../static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#IDCard").blur(function () {
+            var idCard1 = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/,
+                    idCard2 = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[A-Z])$/,
+                    card = $("#IDCard").val();
+            if (card.match(idCard1) == null && card.match(idCard2) == null) {
+                $("#vIDCard").html("身份证号输入不合法!");
+                return false;
+            } else {
+                $("#vIDCard").html("");
+            }
+        });
+        $("#IDBank").blur(function () {
+            var idBank = /^\d{13,}$/;
+            if ($("#IDBank").val().match(idBank) == null) {
+                $("#vIDBank").html("银行卡号输入不合法!");
+                return false;
+            } else {
+                $("#vIDBank").html("");
+            }
+        });
+        $("#phone").blur(function () {
+            var phone = /^[1][3,4,5,7,8][0-9]{9}$/;
+            if ($("#phone").val().match(phone) == null) {
+                $("#vphone").html("手机号输入不合法!");
+                return false;
+            } else {
+                $("#vphone").html("");
+            }
+        });
+    });
+
+    // function getPhoneCode() {
+    //     $.ajax({
+    //         type: "get",
+    //         url: "",
+    //         success: function (res) {
+    //             if (res.code == "9") {
+    //
+    //             }
+    //         }
+    //     });
+    // }
+</script>
+</body>
+
+</html>

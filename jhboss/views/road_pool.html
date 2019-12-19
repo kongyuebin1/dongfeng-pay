@@ -1,0 +1,666 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>管理后台</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+	<script src="../static/js/filter.js"></script>
+	<style type="text/css">
+		.road-pool-record, .edit-road-pool {
+			overflow-x: hidden;
+		}
+		.add-road-pool-button {
+			margin-bottom: 10px;
+		}
+		.edit-road-pool {
+			margin-top: 20px;
+		}
+		.edit-road-pool span {
+			display: inline-block;
+			width: 120px;
+		}
+		.modal-body-road-pool div {
+			margin-bottom: 20px;
+		}
+		.road-pool-name-error,
+		.road-pool-code-error {
+			color: red;
+			margin-left: 10px;
+		}
+		.edit-road-search {
+			border-bottom: 1px solid #e7e7e7;
+			margin-bottom: 10px;
+		}
+		.edit-road-search div {
+			display: inline-block;
+			margin-right: 20px;
+			margin-bottom: 10px;
+		}
+		.all-choose, .all-not-choose {
+			display: inline-block;
+			text-align: center;
+			width: 50px;
+			height: 30px;
+			line-height: 30px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			font-weight: normal;
+			margin-bottom: 5px;
+		}
+		.all-choose:hover, .all-not-choose:hover {
+			cursor: pointer;
+			background-color: #e7e7e7;
+		}
+		#choose-road-table-body th {
+			height: 30px;
+		}
+		.current_total_page span, .current_total_page span{
+			width: 10px;
+		}
+		.road-footer {
+			width: 86%;
+			position: fixed;
+			float: left;
+			bottom: 30px;
+			left: 14%;
+			height: 30px;
+			border: 1px solid #e7e7e7;
+			background-color: white;
+			box-sizing: border-box;
+		}
+		.road-footer .road-cannel-button, .road-footer .road-save-button {
+			display: inline-block;
+			margin-right: 15px;
+			margin-left: 5px;
+			width: 50px;
+			height: 28px;
+			border:  1px solid #e7e7e7;
+			box-sizing: border-box;
+			text-align: center;
+			line-height: 28px;
+			border-radius: 2px;
+		}
+		.road-cannel-button:hover, .road-save-button:hover {
+			cursor: pointer;
+			background-color: #e7e7e7;
+		}
+		.cut_page {
+			margin-bottom: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div class="road-pool-record">
+		<div class="search">
+			<div>
+				<span>通道池名称：</span>
+				<input type="text" class="road-pool-name-search" value="" placeholder="模糊匹配">
+			</div>
+			<div>
+				<span>通道池编号：</span>
+				<input type="text" class="product-pool-name-search" value="" placeholder="模糊匹配">
+			</div>
+			<div>
+				<button type="button" class="btn btn-default road-pool-search">搜索</button>
+			</div>
+		</div>
+		<button type="button" class="btn btn-default btn-xs glyphicon glyphicon-plus add-road-pool-button">添加通道池</button>
+		<div class="menu-table">
+			<table>
+				<thead class="thead-dark">
+					<tr>
+						<th>序列号</th>
+						<th>通道池名称</th>
+						<th>通道池编号</th>
+						<th>状态</th>
+						<th>通道池</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="road-pool-table-body">
+				</tbody>
+			</table>
+		</div>
+		<!-- 分页插件 -->
+		<div class="cut_page">
+			<li>
+				每页显示
+				<select id="display_count">
+					<option value="4">4</option>
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select>
+			</li>
+			
+			<li class="current_total_page">第<span class="current_page">0</span>/<span class="total_page">0</span>页</li>
+			<li class="pre_page">上一页</li>
+			<li class="next_page">下一页</li>
+			<li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+		</div>
+	</div>
+
+	<div class="edit-road-pool">
+		<input type="hidden" value="" class="road-pool-code-hide">
+		<div class="edit-road-search">
+			<div>
+				通道名称：
+				<input type="text" class="road-name-search" value="" placeholder="模糊匹配">
+			</div>
+			<div>
+				产品名称：
+				<input type="text" class="road-product-name-search" value="" placeholder="模糊匹配">
+			</div>
+			<div>
+				支付类型：
+				<input type="text" class="road-pay-type-search" value="">
+			</div>
+			<div>
+				<button type="button" class="btn btn-default edit-road-search-button">搜索</button>
+			</div>
+		</div>
+		
+		<div class="menu-table">
+			<table>
+				<thead class="thead-dark">
+					<tr>
+						<th><input type="checkbox" id="controller-all-checkbox"></th>
+						<th>序列号</th>
+						<th>通道名称</th>
+						<th>产品名称</th>
+						<th>支付类型</th>
+						<th>成本汇率</th>
+						<th>状态</th>
+						<th>通道总额度</th>
+						<th>每天限额</th>
+						<th>单笔区间</th>
+						<th>开放时间段</th>
+						<th>总流水</th>
+						<th>今日流水</th>
+						<th>总利润</th>
+						<th>今日利润</th>
+						<th>成功数/请求数</th>
+						<th hidden="hidden">通道uid</th>
+					</tr>
+				</thead>
+				<tbody id="choose-road-table-body">
+				</tbody>
+			</table>
+		</div>
+		<!-- 分页插件 -->
+		<div class="cut_page">
+			<li>
+				每页显示
+				<select id="display_count_1">
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select>
+			</li>
+			
+			<li class="current_total_page">第<span class="current_page" id="current_page">0</span>/<span class="total_page" id="total_page">0</span>页</li>
+			<li class="pre_page">上一页</li>
+			<li class="next_page">下一页</li>
+			<li class="jump_page">跳转 <input type="text" id="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+		</div>
+		<div class="road-footer">	
+			<word class="road-cannel-button">取消</word>
+			<word class="road-save-button">保存</word>
+		</div>
+
+	</div>
+
+	<!-- 模态框 -->
+	<div class="modal fade" id="roadPoolModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="addroadPoolButton">添加通道池</h4>
+	      </div>
+			
+	      <div class="modal-body modal-body-road-pool">
+	      	<div>
+	      		<span>通道池名称：</span>
+	      		<input type="text" value="" placeholder="" class="road-pool-name">
+	      		<span class="road-pool-name-error"></span>
+	      	</div>
+	      	<div>
+	      		<span>通道池编号：</span>
+	      		<input type="text" value="" class="road-pool-code">
+	      		<span class="road-pool-code-error"></span>
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default cancel-road-pool" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary save-road-pool">保存</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script>
+		//定义一个全局变量，保存当前所有操作的通道uid
+		var roadUid = [];
+		//保存前端操作删除的通道uid
+		var deleteRoadUid = [];
+		$(function() {
+			$(".road-pool-code-hide").val("");
+			$(".edit-road-pool").hide();
+			showRoadPoolRecord(getRoadPoolCutPagevalues());
+		});
+		$(".add-road-pool-button").click(function() {
+			$(".road-pool-name").val("");
+			$(".road-pool-code").val("");
+			$(".road-pool-name-error").html("");
+			$(".road-pool-code-error").html("");
+			$("#roadPoolModal").modal();
+		});
+		$(".save-road-pool").click(function() {
+			let roadPoolName = $(".road-pool-name").val();
+			let roadPoolCode = $(".road-pool-code").val();
+
+			$.ajax({
+				url: "/add/roadPool",
+				data: {
+					"roadPoolName":roadPoolName,
+					"roadPoolCode":roadPoolCode
+				},
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code != 200) {
+						alert(res.Msg);
+					} else {
+						alert("添加通道池成功");
+						$(".cancel-road-pool").trigger("click");
+						showRoadPoolRecord(getRoadPoolCutPagevalues());
+					}
+				}
+			});
+		});
+		function showRoadPoolRecord(dataJSON) {
+			// let dataJSON = getRoadCutPagevalues();
+			$.ajax({
+				url: "/get/roadPool",
+				data: dataJSON,
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+
+					} else if (res.Code != 200) {
+
+					} else {
+						$(".current_page").html(res.CurrentPage);
+						$(".total_page").html(res.TotalPage);
+						$("#display_count option").each(function() {
+							if ($(this).text() == res.DisplayCount) {
+								$(this).attr('selected', true);
+							}
+						});
+						$(".jump_page input").val("");
+
+						let str = "";
+
+						for (let i = 0; i < res.RoadPoolInfoList.length; i ++) {
+							let v = res.RoadPoolInfoList[i];
+							let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+								  "<th>" + v.RoadPoolName + "</th>" + "<th>" + v.RoadPoolCode + "</th>" + 
+								  "<th>" + v.Status + "</th>" +"<th>" + 
+								  '<button type="button" value="' + v.RoadPoolCode +'" class="btn btn-default" onclick="editRoadPool(this.value);"><span>配置通道</span></button>' + 
+								  "</th>";
+							tmp = tmp.replace("unactive", "冻结").replace("active", "激活");
+
+							tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' + 
+							'<button type="button" value="' + v.RoadPoolCode +'" class="btn btn-default" onclick="deleteRoadPool(this.value);"><span class="glyphicon glyphicon-trash"></span></button>' + 
+							'</div>' + "</th>" + "</tr>";
+							str = str + tmp;
+						}
+						
+						$("#road-pool-table-body").html(str);
+					}
+				},
+				error: function() {
+					alert("系统异常，请稍后再试");
+				}
+			});
+		} 
+
+		function showRoadRecordList(dataJSON) {
+			$.ajax({
+				url: "/get/road",
+				data: dataJSON,
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code != 200) {
+						alert("系统异常，请稍后再试");
+					} else {
+						$(".road-name-search").val("");
+						$("#current_page").html(res.CurrentPage);
+						$("#total_page").html(res.TotalPage);
+						$("#display_count_1 option").each(function() {
+							if ($(this).text() == res.DisplayCount) {
+								$(this).attr('selected', true);
+							}
+						});
+						$("#jump_page").val("");
+						$(".road-name-search").val("");
+						$(".road-product-name-search").val("");
+						$(".road-pay-type-search").val("");
+
+						let str = "";
+						for (let i = 0; i < res.RoadInfoList.length; i ++) {
+							let v = res.RoadInfoList[i];
+
+							let tmp = "<tr>" + "<th>" + '<input type="checkbox">' + "</th>" +
+							"<th>" + (res.StartIndex+i+1) + "</th>" + 
+							"<th>" + v.RoadName + "</th>" + "<th>" + v.ProductName + "</th>" +
+							"<th>" + v.PayType + "</th>" + "<th>" + v.BasicFee + "</th>" +
+							"<th>" + v.Status + "</th>" + "<th>" + v.TotalLimit + "</th>" +
+							"<th>" + v.TodayLimit + "</th>" + "<th>" + v.SingleMinLimit + "-" + v.SingleMaxLimit + "</th>" +
+							"<th>" + v.StarHour + "-" + v.EndHour + "</th>" + "<th>" + v.TotalIncome + "</th>" +
+							"<th>" + v.TodayIncome + "</th>" + "<th>" + v.TotalProfit + "</th>" +
+							"<th>" + v.TodayProfit + "</th>" + "<th>" + v.RequestSuccess + "/" + v.RequestAll + "</th>" + 
+							"<th hidden='hidden'>" + v.RoadUid + "</th>";
+
+							tmp = tmp.replace("unactive", "冻结").replace("active", "激活");
+							str = str + tmp;
+						}
+						$("#choose-road-table-body").html(str);
+						signCheckbox(res.RoadPool);
+					}
+				},
+
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				}
+			});
+		}
+		
+		function getRoadListCutPageValues() {
+			let displayCount = $("#display_count_1").val();
+			let currentPage = $("#current_page").html();
+			let totalPage = $("#total_page").html();
+			let jumpPage = $("#jump_page").val();
+			let roadName = $(".road-name-search").val();
+			let productName = $(".road-product-name-search").val();
+			let payType = $(".road-pay-type-search").val();
+			let roadPoolCode = $(".road-pool-code-hide").val();
+			return {
+				"displayCount":displayCount,
+				"currentPage":currentPage,
+				"totalPage":totalPage,
+				"jumpPage":jumpPage,
+				"roadName":roadName,
+				"productName":productName,
+				"payType":payType,
+				"roadPoolCode":roadPoolCode
+			};
+		}
+
+		function getRoadPoolCutPagevalues() {
+			let displayCount = $("#display_count").val();
+			let currentPage = $(".current_page").html();
+			let totalPage = $(".total_page").html();
+			let jumpPage = $(".jump_page input").val();
+			let roadPoolName = $(".road-pool-name-search").val();
+			let roadPoolCode = $(".product-pool-name-search").val();
+
+			return dataJSON = {
+				"roadPoolName":roadPoolName,
+				"roadPoolCode":roadPoolCode,
+				"displayCount":displayCount,
+				"currentPage":currentPage,
+				"totalPage":totalPage,
+				"jumpPage":jumpPage
+			};
+		}
+
+		function editRoadPool(roadPoolCode) {
+			//每次进来，清空数组
+			roadUid = [];
+			deleteRoadUid = [];
+			$("#jump_page").val("");
+			$(".road-pool-code-hide").val(roadPoolCode);
+			$(".edit-road-pool").show();
+			$(".road-pool-record").hide();
+			let dataJSON = getRoadListCutPageValues();
+			showRoadRecordList(dataJSON);
+		}
+
+		function deleteRoadPool(roadPoolCode) {
+			if (!window.confirm("是否确认删除该项?")) {
+				return false;
+			}
+			$.ajax({
+				url: "/delete/roadPool",
+				data:{
+					"roadPoolCode":roadPoolCode
+				},
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+
+					} else if (res.Code != 200) {
+					} else {
+						alert("删除成功");
+						showRoadPoolRecord(getRoadPoolCutPagevalues());
+					}
+				} 
+			});
+		} 
+		//给数组绑定一个删除remove函数
+		Array.prototype.remove = function(val) {
+			var index = this.indexOf(val);
+			if (index > -1) {
+				this.splice(index, 1);
+			}
+		};
+		//去重函数
+		function unique(uid) {
+			for (let i = 0; i < roadUid.length; i ++) {
+				if (roadUid[i] == uid) {
+					return true;
+				}
+			}
+			return false;
+		}
+		//将去重后的uid加入roadUid数组中
+		function PushUid(uid) {
+			if (!unique(uid)) {
+				roadUid.push(uid);
+			}
+		}
+		//判断uid是否存在deleteRoadUid
+		function ExistDeleteRoadUid(uid) {
+			for (let i = 0; i < deleteRoadUid.length; i ++) {
+				if (deleteRoadUid[i] == uid) {
+					return true;
+				}
+			}
+			return false;
+		}
+		// 标记已经被选的checkbox
+		function signCheckbox(roadPoolInfo) {
+			let uids = roadPoolInfo.RoadUidPool.split("||");
+			//需要将uid保存到roaduid全局数组中保存
+			for (let i = 0; i < uids.length; i ++) {
+				if (!unique(uids[i]) && !ExistDeleteRoadUid(uids[i])) {
+					roadUid.push(uids[i])
+				} 
+			}
+
+			$("#choose-road-table-body tr input:checkbox").each(function() {
+				let uid = $(this).parent().parent().children().eq(16).text();
+				for (let i = 0; i < roadUid.length; i ++) {
+					if (uid == roadUid[i]) {
+						$(this).prop('checked', 'true');
+						break;
+					}
+				}
+			});	
+		}
+		//点击最上面的checkbox做出的逻辑
+		$("#controller-all-checkbox").click(function() {
+			let flag;
+			$(".thead-dark input[type='checkbox']").each(function() {
+				flag = $(this).prop("checked");
+			});
+			if (flag == true) {
+				$("#choose-road-table-body input:checkbox").each(function() {
+					$(this).prop('checked', 'true');
+					let uid = $(this).parent().parent().children().eq(16).text();
+					PushUid(uid);
+					deleteRoadUid.remove(uid);
+				});;
+			} else {
+				$("#choose-road-table-body input:checkbox").each(function() {
+					$(this).removeAttr('checked');
+					let uid = $(this).parent().parent().children().eq(16).text();
+					roadUid.remove(uid);
+					if (!ExistDeleteRoadUid(uid)) {
+						deleteRoadUid.push(uid);
+					}
+				})
+			}
+		});
+		//监听checkbox的事件，如果有取消选择的，remove数组
+		$("#choose-road-table-body").on("change", "input:checkbox", function() {
+			let uid = $(this).parent().parent().children().eq(16).text();
+			if ($(this).prop('checked')) {
+				PushUid(uid);
+				deleteRoadUid.remove(uid);
+			} else {
+				roadUid.remove(uid);
+				if (!ExistDeleteRoadUid(uid)) {
+					deleteRoadUid.push(uid);
+				}
+			}
+		});
+		$(".road-cannel-button").click(function() {
+			$(".road-pool-record").show();
+			$(".edit-road-pool").hide();
+		});
+		$(".road-save-button").click(function() {
+			let roadPoolCode = $(".road-pool-code-hide").val();
+			$.ajax({
+				url: "/save/roadUid",
+				data: {
+					"roadPoolCode":roadPoolCode,
+					"roadUid":roadUid
+				},
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code != 200) {
+						alert("更改通道池失败")
+					} else {
+						alert("更改通道池通道成功");
+						$(".edit-road-pool").hide();
+						$(".road-pool-record").show();
+					}
+				},
+
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				}
+			});
+		});
+		$(".edit-road-search-button").click(function() {
+			let dataJSON = getRoadListCutPageValues();
+			showRoadRecordList(dataJSON);
+		});
+		$(".road-pool-search").click(function() {
+			let dataJSON = getRoadPoolCutPagevalues();
+			showRoadPoolRecord(dataJSON);
+		});
+		//当每页显示数更改后，执行的操作
+		$("#display_count").change(function() {
+			let dataJSON = getRoadPoolCutPagevalues();
+			showRoadPoolRecord(dataJSON);
+		});
+		$("#display_count_1").change(function() {
+			$(".thead-dark input[type='checkbox']").each(function(){
+				$(this).removeAttr('checked');
+			});
+			let dataJSON = getRoadListCutPageValues();
+			showRoadRecordList(dataJSON);
+		});
+		//点击上一页的按钮
+		$(".pre_page").click(function() {
+			let flag = $(".road-pool-code-hide").val();
+			if (flag.length > 0) {
+				$(".thead-dark input[type='checkbox']").each(function(){
+					$(this).removeAttr('checked');
+				});
+				let dataJSON = getRoadListCutPageValues();
+				if (dataJSON["currentPage"] == 1) {
+					return;
+				}
+				// saveNowRoadUid();
+				dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) -1;
+				showRoadRecordList(dataJSON);
+			} else {
+				let dataJSON = getRoadPoolCutPagevalues();
+				if (dataJSON["currentPage"] == 1) {
+					return;
+				}
+				dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) -1;
+				showRoadPoolRecord(dataJSON);
+			}
+		});
+	    //点击下一页的按钮时
+	    $(".next_page").click(function() {
+			let flag = $(".road-pool-code-hide").val();
+			if (flag.length > 0) {
+				$(".thead-dark input[type='checkbox']").each(function(){
+					$(this).removeAttr('checked');
+				});
+			
+				let dataJSON = getRoadListCutPageValues();
+				if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+					return;
+				}
+				// saveNowRoadUid();
+				dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+				showRoadRecordList(dataJSON);
+			} else {
+				let dataJSON = getRoadPoolCutPagevalues();
+				if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+					return;
+				}
+				dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+				showRoadPoolRecord(dataJSON);
+			}
+	    });
+	    //点击跳转那一页的按钮
+	    $(".jump_page button").click(function() {
+			let flag = $(".road-pool-code-hide").val();
+			if (flag.length > 0) {
+				$(".thead-dark input[type='checkbox']").each(function(){
+					$(this).removeAttr('checked');
+				});
+				let dataJSON = getRoadListCutPageValues();
+				if (dataJSON["jumpPage"].length <= 0) {
+					return;
+				}
+				// saveNowRoadUid();
+				showRoadRecordList(dataJSON);
+			} else {
+				let dataJSON = getRoadPoolCutPagevalues();
+				if (dataJSON["jumpPage"].length <= 0) {
+					return;
+				}			
+				showRoadPoolRecord(dataJSON);	
+			}
+	    });
+	</script>
+</body>
+</html>

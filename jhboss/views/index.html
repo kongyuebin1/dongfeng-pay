@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>管理后台</title>
+    <link rel="stylesheet" type="text/css" href="../static/lib/bootstrap/css/bootstrap.min.css" />
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/js/filter.js"></script>
+    <style type="text/css" media="screen">
+		body {
+			overflow-y: hidden;
+			overflow-x: hidden;
+		}
+    	.middle {
+    		position: absolute;
+    		top: 50px;
+    		left: 0;
+    		bottom: 30px;
+    		width: 100%;
+    	}
+    	
+		.middle .sider-left {
+			float: left;
+			bottom: 30px;
+			width: 14%;
+			height: 100%;
+			border: 2px solid #e7e7e7;
+			overflow: auto;
+			box-sizing: border-box;
+		}
+
+		.middle .sider-left .sider-bar {
+			height: auto;
+			width: 100%;
+		}
+
+		.middle .sider-left li {
+			list-style: none;
+		}
+		.middle .sider-right {
+			float: right;
+			bottom: 30px;
+			height: 100%;
+			width: 86%;
+			border: 2px solid #e7e7e7;
+			overflow: auto;
+			box-sizing: border-box;
+		}
+		.middle .sider-right .main {
+			height: auto;
+			width: 100%;
+		}
+		.middle .sider-left .divider {
+			border-top: 1px solid #e7e7e7;
+		}
+		.middle .sider-left .first-menu {
+			position: relative;
+			display: inline-block;
+			text-decoration: none;
+			width: 100%;
+			font-size: 14px;
+			letter-spacing: 1px;
+			color: #777777;
+			line-height: 40px;
+			padding-left: 2px;
+			border-top: 1px solid #e7e7e7;
+			border-bottom: 1px solid #e7e7e7;
+		}
+		.middle .sider-left .first-menu-main {
+			position: relative;
+			display: inline-block;
+			text-decoration: none;
+			width: 100%;
+			font-size: 16px;
+			letter-spacing: 1px;
+			color: #777777;
+			line-height: 40px;
+			padding-left: 2px;
+			border-top: 1px solid #e7e7e7;
+			border-bottom: 1px solid #e7e7e7;
+		} 
+		.middle .sider-left .first-menu .first-title {
+			display: inline-block;
+		}
+		.middle .sider-left .last-glyphicon {
+			position: absolute;
+			right: 2px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		.middle .sider-left .second-menu a {
+			display: block;
+			width: 100%;
+			text-align: center;
+			text-decoration: none;
+			letter-spacing: 1px;
+			line-height: 30px;
+			font-size: 13px;
+			color: #777777;
+		}
+		.middle .sider-left .second-menu a:last-child{
+			margin-bottom: 30px;
+		}
+		.footer {
+			width: 100%;
+			border: 2px solid #e7e7e7;
+			line-height: 30px;
+			text-align: center;
+			box-sizing: border-box;
+		}
+		
+    </style>
+</head>
+
+<body>
+	
+	<!-- 更改密码的模态框 -->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" >
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">用户密码更改</h4>
+	      </div>
+	      
+	      <div class="modal-body">
+	      	<p class="color-red text-center">温馨提示：新密码字为8~16个字符，字母和数字组成。</p>
+	      	<div class="row margin-top-20">
+		      	<div class="col-xs-3">
+		      		<span>旧密码：</span>
+		      	</div>
+		      	<div class="col-xs-5">
+		      		<input class="old-passwrod" type="password" name=""> <span class="color-red">*</span>
+		      	</div>
+		      	<div class="col-xs-4 color-red old-error">
+		      		
+		      	</div>
+	      	</div>
+	      	<div class="row margin-top-20">
+		      	<div class="col-xs-3">
+		      		<span>新密码：</span>
+		      	</div>
+		      	<div class="col-xs-5">
+		      		<input class="new-password" type="password" name=""> <span class="color-red">*</span>
+		      	</div>
+		      	<div class="col-xs-4 color-red new-error">
+		      	
+		      	</div>
+	      	</div>
+	      	<div class="row margin-top-20">
+		      	<div class="col-xs-3">
+		      		<span>再次输入新密码：</span>
+		      	</div>
+		      	<div class="col-xs-5">
+		      		<input class="twice-password" type="password" name=""> <span class="color-red">*</span>
+		      	</div>
+		      	<div class="col-xs-4 color-red twice-error">
+		      		
+		      	</div>
+	      	</div>
+	  	  </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default password-cancal cancal-save" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary password-save">保存</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 导航栏 -->
+	<div class="self-nav">
+		
+	</div>
+    <nav class="navbar-inverse navbar-fixed-top" id="navbar-inverse">
+        <div class="container-fluid">
+	        <div class="navbar-header">
+		        <a class="navbar-brand" href="#">聚合支付管理系统</a>
+	        </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>你好！管理员 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" style="text-align: center;" data-toggle="modal" data-target="#logoutModal"> <i class="glyphicon glyphicon-cog change-password"></i> 更改密码</a>
+                            </li>
+
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#" style="text-align: center;" class="logout"> <i class="glyphicon glyphicon-off"></i> 退出登录</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- 左侧导航栏 -->
+    <div class="middle">
+    	<div class="sider-left">
+    		<div class="sider-bar">
+
+	    		<div>
+	    			<a href="#"  class="first-menu" onclick='loadMainContent("/main.html")'>
+		    			<span class="glyphicon glyphicon-home"></span>
+		    			<span class="first-title">控制面板</span>
+		    		</a>
+	    		</div>
+	    		<div>
+		    		<a href="#"  class="first-menu">
+		    			<span class="glyphicon glyphicon-wrench"></span>
+		    			<span class="first-title">权限控制</span>
+		    			<span class="glyphicon glyphicon-plus last-glyphicon"></span>
+		    		</a>
+		    		<div class="second-menu">
+						{{/*<a href="#" onclick='loadMainContent("/first_menu.html");'><span>添加一级菜单</span></a>
+						<a href="#" onclick='loadMainContent("/second_menu.html")'><span>添加二级菜单</span></a>
+						<a href="#" onclick='loadMainContent("/power.html")'><span>添加权限</span></a>*/}}
+						<a href="#" onclick='loadMainContent("/role.html")'><span>角色管理</span></a>
+						<a href="#" onclick='loadMainContent("/operator.html")'><span>操作员管理</span></a>
+		    		</div>
+	    		</div>
+				<div>
+					<a href="#"  class="first-menu">
+		    			<span class="glyphicon glyphicon-road"></span>
+		    			<span class="first-title">通道管理</span>
+		    			<span class="glyphicon glyphicon-plus last-glyphicon"></span>
+	    			</a>
+	    			<div class="second-menu">
+	    				<a href="#" onclick='loadMainContent("/road.html")'><span>添加通道</span></a>
+	    				<a href="#" onclick='loadMainContent("/road_pool.html")'><span>轮询池</span></a>
+	    			</div>
+				</div>
+
+				<div>
+					<a href="#"  class="first-menu">
+		    			<span class="glyphicon glyphicon-user"></span>
+		    			<span class="first-title">商户管理</span>
+		    			<span class="glyphicon glyphicon-plus last-glyphicon"></span>
+	    			</a>
+	    			<div class="second-menu">
+	    				<a href="#" onclick='loadMainContent("/merchant.html")'><span>商户配置</span></a>
+	    			</div>
+				</div>
+
+				<div>
+					<a href="#"  class="first-menu">
+		    			<span class="glyphicon glyphicon-console"></span>
+		    			<span class="first-title">代理管理</span>
+		    			<span class="glyphicon glyphicon-plus last-glyphicon"></span>
+	    			</a>
+	    			<div class="second-menu">
+	    				<a href="#" onclick='loadMainContent("/create_agent.html")'>创建代理</a>
+	    				<a href="#" onclick='loadMainContent("/agent_to_merchant.html")'><span>代理商户映射列表</span></a>
+	    			</div>
+				</div>
+
+                <div>
+                    <a href="#"  class="first-menu">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <span class="first-title">资金管理</span>
+                        <span class="glyphicon glyphicon-plus last-glyphicon"></span>
+                    </a>
+                    <div class="second-menu">
+                        <a href="#" onclick='loadMainContent("/account.html")'><span>账户钱包</span></a>
+                        <a href="#" onclick='loadMainContent("/account_history.html")'><span>动账记录</span></a>
+                    </div>
+                </div>
+				
+				<div>
+					<a href="#"  class="first-menu">
+		    			<span class="glyphicon glyphicon-book"></span>
+		    			<span class="first-title">订单管理</span>
+		    			<span class="glyphicon glyphicon-plus last-glyphicon"></span>
+	    			</a>
+	    			<div class="second-menu">
+	    				<a href="#" onclick='loadMainContent("/order_info.html")'><span>实时订单</span></a>
+	    				<a href="#" onclick='loadMainContent("/order_profit.html")'><span>订单收益</span></a>
+	    			</div>
+				</div>
+
+	    		<div>
+	    			<a href="#"  class="first-menu">
+		    			<span class="glyphicon glyphicon-piggy-bank"></span>
+		    			<span class="first-title">代付管理</span>
+		    			<span class="glyphicon glyphicon-plus last-glyphicon"></span>
+	    			</a>
+	    			<div class="second-menu">
+	    				<a href="#" onclick='loadMainContent("/merchant_payfor.html")'><span>商户下发</span></a>
+                        <a href="#" onclick='loadMainContent("/self_payfor.html")'><span>任意打款</span></a>
+	    				<a href="#" onclick='loadMainContent("/payfor_record.html")'><span>代付列表</span></a>
+	    				<a href="#" onclick='loadMainContent("/bank_card.html")'><span>银行卡管理</span></a>
+	    			</div>
+	    		</div>
+
+	    		<div>
+	    			<a href="#"  class="first-menu">
+		    			<span class="glyphicon glyphicon-yen"></span>
+		    			<span class="first-title">分润管理</span>
+		    			<span class="glyphicon glyphicon-plus last-glyphicon"></span>
+	    			</a>
+	    			<div class="second-menu">
+	    				<a href="#" onclick='loadMainContent("/platform_profit.html")'><span>平台利润</span></a>
+	    				<a href="#" onclick='loadMainContent("/agent_profit.html")'><span>代理利润</span></a>
+	    			</div>
+	    		</div>
+	    		
+	    		<div>
+	    			<a href="#"  class="first-menu">
+		    			<span class="glyphicon glyphicon-edit"></span>
+		    			<span class="first-title">自助服务</span>
+		    			<span class="glyphicon glyphicon-plus last-glyphicon"></span>
+	    			</a>
+	    			<div class="second-menu">
+	    				<a href="#" onclick="loadMainContent('/self_notify.html')"><span>批量给下游回调</span></a>
+	    				<a href="#" onclick="loadMainContent('/self_plus_sub.html')"><span>自定义加减款</span></a>
+	    			</div>
+	    		</div>
+				</div>
+	    	</div>
+			
+			<div class="sider-right">
+                <input type="text" hidden="hidden" id="main-bank-order-id" value="">
+		    	<div class="main">
+
+		    	</div>
+    		</div>
+
+    	<div class="footer">版权所有</div>
+    </div>
+</body>
+<script>
+	$(function() {
+		$(".second-menu").hide();
+	});
+	function loadMainContent(url) {
+    	$(".main").load(url);
+    }
+
+	function passwordCheck(str) {
+		let msg = "";
+		if (str.length < 8) {
+			msg = "密码长度不能小于8！";
+		} else if (str.length > 16) {
+			msg = "密码长度不能大于16！";
+		} else {
+			if (/([a-zA-Z]+[0-9]+|[0-9]+[a-zA-Z])/.exec(str)) {
+				return msg;
+			} else {
+				msg = "新密码中必须包含数字和字母！";
+			}
+		}
+		return msg;
+	}
+
+	function clearError() {
+		$(".old-error").text("").append("");
+		$(".new-error").text("").append("");
+		$(".twice-error").text("").append("");
+	}
+
+	function setError(key, value) {
+		$(key).text("").append(value);
+		return;
+	}
+
+	$(".password-cancal").click(function(event) {
+		$("input[type='password']").val("");
+		clearError();
+	})
+
+	$(".password-save").click(function(event) {
+		//清除之前的错误提示文字
+		clearError();
+		let oldPassword = $(".old-passwrod").val();
+		let newPassword = $(".new-password").val();
+		let twicePassword = $(".twice-password").val();
+
+		let msg = "";
+		if (oldPassword.length <= 0) {
+			setError(".old-error", "旧密码不能为空!");
+			return;
+		}
+		if (newPassword.length <= 0) {
+			setError(".new-error", "新密码不能为空！");
+			return;
+		}
+		if (twicePassword.length <= 0) {
+			setError(".twice-error", "请再次输入新密码!");
+			return;
+		}
+		
+		if (!(newPassword == twicePassword)) {
+			setError(".twice-error", "新密码两次输入不一致!");
+			return;
+		}
+		if (oldPassword == newPassword) {
+			setError(".new-error", "新密码不能和旧密码一样!");
+			return;
+		}
+		msg = passwordCheck(newPassword);
+		if (msg.length > 0) {
+			setError(".new-error", msg);
+			return;
+		}
+
+		$.ajax({
+			url: "/update/password",
+			data: {
+				oldPassword: oldPassword,
+				newPassword: newPassword,
+				twicePassword: twicePassword
+			},
+
+			success: function(res) {
+				if (res.Code == 200) {
+					//将模态框关闭
+					$("input[type='password']").val("");
+					$(".cancal-save").trigger('click');
+					setTimeout("", 1500);//等待1.5秒
+					alert("密码修改成功!");
+					window.parent.location = "/login.html";
+				} else if (res.Code == 404) {
+					//用户登录已经过期，需要重新登录
+					window.parent.location = "/login.html";
+				} else {
+					//用户密码更新失败
+					setError(res.Key, res.Msg);
+				}
+			},
+
+			error: function() {
+				alert("系统异常，请稍后再试!");
+			}
+		});
+	});
+
+
+    $(".logout").click(function() {
+        $.ajax({
+            url: "/logout",
+            success: function(res) {
+                if (res.Code == 200) {
+                    window.parent.location = "/login.html";
+                } else {
+                    alert("系统异常，退出失败!");
+                }
+            },
+
+            error: function(e) {
+                alert("系统异常!");
+            },
+        });
+    });
+    
+    $(".first-menu").click(function(event) {
+    	//判断右边图标箭头是向右，还是向下；如果当前的图片是向下，那么变为向右；有所的兄弟图标全部变为向右。
+    	if ($(this).children(".last-glyphicon").hasClass("glyphicon-plus")) {
+    		$(this).children(".last-glyphicon").removeClass('glyphicon-plus');
+    		$(this).children(".last-glyphicon").addClass("glyphicon-minus");
+    	} else {
+    		$(this).children(".last-glyphicon").removeClass("glyphicon-minus");
+    		$(this).children(".last-glyphicon").addClass("glyphicon-plus");
+    	}
+    	//添加面包屑
+    	$(".breadcrumb").html("");
+    	firstTitle = $(this).children(".first-title").text();
+    	//背景色变为灰色
+    	$(this).css('background-color', 'skyblue');
+    	$(this).parents().siblings().children(".first-menu").css("background-color", 'white');
+    	$(this).parents().children(".second-menu").children("a").children('span').css('border-bottom', 'none');
+    	// $(this).parents().children(".second-menu").css("background-color", "#dff0d8");
+    	$(this).parents().siblings().children(".second-menu").css('background-color', 'none');
+    	//展示当前的二级菜单
+    	$(this).parents().children(".second-menu").toggle();
+    	//隐藏其余的二级菜单
+    	$(this).parents().siblings().children(".second-menu").hide();
+    	//将其余一级菜单的箭头改为向右
+    	$(this).parents().siblings().children(".first-menu").children(".last-glyphicon").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+    });
+    //选择二级菜单时，会出现下划线
+  	$(".second-menu a span").click(function(event) {
+  		$(this).css("border-bottom", "1px dashed #333333");
+  		$(this).parents().siblings().children('span').css("border-bottom", "none");
+  		//添加二级面包屑
+  		$(".breadcrumb").html("");
+  		let secondTile = $(this).text();
+  	});
+</script>
+
+</html>

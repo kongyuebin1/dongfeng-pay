@@ -1,0 +1,238 @@
+/* CSS Document */
+li, ol, ul {
+    list-style: outside none none;
+}
+html, body {
+    height: 100%;
+}
+body {
+	background: #f8f8f8;
+}
+* {
+    font-family: Arial,microsoft yahei;
+    margin: 0;
+    padding: 0;
+}
+.tastesdk-box {
+    background-color: #f8f8f8;
+    position: relative;
+}
+/*头部*/
+.header{width:100%; height:60px;background: #fefefe;border-bottom: 2px solid #f68452;}
+.header .title{width: 1200px;margin: 0 auto;position: relative;}
+.header .title .scan_code{display:none;width:190px;height:190px;position: absolute;right: 0px;top: 52px;background: #ffffff;border: 1px solid #dcdcdc;box-shadow:0 0 7px rgba(115, 115, 115, .2);-webkit-box-shadow:0 0 7px rgba(115, 115, 115, .2);-moz-box-shadow:0 0 7px rgba(1115, 115, 115, .2);}
+.header .title .scan_code img{width: 160px;height: 160px;padding: 15px;}
+.header .title .logo{font-family: "方正正黑简体";font-size:22px;color:#000000;float:left;background: url(../images/icon_logo.png) no-repeat left center;display:inline-block;height: 30px;margin-top: 17px;padding-left: 126px;}
+.header .title .logo span{font-size: 24px;color: #9f9f9f;font-family: "微软雅黑";background: url(../images/syt_03.png) no-repeat 8px 4px;display: block;width: 72px;height:30px;}
+.header .title .right{float:right; padding-top:16px;}
+.header .title .right ul{float:right; padding-top:7px;}
+.header .title .right li{float:left; padding-left:15px;font-size:12px;line-height: 17px;height: 17px;}
+.header .title .right li span{display:inline-block;color:#868686; background-repeat:no-repeat; background-image:url(../images/icon_header.png);letter-spacing: 1px;}
+.icon_info{padding-left:21px; background-position:left top;line-height: 13px;}
+.icon_qq{padding-left:22px; background-position:left -13px;}
+.icon_phone{padding-left:21px; background-position:left -30px;}
+.login{padding-left: 15px;}
+.iap_new img{margin-left: 8px;float: right;margin-top: 1px;}
+.iap_new:hover .scan_code{display: block;}
+
+.clearfix {
+    zoom: 1;
+}
+li {
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+}
+.header .title .right li {
+    float: left;
+    padding-left: 15px;
+    font-size: 12px;
+    line-height: 17px;
+    height: 17px;
+}
+.header .title .right li span {
+    display: inline-block;
+    color: #868686;
+    background-repeat: no-repeat;
+    background-image: url(../images/icon_header.png);
+    letter-spacing: 1px;
+}
+
+.icon_info {
+    padding-left: 21px;
+    background-position: left top;
+    line-height: 13px;
+}
+
+.tastesdk-box::after {
+    background-color: #f8f8f8;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 166px;
+    z-index: 1;
+}
+.tastesdk-box .main {
+    position: relative;
+    z-index: 2;
+}
+.main {
+    margin: 0 auto;
+    width: 1200px;
+}
+.tastesdk-box .typedemo {
+    background-color: #fff;
+    display: block;
+    height: 480px;
+    margin: 50px 0 0;
+    position: relative;
+    transition: box-shadow 0.5s cubic-bezier(0, 0, 0.2, 1) 0s;
+}
+
+.tastesdk-box .typedemo .tit, .tastesdk-box .typedemo .title {
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 16px;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 30px;
+}
+
+.tastesdk-box .typedemo .tit span, .tastesdk-box .typedemo .title span {
+    cursor: pointer;
+}
+.demo-pc {
+    padding: 30px 40px 0;
+}
+
+.two-step p {
+    color: #666;
+}
+.two-step p strong {
+    color: #333;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.two-step p span {
+    color: #fb226b;
+}
+.two-step .pay-infor {
+    border: 1px solid #e5e5e5;
+    margin: 25px 0 20px;
+	  width: 100%;
+	  float:left;
+}
+.two-step .pay-infor li {
+    box-sizing: border-box;
+    float: left;
+    font-size: 14px;
+    height: 58px;
+    line-height: 58px;
+    text-align: center;
+    width: 33.3333%;
+	 padding-left: 50px;
+    text-align: left;
+}
+.two-step .pay-infor li strong {
+    color: #fb226b;
+    font-size: 20px;
+}
+
+.two-step .pay-infor li strong span {
+    font-size: 14px;
+}
+.two-step h5 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+.two-step .pay-label {
+    border: 1px solid #e5e5e5;
+    padding: 0 20px 20px;
+	float:left;
+	width:100%;
+}
+
+.two-step .pay-label li {
+    display: inline;
+    float: left;
+    height: 42px;
+    margin: 20px 40px 0 0;
+    position: relative;
+    width: 150px;
+}
+
+.two-step .pay-label li input {
+    height: 40px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.two-step .pay-label li input:checked + label {
+    border-color: #27c8e8;
+}
+.two-step .pay-label li label {
+    border: 1px solid #e5e5e5;
+    left: 0;
+    text-align: center;
+    top: 0;
+    vertical-align: middle;
+    width: 148px;
+}
+.two-step .btns, .two-step .pay-label li label {
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+}
+
+.pay-label span {
+    margin-left: 5px;
+}
+
+.two-step .pay-label li label img {
+    vertical-align: middle;
+	width: auto;
+	height:25px;
+}
+.two-step .btns {
+    bottom: 10px;
+    right: 10px;
+	 height: 40px;
+    line-height: 40px;
+    position: absolute;
+}
+.two-step .btns span {
+    color: #0098b6;
+}
+ 
+.two-step .btns button {
+    margin-left: 30px;
+    vertical-align: top;
+}
+.pcdemo-btn {
+    background-color: #27c8e8;
+    border: medium none;
+    border-radius: 4px;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    position: relative;
+    width: 160px;
+    z-index: 2;
+}
+
+.ylzf_list{
+    display:none;
+}
+.ylzf_list h5{
+    margin-top: 20px;
+}
+.ylzf_list ul li img{
+    width: 96%;
+    height: 46px;
+    line-height: 46px;
+}

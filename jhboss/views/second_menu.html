@@ -1,0 +1,342 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>管理后台</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+	<script src="../static/js/jquery.ui.min.js"></script>
+	<script src="../static/js/filter.js"></script>
+	<style>
+		.first-input-group .basic-url, .router-input-group .basic-url {
+			width: 210px;
+		}
+		
+		.pre-menu-error ,.second-menu-error ,.second-router-error {
+			padding-left: 20px;
+			color: red
+		}
+	</style>
+</head>
+<body>
+	<!-- 添加菜单的模态框 -->
+	<div class="modal fade" id="addMenuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">添加二级菜单</h4>
+	      </div>
+	      <div class="modal-body modal-body-menu">
+	      	<div class="input-group pre-input-group">
+	      		<span class="input-group-addon basic-addon">父级菜单</span>
+	      		<div class="select-content">
+	      		</div>
+	      		
+			  	<span class="pre-menu-error"></span>
+	      	</div>
+	      	<div class="input-group first-input-group">
+			  <span class="input-group-addon basic-addon">二级菜单</span>
+			  <input type="text" class="form-control basic-url second-menu-content">
+			  <span class="second-menu-error"></span>
+			</div>
+	      	
+	      	<div class="input-group first-input-group">
+			  <span class="input-group-addon basic-addon">菜单路由</span>
+			  <input type="text" class="form-control basic-url router-url">
+			  <span class="second-router-error"></span>
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default cancel-menu" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary save-menu">保存</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="search">
+		<div>
+			<span>一级菜单</span>
+			<input type="text" class="first-menu-serach" placeholder ="模糊匹配">
+		</div>
+		<div>
+			<span>二级菜单</span>
+			<input type="text" class="second-menu-serach" value="" placeholder="模糊匹配">
+		</div>
+		<div>
+			<button type="button" class="btn btn-default second-menu-search">搜索</button>
+		</div>
+	</div>
+
+	<div class="add-menu">
+		<button type="button" class="btn btn-default btn-xs glyphicon glyphicon-plus add-button" data-toggle="modal" data-target="#addMenuModal">添加二级菜单</button>
+		<strong>在添加二级菜单时，确保对应的一级菜单已经创建好!</strong>
+	</div>
+	<div class="menu-table">
+		<table>
+			<thead class="thead-dark">
+				<tr>
+					<th>序列号</th>
+					<th>父级菜单</th>
+					<th>父级菜单排序号</th>
+					<th>父级菜单识别号</th>
+					<th>二级菜单顺序</th>
+					<th>二级菜单识别号</th>
+					<th>二级菜单</th>
+					<th>二级菜单路由</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="menu_table_body">
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页插件 -->
+	<div class="cut_page">
+		<li>
+			每页显示
+			<select id="display_count">
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+		</li>
+		
+		<li class="current_total_page">第<span class="current_page">1</span>/<span class="total_page">2</span>页</li>
+		<li class="pre_page">上一页</li>
+		<li class="next_page">下一页</li>
+		<li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+	</div>
+
+	<script>
+
+		//获取搜索框的数据，和分页的基础数据
+		function getCutPageData() {
+			let firstMenuSerach = $(".first-menu-serach").val();
+			let secondMenuSerach = $(".second-menu-serach").val();
+			let displayCount = $("#display_count").val();
+			let currentPage = $(".current_page").html();
+			let totalPage = $(".total_page").html();
+			let jumpPage = $(".jump_page input").val();
+			
+			return {"displayCount":displayCount, "currentPage":currentPage, "totalPage":totalPage, "jumpPage":jumpPage, "firstMenuSerach": firstMenuSerach, "secondMenuSerach":secondMenuSerach};
+		}
+		$(".second-menu-search").click(function() {
+			showSecondMenuList(getCutPageData());
+		});
+		//刚开始加载页面的时候，执行的一系列操作
+		$(document).ready(function() {
+			showSecondMenuList(getCutPageData());
+		});
+		//当每页显示数更改后，执行的操作
+		$("#display_count").change(function() {
+			showSecondMenuList(getCutPageData());
+		});
+
+		//点击上一页的按钮
+		$(".pre_page").click(function() {
+			let dataJSON = getCutPageData();
+
+			if (dataJSON["currentPage"] == 1) {
+				return;
+			}
+			dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) - 1;
+			showSecondMenuList(dataJSON);
+		});
+	    //点击下一页的按钮时
+	    $(".next_page").click(function() {
+	 		let dataJSON = getCutPageData();
+
+			if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+				return;
+			}
+
+			dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+			
+			showSecondMenuList(dataJSON);
+	    });
+	    //点击跳转那一页的按钮
+	    $(".jump_page button").click(function() {
+	  		let dataJSON = getCutPageData();
+
+			if (dataJSON["jumpPage"].length <= 0) {
+				return;
+			}
+
+			showSecondMenuList(dataJSON);
+	    });
+		$(".search div button").click(function() {
+			let dataJSON = getCutPageData();
+			showSecondMenuList(dataJSON);
+		});
+		
+		function Ajax(secondMenuUid, hostUrl) {
+			$.ajax({
+				url: hostUrl,
+				data: {
+					"secondMenuUid": secondMenuUid
+				},
+
+				success: function(res) {
+				
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == 200){
+						showSecondMenuList();
+					} else {
+						alert("参数传入有误");
+					}
+				},
+
+				error: function() {
+					alert("系统异常，请稍后重试");
+				}
+
+			});
+		}
+		
+		//提升菜单的顺序
+		function menuUp(secondMenuUid) {
+			Ajax(secondMenuUid, "/up/secondMenu");
+		}
+		//降低菜单的顺序
+		function menuDown(secondMenuUid) {
+			Ajax(secondMenuUid, "/down/secondMenu");
+		}
+		//删除菜单
+		function menuDelete(secondMenuUid) {
+			if (!window.confirm("是否确定删除该项?")) {
+				return;
+			}
+			Ajax(secondMenuUid, "/delete/secondMenu");
+		}
+		//此函数的作用，是在每行的最后一格，加入可操作的按钮图标
+		function showSecondMenuList(dataJSON) {
+			$.ajax({
+				url: "/get/secondMenu",
+				data: dataJSON,
+
+				success: function(res) {
+					$(".current_page").html(res.CurrentPage);
+					$(".total_page").html(res.TotalPage);
+					$("#display_count option").each(function() {
+						if ($(this).text() == res.DisplayCount) {
+							$(this).attr('selected', true);
+						}
+					});
+					$(".jump_page input").val("");
+
+					if (res.Code == -1) {
+						alert(res.Msg);
+					}else if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else {
+						//将先前的内容清空
+						$("#menu_table_body").html("");
+						let str = "";
+						for(let i = 0; i < res.SecondMenuList.length; i ++) {
+							let v = res.SecondMenuList[i];
+							let secondMenus = v.SecondMenu.split("|");
+							let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+									"<th>" + v.FirstMenu + "</th>" + "<th>" + v.FirstMenuOrder + "</th>" + 
+									"<th>" + v.FirstMenuUid + "</th>" + "<th>" + v.MenuOrder + "</th>" + "<th>" + v.SecondMenuUid + "</th>" +
+									"<th>" + v.SecondMenu + "</th>" + "<th>" + v.SecondRouter + "</th>";
+							tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' + 
+							'<button type="button" value="' + v.SecondMenuUid +'" class="btn btn-default" onclick="menuUp(this.value);"><span class="glyphicon glyphicon-arrow-up"></span></button>' +
+							'<button type="button" value="' + v.SecondMenuUid +'" class="btn btn-default" onclick="menuDown(this.value);"><span class="glyphicon glyphicon-arrow-down"></span></button>' +
+							'<button type="button" value="' + v.SecondMenuUid +'" class="btn btn-default" onclick="menuDelete(this.value);"><span class="glyphicon glyphicon-trash"></span></button>' + 
+							'</div>' + "</th>" + "</tr>";
+							str = str + tmp;
+						}
+						$("#menu_table_body").append(str);
+					}
+				},
+
+				error: function() {
+					alert("系统异常，请稍后重试");
+				}
+			});
+		}
+
+		$(".save-menu").click(function() {
+			clearMenuError();
+			let preMenuUid = $("#pre-menu").val();
+			if (preMenuUid == "none") {
+				$(".pre-menu-error").text("*父级菜单不能为空");
+				return;
+			}
+			let secondMenu = $(".second-menu-content").val();
+			let secondRouter = $(".router-url").val();
+
+			if (secondMenu.length == 0) {
+				$(".second-menu-error").text("*二级菜单不能为空");
+				return;
+			}
+			if (secondRouter.length == 0) {
+				$(".second-router-error").text("*二级菜单路由不能为空");
+				return;
+			}
+
+			$.ajax({
+				url: "/add/secondMenu",
+				data: {
+					"preMenuUid": preMenuUid,
+					"secondMenu": secondMenu,
+					"secondRouter": secondRouter
+				},
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						$("." + res.Key).text(res.Msg);
+					} else {
+						$(".cancel-menu").trigger('click');
+						showSecondMenuList();
+					}
+				},
+				error: function() {
+					alert("系统异常，请稍后重试");
+				}
+			});
+		});
+		function clearMenuError() {
+			$(".pre-menu-error").text("");
+			$(".second-menu-error").text("");
+			$(".second-router-error").text("");
+		}
+		function selectContent() {
+			$.ajax({
+				url: "/get/firstMenu",
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == 200) {
+						let str = '<select id="pre-menu">' + '<option value="none">请选择父菜单</option>';
+						for (let i = 0; i < res.MenuList.length; i ++) {
+							let m = res.MenuList[i];
+							str = str + '<option value="' + m.MenuUid + '">' + m.FirstMenu + '</option>' ;
+						}
+						str = str + '</select>';
+						$(".select-content").html(str);
+					} else {
+
+					}
+				},
+
+				error: function() {
+					alert("系统异常，请稍后重试");
+				}
+			});
+		}
+		$(".add-button").click(function() {
+			$(".basic-url").val("");
+			$(".select-content").html("");
+			clearMenuError();
+			selectContent();
+		});
+	</script>
+</body>
+</html>

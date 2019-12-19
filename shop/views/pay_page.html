@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>{{.siteName}}</title>
+    <link rel="shortcut icon" type="tmpay/image/x-icon" href="../static/img/icon.ico">
+    <link href="../static/css/cashier.css" rel="stylesheet">
+    <style type="text/css">
+        #maxthon-1eec22d4-0232-4212-8283-6f2ac8f967-iframe {
+            display: block !important;
+            position: absolute !important;
+            visibility: visible !important;
+            z-index: 2147483647 !important;
+            border-style: none !important;
+            opacity: 1 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .3) !important;
+            border: 1px solid #b3b3b3 !important
+        }
+    </style>
+</head>
+
+<body style="">
+<div class="tastesdk-box">
+    <div class="header clearfix">
+        <div class="title">
+            <p class="logo">
+                <span style="width: 100%;">{{.siteName}}</span>
+            </p>
+            <div class="right">
+                <div class="clearfix">
+                    <ul class="clearfix">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="typedemo" style="height: 900px;">
+            <div class="demo-pc">
+                <div class="pay-jd">
+                    <form action="/payfor.py/" method="post" autocomplete="off">
+                        <input type="text" style="display: none" name="orderid" value="{{.orderNo}}">
+                        <input type="text" style="display: none" name="shopName" value="{{.shopName}}">
+                        <input type="text" style="display: none" name="productName" value="{{.productName}}">
+
+                        <div class="two-step">
+                            <p><strong>请您及时付款，以便订单尽快处理！</strong></p>
+                            <ul class="pay-infor">
+                                <li>商城：{{.shopName}}</li>
+                                <li>商品名称：{{.productName}}</li>
+                                <li>订单编号：<span>{{.orderNo}}</span></li>
+                                <li>商品数量：{{.count}}</li>
+                                <li>商品单价：{{.price}}</li>
+                            </ul>
+                            <ul class="pay-infor">
+                                <li>支付金额：<strong><input style="border: 0px;width: 34px;color: red;" value="{{.allPrice}}" id="amount" name="amount" />
+                                    <span>元</span></strong></li>
+                                <li class="" style="float: left;">
+                                    <button type="submit" class="pcdemo-btn sbpay-btn">立即支付</button>
+                                </li>
+                            </ul>
+                            <h4 >扫码支付：</h4>
+                            <ul class="pay-label type" >
+                                <li>
+                                    <input value="SCAN_YL" name="SCAN" id="SCAN_YL" type="radio" checked>
+                                    <label for="SCAN_YL"><img src="../static/img/yinlian.jpg" alt="银联扫码"
+                                                              style="height: 35px;"><span></span></label>
+                                </li>
+                                <li>
+                                    <input value="SCAN_QQ" name="SCAN" id="SCAN_QQ" type="radio">
+                                    <label for="SCAN_QQ"><img src="../static/img/qqq.jpg" alt="QQ扫码支付"
+                                                              style="height: 35px;"><span></span></label>
+                                </li>
+                            </ul>
+                            <h4 style="margin-top: 115px">H5支付：</h4>
+                            <ul class="pay-label type">
+                                <li>
+                                    <input value="SCAN_YL_H5" name="H5" id="SCAN_YL_H5" type="radio">
+                                    <label for="SCAN_YL_H5"><img src="../static/img/yinlian.jpg" alt="银联H5"
+                                                                 style="height: 35px;"><span></span></label>
+                                </li>
+                            </ul>
+
+                            <h4 style="margin-top: 115px">快捷支付：</h4>
+                            <ul class="pay-label type">
+                                <li>
+                                    <input value="04031000" name="KJ" id="beijing_kj" type="radio">
+                                    <label for="beijing_kj"><img src="../static/img/beijing_0.jpg" alt="中国北京银行"
+                                                                 style="height: 35px;"><span></span></label>
+                                </li>
+                                <li>
+                                    <input value="01020000" name="KJ" id="gongshang_kj" type="radio">
+                                    <label for="gongshang_kj"><img src="../static/img/gongshang_0.jpg" alt="中国工商银行"
+                                                                   style="height: 35px;"><span></span></label>
+                                </li>
+                                <li>
+                                    <input value="03030000" name="KJ" id="guangda_kj" type="radio">
+                                    <label for="guangda_kj"><img src="../static/img/guangda_0.jpg" alt="中国光大银行"
+                                                                 style="height: 35px;"><span></span></label>
+                                </li>
+                                <li>
+                                    <input value="01050000" name="KJ" id="jianshe_kj" type="radio">
+                                    <label for="jianshe_kj"><img src="../static/img/jieshe_0.jpg" alt="中国建设银行"
+                                                                 style="height: 35px;"><span></span></label>
+                                </li>
+                                <li>
+                                    <input value="03050000" name="KJ" id="minsheng_kj" type="radio">
+                                    <label for="minsheng_kj"><img src="../static/img/minsheng_0.jpg" alt="中国民生银行"
+                                                                  style="height: 35px;"><span></span></label>
+                                </li>
+                                <li>
+                                    <input value="01030000" name="KJ" id="nongye_kj" type="radio">
+                                    <label for="nongye_kj"><img src="../static/img/nongye_0.jpg" alt="中国农业银行"
+                                                                style="height: 35px;"><span></span></label>
+                                </li>
+                                <li>
+                                    <input value="04012900" name="KJ" id="shanghai_kj" type="radio">
+                                    <label for="shanghai_kj"><img src="../static/img/shanghai_0.jpg" alt="中国上海银行"
+                                                                  style="height: 35px;"><span></span></label>
+                                </li>
+                                <li>
+                                    <input value="01000000" name="KJ" id="youzheng_kj" type="radio">
+                                    <label for="youzheng_kj"><img src="../static/img/youzheng_0.jpg" alt="中国邮政银行"
+                                                                  style="height: 35px;"><span></span></label>
+                                </li>
+                            </ul>
+
+                            <h4 style="margin-top: 175px">WAP支付(只支持手机端,不支持PC端)：</h4>
+                            <ul class="pay-label type">
+                                <li>
+                                    <input value="SCAN_QQ_WAP" name="WAP" id="SCAN_QQ_WAP" type="radio">
+                                    <label for="SCAN_QQ_WAP"><img src="../static/img/qqq.jpg" alt="QQ-WAP支付"
+                                                                  style="height: 35px;"><span></span></label>
+                                </li>
+
+                            </ul>
+                            <input value="CCB" name="bankCode" type="hidden">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/base.js"></script>
+
+</body>
+
+</html>

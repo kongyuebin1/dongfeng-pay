@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>管理后台</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <script src="../static/js/filter.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="../static/js/basic.js"></script>
+    <style>
+        .order-record .search{
+            margin: 0;
+            padding: 0;
+        }
+        .search label {
+            font-weight: normal;
+            padding-right: 20px;
+        }
+
+        .order-profit-record .search div {
+            height: 20px;
+        }
+        #search-order-status, #search-order-pay-way-code,#search-order-supplier-name {
+            height: 30px;
+            margin-right: 15px;
+        }
+
+        #order-table-body tr {
+            height: 30px;
+            line-height: 30px;
+        }
+        #supplierProfit, #platformProfit, #agentProfit {
+            display: inline-block;
+            padding-right: 50px;
+        }
+        .menu-table {
+            margin-top: 10px;
+        }
+        #order-search {
+            background-color: skyblue;
+            width: 120px;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-record">
+        <div class="search form-inline" style="font-weight: normal;">
+            <label for="" style="font-weight: normal;">
+                <span>开始时间：</span>
+                <input type="text" name="" value="" id="search-order-start-time" class="start-time" value="">
+            </label>
+            <label for="" style="font-weight: normal;">
+                <span>结束时间：</span>
+                <input type="text" name="" value="" id="search-order-end-time" class="end-time" value="">
+            </label>
+            <label for="" style="font-weight: normal;">
+                <span>商户名称：</span>
+                <input type="text" id="search-order-merchant-name" placeholder="模糊匹配">
+            </label>
+            <label for="">
+                <span>代理名称：</span>
+                <input type="text" name="" value="" id="search-order-agent-name" placeholder="模糊匹配">
+            </label>
+            <label style="font-weight: normal;">
+                <span>本系统订单号：</span>
+                <input type="text" id="search-order-bank-order-id" value="" >
+            </label>
+            <label for="" style="font-weight: normal;">
+                上游名称：
+                <select name="" id="search-order-supplier-name">
+                </select>
+            </label>
+            <label for="" style="font-weight: normal;">
+                订单状态：
+                <select name="" id="search-order-status">
+                    <option value="">请选择</option>
+                    <option value="success">支付成功</option>
+                    <option value="wait">等待支付</option>
+                    <option value="fail">支付失败</option>
+                    <option value="cancel">放弃支付</option>
+                </select>
+            </label>
+            <label for="" style="font-weight: normal;">
+                支付类型：
+                <select name="" id="search-order-pay-way-code">
+                    <option value="">请选择</option>
+                    <option value="WEIXIN_SCAN">微信扫码</option>
+                    <option value="WEIXIN_H5">微信H5</option>
+                    <option value="WEIXIN_SYT">微信收银台</option>
+                    <option value="ALI_SCAN">支付宝扫码</option>
+                    <option value="ALI_H5">支付宝H5</option>
+                    <option value="ALI_SYT">支付宝收银台</option>
+                    <option value="QQ_SCAN">QQ扫码</option>
+                    <option value="QQ_H5">QQ-H5</option>
+                    <option value="QQ_SYT">QQ收银台</option>
+                    <option value="UNION_SCAN">银联扫码</option>
+                    <option value="UNION_H5">银联H5</option>
+                    <option value="UNION_PC_WAP">银联pc-web</option>
+                    <option value="UNION_SYT">银联收银台</option>
+                    <option value="UNION_FAST">银联快捷</option>
+                    <option value="BAIDU_SCAN">百度钱包扫码</option>
+                    <option value="BAIDU_H5">百度钱包H5</option>
+                    <option value="BAIDU_SYT">百度钱包收银台</option>
+                    <option value="JD_SCAN">京东扫码</option>
+                    <option value="JD_H5">京东H5</option>
+                    <option value="JD_SYT">京东收银台</option>
+                </select>
+            </label>
+            {{/*<br>*/}}
+            <label class="color-red" style="font-weight: normal;">
+                手续费：
+                <span id="supplierProfit"></span>
+            </label>
+            <label class="color-red" style="font-weight: normal;">
+                平台利润：
+                <span id="platformProfit"></span>
+            </label>
+            <label class="color-red" style="font-weight: normal;">
+                代理利润：
+                <span id="agentProfit"></span>
+            </label>
+            <button type="button" class="btn btn-default" id="order-search">搜索</button>
+        </div>
+
+        <div class="menu-table table-responsive">
+            <table>
+                <thead class="thead-dark">
+                <tr>
+                    <th>序列号</th>
+                    <th>商户名称</th>
+                    <th>代理名称</th>
+                    <th>系统订单号</th>
+                    <th>实际金额</th>
+                    <th>状态</th>
+                    <th>手续费</th>
+                    <th>平台利润</th>
+                    <th>代理利润</th>
+                    <th>支付类型</th>
+                    <th>上游通道</th>
+                </tr>
+                </thead>
+                <tbody id="order-table-body">
+                </tbody>
+            </table>
+        </div>
+        <!-- 分页插件 -->
+        <div class="cut_page">
+            <li>
+                每页显示
+                <select id="display_count">
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </li>
+
+            <li class="current_total_page">第<span class="current_page">0</span>/<span class="total_page">0</span>页</li>
+            <li class="pre_page">上一页</li>
+            <li class="next_page">下一页</li>
+            <li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+        </div>
+    </div>
+
+    <script>
+        //获取搜索去的参数
+        function getOrderProfitSearchValues() {
+            let displayCount = $("#display_count").val();
+            let currentPage = $(".current_page").html();
+            let totalPage = $(".total_page").html();
+            let jumpPage = $(".jump_page input").val();
+            let startTime = $("#search-order-start-time").val();
+            let endTime = $("#search-order-end-time").val();
+            let merchantName = $("#search-order-merchant-name").val();
+            let agentName = $("#search-order-agent-name").val();
+            let bankOrderId = $("#search-order-bank-order-id").val();
+            let orderStatus = $("#search-order-status").val();
+            let supplierUid = $("#search-order-supplier-name").val();
+            let payWayCode = $("#search-order-pay-way-code").val();
+            return {
+                "displayCount":displayCount,
+                "currentPage":currentPage,
+                "totalPage":totalPage,
+                "jumpPage":jumpPage,
+                "startTime":startTime,
+                "endTime":endTime,
+                "merchantName":merchantName,
+                "agentName":agentName,
+                "bankOrderId":bankOrderId,
+                "orderStatus":orderStatus,
+                "supplierUid":supplierUid,
+                "payWayCode":payWayCode
+            };
+        }
+        function setOrderCutPageValues(res) {
+            $(".current_page").html(res.CurrentPage);
+            $(".total_page").html(res.TotalPage);
+            $("#display_count option").each(function() {
+                if ($(this).text() == res.DisplayCount) {
+                    $(this).attr('selected', true);
+                }
+            });
+            $(".jump_page input").val("");
+        }
+        function showOrderProfitList(res) {
+            setOrderCutPageValues(res);
+            let str = "";
+            for (let i = 0; i < res.List.length; i ++) {
+                let v = res.List[i];
+                let tmp = "";
+                if (v.Status == "success") {
+                    tmp = "<tr style='color: blue;'>"
+                } else if (v.Status == "fail") {
+                    tmp = "<tr style='color: red;'>"
+                }
+                tmp = tmp + "<th>" + (res.StartIndex+i+1) + "</th>" +
+                        "<th>" + v.MerchantName + "</th>" + "<th>" + v.AgentName + "</th>" + "<th>" + v.BankOrderId + "</th>" +
+                        "<th>" + v.FactAmount + "</th>" + "<th>" + v.Status + "</th>" + "<th>" + v.SupplierProfit + "</th>" +
+                        "<th>" + v.PlatformProfit + "</th>" + "<th>" + v.AgentProfit + "</th>" + "<th>" + v.PayTypeName + "</th>" +
+                        "<th>" + v.PayProductName + "</th>";
+                tmp = tmp.replace("wait", "等待支付").replace("success", "支付成功").replace("fail", "支付失败").replace("cancel", "放弃支付");
+                tmp = tmp + '</div>' + "</th>" + "</tr>";
+                str = str + tmp;
+            }
+            $("#order-all-amount").html(res.AllAmount);
+            $("#success-rate").html(res.SuccessRate);
+            $("#order-table-body").html(str);
+            $("#supplierProfit").html(res.SupplierProfit);
+            $("#platformProfit").html(res.PlatformProfit);
+            $("#agentProfit").html(res.AgentProfit);
+        }
+
+        function AjaxOrderProfitList(dataJSON) {
+            $.ajax({
+                url:"/get/orderProfit",
+                data: dataJSON,
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else if (res.Code == -1) {
+
+                    } else {
+                        showOrderProfitList(res);
+                    }
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        $("#order-search").click(function () {
+            let dataJSON = getOrderProfitSearchValues();
+            AjaxOrderProfitList(dataJSON);
+        });
+        //当每页显示数更改后，执行的操作
+        $("#display_count").change(function() {
+            let dataJSON = getOrderProfitSearchValues();
+            AjaxOrderProfitList(dataJSON);
+        });
+
+        //点击上一页的按钮
+        $(".pre_page").click(function() {
+            let dataJSON = getOrderProfitSearchValues();
+
+            if (dataJSON["currentPage"] == 1) {
+                return;
+            }
+            dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) - 1;
+            AjaxOrderProfitList(dataJSON);
+        });
+        //点击下一页的按钮时
+        $(".next_page").click(function() {
+            let dataJSON = getOrderProfitSearchValues();
+            if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+                return;
+            }
+            dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+            AjaxOrderProfitList(dataJSON);
+        });
+        //点击跳转那一页的按钮
+        $(".jump_page button").click(function() {
+            let dataJSON = getOrderProfitSearchValues();
+
+            if (dataJSON["jumpPage"].length <= 0) {
+                return;
+            }
+            AjaxOrderProfitList(dataJSON);
+        });
+        $(function () {
+            let day = new Date(new Date().getTime() - 86400000);
+            let s = dateFtt("yyyy-MM-dd hh:mm:ss", day);
+            $("#search-order-start-time").val();
+            setSupplier();
+            let dataJSON = getOrderProfitSearchValues();
+            AjaxOrderProfitList(dataJSON);
+        })
+    </script>
+</body>
+</html>
