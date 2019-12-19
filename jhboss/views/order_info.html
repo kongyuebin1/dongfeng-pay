@@ -306,7 +306,7 @@
             let str = "";
             for (let i = 0; i < res.OrderList.length; i ++) {
                 let v = res.OrderList[i];
-                let tmp = "";
+                let tmp = "<tr>";
                 if (v.Status == "success") {
                     tmp = "<tr style='color: blue;'>"
                 } else if (v.Status == "fail") {
