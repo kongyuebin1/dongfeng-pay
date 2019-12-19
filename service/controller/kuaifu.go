@@ -28,14 +28,14 @@ type KuaiFuImpl struct {
 }
 
 const (
-	HOST             = "47.103.5.207"
+	HOST             = "localhost"
 	KF_SCAN_HOST     = "http://" + HOST + "/gateway/scanPay/payService"
 	KF_PAYFOR_HOST   = "http://" + HOST + "/gateway/remittance/pay"
 	KF_BALANCE_QUERY = "http://" + HOST + "/gateway/remittance/getBalance"
 	KF_ORDER_QUERY   = "http://" + HOST + "/gateway/scanPay/orderQuery"
 	KF_PAYFOR_QUERY  = "http://" + HOST + "/gateway/remittance/query"
-	KF_PAY_KEY       = "6889989417e641019d2972e7ff7b08a3"
-	KF_PAY_SECRET    = "9512161f75b246f8a7e72f91c57767da"
+	KF_PAY_KEY       = "xxxxxxx"
+	KF_PAY_SECRET    = "xxxxxx"
 )
 
 func (c *KuaiFuImpl) Scan(orderInfo models.OrderInfo, roadInfo models.RoadInfo, merchantInfo models.MerchantInfo) ScanData {
