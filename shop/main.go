@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	_ "juhe/shop/routers"
+	_ "dongfeng-pay/shop/routers"
 )
 
 func main() {

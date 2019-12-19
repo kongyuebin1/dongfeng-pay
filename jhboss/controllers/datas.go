@@ -10,7 +10,7 @@
 package controllers
 
 import (
-	"juhe/service/models"
+	"dongfeng-pay/service/models"
 )
 
 type BaseDataJSON struct {

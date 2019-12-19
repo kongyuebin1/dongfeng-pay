@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/astaxie/beego"
-	"juhe/shop/controllers"
+	"dongfeng-pay/shop/controllers"
 )
 
 func init() {

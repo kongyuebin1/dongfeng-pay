@@ -1,12 +1,12 @@
 package main
 
 import (
+	_ "dongfeng-pay/jhagent/routers"
+	"dongfeng-pay/jhagent/sys"
+	"dongfeng-pay/jhagent/utils"
+	"dongfeng-pay/service/service_init"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	_ "juhe/jhagent/routers"
-	"juhe/jhagent/sys"
-	"juhe/jhagent/utils"
-	"juhe/service/service_init"
 )
 
 func init() {

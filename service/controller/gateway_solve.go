@@ -12,7 +12,7 @@ package controller
 import (
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
-	"juhe/service/models"
+	"dongfeng-pay/service/models"
 )
 
 /*

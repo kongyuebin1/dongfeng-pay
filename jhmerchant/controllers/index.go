@@ -11,8 +11,8 @@ package controllers
 
 import (
 	"fmt"
-	"juhe/jhmerchant/sys/enum"
-	"juhe/service/models"
+	"dongfeng-pay/jhmerchant/sys/enum"
+	"dongfeng-pay/service/models"
 )
 
 type Index struct {

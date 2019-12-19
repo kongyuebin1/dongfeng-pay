@@ -11,7 +11,7 @@ package controller
 
 import (
 	"github.com/astaxie/beego/logs"
-	"juhe/service/common"
+	"dongfeng-pay/service/common"
 )
 
 var registerSupplier = make(map[string]PayInterface)

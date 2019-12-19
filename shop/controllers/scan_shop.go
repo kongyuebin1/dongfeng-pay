@@ -15,7 +15,7 @@ import (
 	"github.com/astaxie/beego/logs"
 	"github.com/skip2/go-qrcode"
 	"github.com/widuu/gojson"
-	"juhe/service/utils"
+	"dongfeng-pay/service/utils"
 	"strings"
 )
 

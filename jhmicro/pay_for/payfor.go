@@ -11,8 +11,8 @@ package pay_for
 
 import (
 	"github.com/astaxie/beego/logs"
-	"juhe/service/common"
-	"juhe/service/controller"
+	"dongfeng-pay/service/common"
+	"dongfeng-pay/service/controller"
 	"time"
 )
 

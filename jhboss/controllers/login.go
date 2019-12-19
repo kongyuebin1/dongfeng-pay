@@ -4,9 +4,9 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/validation"
-	"juhe/service/common"
-	"juhe/service/models"
-	"juhe/service/utils"
+	"dongfeng-pay/service/common"
+	"dongfeng-pay/service/models"
+	"dongfeng-pay/service/utils"
 )
 
 type LoginController struct {

@@ -13,9 +13,9 @@ import (
 	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
-	"juhe/service/common"
-	"juhe/service/controller"
-	"juhe/service/models"
+	"dongfeng-pay/service/common"
+	"dongfeng-pay/service/controller"
+	"dongfeng-pay/service/models"
 	"strings"
 )
 

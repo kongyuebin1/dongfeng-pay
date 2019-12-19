@@ -12,8 +12,8 @@ package models
 import (
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
-	"juhe/service/common"
-	"juhe/service/utils"
+	"dongfeng-pay/service/common"
+	"dongfeng-pay/service/utils"
 )
 
 func OperatorAccount(accountUid, operatorType string, amount float64) (string, bool) {
