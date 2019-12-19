@@ -6,9 +6,9 @@
 详细的安装文档在doc文件夹中。
 # 部分截图
 boss管理后台示意图
-![Image_text](https://github.com/kongyuebin1/dongfeng-pay/blob/master/doc/boss1.png)
-![Image text](https://github.com/kongyuebin1/dongfeng-pay/raw/master/doc/boss2.png)
-![Image text](https://github.com/kongyuebin1/dongfeng-pay/raw/master/doc/boss3.png)
-![Image text](https://github.com/kongyuebin1/dongfeng-pay/raw/master/doc/boss4.png)
-![Image text](https://github.com/kongyuebin1/dongfeng-pay/raw/master/doc/boss5.png)
-![Image text](https://github.com/kongyuebin1/dongfeng-pay/raw/master/doc/boss6.png)
+![Image_text](http://139.196.82.110/doc/boss1.png)
+![Image text](http://139.196.82.110/doc/boss2.png)
+![Image text](http://139.196.82.110/doc/boss3.png)
+![Image text](http://139.196.82.110/doc/boss4.png)
+![Image text](http://139.196.82.110/doc/boss5.png)
+![Image text](http://139.196.82.110/doc/boss6.png)
