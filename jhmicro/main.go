@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
 	"dongfeng-pay/jhmicro/notify"
 	"dongfeng-pay/jhmicro/order_settle"
 	"dongfeng-pay/jhmicro/pay_for"
 	"dongfeng-pay/jhmicro/query"
 	"dongfeng-pay/service/service_init"
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 )
 
 func main() {
