@@ -11,7 +11,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/kvpay/goutils"
+	"github.com/rs/xid"
 )
 
 type HomeAction struct {
@@ -22,7 +22,7 @@ type HomeAction struct {
 func (c *HomeAction) ShowHome() {
 	//取值
 	siteName := beego.AppConfig.String("site.name")
-	orderNo := goutils.NewContext("Joker").GetUUID()
+	orderNo := xid.New().String()
 	productName := "测试应用-支付功能体验(非商品消费)"
 
 	//数据回显
