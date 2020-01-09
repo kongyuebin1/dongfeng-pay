@@ -11,6 +11,7 @@ package controllers
 
 import (
 	"fmt"
+	"github.com/astaxie/beego/logs"
 	"github.com/tealeg/xlsx"
 	"dongfeng-pay/jhagent/sys/enum"
 	"dongfeng-pay/jhagent/utils"
@@ -172,7 +173,7 @@ func (c *DealExcel) DownloadRecordExcel() {
 
 	defer func() {
 		if r := recover(); r != nil {
-			sys.LogEmergency(file + " 此文件不存在！")
+			logs.Error(fmt.Sprintf("%s此文件不存在", file))
 			time.Sleep(3 * time.Second)
 		}
 	}()
