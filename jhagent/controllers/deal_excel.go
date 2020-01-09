@@ -10,14 +10,13 @@
 package controllers
 
 import (
-	"fmt"
-	"github.com/astaxie/beego/logs"
-	"github.com/tealeg/xlsx"
 	"dongfeng-pay/jhagent/sys/enum"
 	"dongfeng-pay/jhagent/utils"
 	"dongfeng-pay/service/models"
+	"fmt"
+	"github.com/astaxie/beego/logs"
+	"github.com/tealeg/xlsx"
 	"os"
-	"recharge/sys"
 	"strings"
 	"time"
 )
@@ -174,8 +173,7 @@ func (c *DealExcel) DownloadRecordExcel() {
 	defer func() {
 		if r := recover(); r != nil {
 			logs.Error(fmt.Sprintf("%s此文件不存在", file))
-			time.Sleep(3 * time.Second)
-		}
+			time.Sleep(3 * time.Second)}
 	}()
 	// 删除临时文件
 	go func() {
