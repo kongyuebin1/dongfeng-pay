@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0ea8127f-6574-4cc3-a211-84c60b525572" name="Default" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" path="C:\Go" />
+  <component name="Git.Settings">
+    <option name="ADD_SUFFIX_TO_CHERRY_PICKS_OF_PUBLISHED_COMMITS" value="false" />
+    <option name="PREVIEW_PUSH_ON_COMMIT_AND_PUSH" value="false" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
+    <option name="WARN_ABOUT_CRLF" value="false" />
+    <option name="WARN_ABOUT_DETACHED_HEAD" value="false" />
+  </component>
+  <component name="ProjectId" id="1VnQmWLWE27GSNDVSwO0rv5Ub9V" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="ask.go.tool.to.install.GoImportsTaskConsumer" value="true" />
+    <property name="go.gopath.indexing.explicitly.defined" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.vendoring.notification.had.been.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+  </component>
+  <component name="RunManager" selected="Go Build.jhmicro">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="dongfeng-pay" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/" />
+      <package value="dongfeng-pay" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="jhboss" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="dongfeng-pay" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/jhboss/main.go" />
+      <package value="dongfeng-pay" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="jhgateway" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="dongfeng-pay" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/jhgateway/main.go" />
+      <package value="dongfeng-pay" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="jhmerchant" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="dongfeng-pay" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/jhmerchant/main.go" />
+      <package value="dongfeng-pay" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="jhmicro" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="dongfeng-pay" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/jhmicro/main.go" />
+      <package value="dongfeng-pay" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="dongfeng-pay" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="DIRECTORY" />
+      <package value="dongfeng-pay" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Build.jhboss" />
+      <item itemvalue="Go Build.jhgateway" />
+      <item itemvalue="Go Build.jhmerchant" />
+      <item itemvalue="Go Build.jhmicro" />
+    </list>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="420" y="50" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1584617396636">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="420" y="50" key="#com.intellij.ide.macro.MacrosDialog/0.0.1280.689/1920.0.1920.1050@0.0.1280.689" timestamp="1584617396636" />
+    <state x="321" y="78" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1584616848019">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="321" y="78" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1280.689/1920.0.1920.1050@0.0.1280.689" timestamp="1584616848019" />
+    <state x="259" y="125" key="EditFileWatcherDialog" timestamp="1584617405386">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="259" y="125" key="EditFileWatcherDialog/0.0.1280.689/1920.0.1920.1050@0.0.1280.689" timestamp="1584617405386" />
+    <state x="421" y="102" key="FileChooserDialogImpl" timestamp="1584617401281">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="421" y="102" key="FileChooserDialogImpl/0.0.1280.689/1920.0.1920.1050@0.0.1280.689" timestamp="1584617401281" />
+    <state x="2552" y="155" key="FileChooserDialogImpl/0.0.1280.689/1920.0.1920.1050@1920.0.1920.1050" timestamp="1577932262660" />
+    <state x="172" y="0" key="SettingsEditor" timestamp="1584617406420">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="172" y="0" key="SettingsEditor/0.0.1280.689/1920.0.1920.1050@0.0.1280.689" timestamp="1584617406420" />
+    <state x="2178" y="0" key="SettingsEditor/0.0.1280.689/1920.0.1920.1050@1920.0.1920.1050" timestamp="1579140033563" />
+    <state x="400" y="264" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577886582985">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="400" y="264" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.689/1920.0.1920.1050@0.0.1280.689" timestamp="1577886582985" />
+    <state x="2549" y="267" width="664" height="516" key="find.popup" timestamp="1578534509592">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="2549" y="267" width="664" height="516" key="find.popup/0.0.1280.689/1920.0.1920.1050@1920.0.1920.1050" timestamp="1578534509592" />
+  </component>
+</project>
