@@ -12,7 +12,7 @@ package common
 import "net"
 
 const (
-	mqHost = "139.196.82.110"
+	mqHost = "127.0.0.1"
 	mqPort = "61613"
 
 	MqOrderQuery    = "order_query"

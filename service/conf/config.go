@@ -10,9 +10,9 @@
 package conf
 
 const (
-	DB_HOST     = "localhost"
+	DB_HOST     = "rm-z7fchopj.mysql.rds.aliyuncs.com"
 	DB_PORT     = "3306"
-	DB_USER     = "root"
-	DB_PASSWORD = ""
-	DB_BASE     = "pay_pay"
+	DB_USER     = "dongfeng"
+	DB_PASSWORD = "UekR24BwfKx&^E5bcq43f"
+	DB_BASE     = "dongfeng"
 )

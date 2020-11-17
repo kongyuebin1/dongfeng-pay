@@ -10,9 +10,9 @@
 package service_init
 
 import (
+	"dongfeng-pay/service/controller"
 	_ "dongfeng-pay/service/message_queue"
 	"dongfeng-pay/service/models"
-	"dongfeng-pay/service/controller"
 )
 
 func InitAll() {

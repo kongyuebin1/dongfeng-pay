@@ -10,9 +10,9 @@
 package message_queue
 
 import (
+	"dongfeng-pay/service/common"
 	"github.com/astaxie/beego/logs"
 	"github.com/go-stomp/stomp"
-	"dongfeng-pay/service/common"
 	"os"
 	"time"
 )
