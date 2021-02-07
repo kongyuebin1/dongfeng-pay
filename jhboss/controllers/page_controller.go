@@ -9,13 +9,17 @@
 ****************************************************/
 package controllers
 
-import "github.com/astaxie/beego"
+import (
+	"fmt"
+	"github.com/astaxie/beego"
+)
 
 type PageController struct {
 	beego.Controller
 }
 
 func (c *PageController) Index() {
+	fmt.Println("dlfjldkjfldjfljljljlj")
 	c.TplName = "index.html"
 }
 

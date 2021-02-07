@@ -10,13 +10,13 @@
 package controllers
 
 import (
-	"fmt"
-	"github.com/astaxie/beego"
-	"github.com/dchest/captcha"
 	"dongfeng-pay/jhagent/sys"
 	"dongfeng-pay/jhagent/sys/enum"
 	"dongfeng-pay/jhagent/utils"
 	"dongfeng-pay/service/models"
+	"fmt"
+	"github.com/astaxie/beego"
+	"github.com/dchest/captcha"
 	"strconv"
 	"strings"
 )

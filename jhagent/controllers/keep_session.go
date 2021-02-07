@@ -10,8 +10,8 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
 	"dongfeng-pay/jhagent/sys/enum"
+	"github.com/astaxie/beego"
 )
 
 type KeepSession struct {
