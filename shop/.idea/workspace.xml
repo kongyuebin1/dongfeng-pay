@@ -1,567 +1,1174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="226bde98-4991-4cd8-9dcf-9c724fad0921" name="Default" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
+    <list default="true" id="c8828c19-3c31-4554-9836-44fb1c107647" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../agent/common/consts.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/common/mq_config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/common/pay_way_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/common/supplier.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/conf/app.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/conf/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/controllers/account_history.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/controllers/deal_excel.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/controllers/index.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/controllers/keep_session.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/controllers/login.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/controllers/multi_withdraw.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/controllers/trade_record.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/controllers/user_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/controllers/withdraw.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/lastupdate.tmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/account.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/account_history_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/agent_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/agent_profit.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/bank_card_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/init.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/menu_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/merchant_deploy_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/merchant_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/merchant_load_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/notify_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/order_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/order_profit_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/order_settle_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/payfor_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/platform_profit.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/power_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/road_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/road_pool_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/role_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/second_menu_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/transaction.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/models/user_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/routers/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/css/custom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/css/fontastic.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/css/style.blue.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/css/style.default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/css/style.font.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/css/style.sea.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/excel/batch_daifa_template.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/fonts/dashboard.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/fonts/dashboard.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/fonts/dashboard.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/fonts/dashboard.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/icons-reference/fonts/dashboard.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/icons-reference/fonts/dashboard.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/icons-reference/fonts/dashboard.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/icons-reference/fonts/dashboard.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/icons-reference/icons-reference.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/icons-reference/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/img/avatar-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/img/icon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/img/map-marker-sea.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/js/deal_excel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/js/form_validate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/js/front.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/js/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/js/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/js/trade_record.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/js/withdraw_account_list.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/css/bootstrap-theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/css/bootstrap-theme.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-3.3.7/js/npm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-datetimepicker/css/datetimepicker.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap-paginator/bootstrap-paginator.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/css/bootstrap-grid.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/css/bootstrap-reboot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/font-awesome/css/font-awesome.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/font-awesome/css/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/font-awesome/fonts/FontAwesome.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/font-awesome/fonts/fontawesome-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/font-awesome/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/font-awesome/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/font-awesome/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/font-awesome/fonts/fontawesome-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/jquery.cookie/MIT-LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/jquery.cookie/component.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/jquery.cookie/cookie.jquery.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/jquery.cookie/jquery.cookie.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/jquery/core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/jquery/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/jquery/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/jquery/jquery.slim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/jquery/jquery.slim.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/sweetalert.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/toastr-2.1.4-7/toastr.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/static/lib/toastr-2.1.4-7/toastr.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/sys/enum/bank_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/sys/enum/conf.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/sys/enum/constant.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/sys/enum/pay_type.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/sys/enum/regular_expression.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/sys/enum/status.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/sys/public_method.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/sys/session.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/tests/default_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/utils/date_time.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/utils/encryption.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/utils/logs.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/utils/mysql.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/utils/send_messages.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/complaint_record.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/history_record.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/merchant.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/modify_userInfo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/pay_way.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/recharge_record.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/show_userInfo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/template/css.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/template/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/template/js.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/trade_record.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/withdraw/multi_withdraw.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/withdraw/withdraw.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../agent/views/withdraw/withdraw_record.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/common/consts.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/common/mq_config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/common/pay_way_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/common/supplier.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/conf/app.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/conf/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/addController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/baseController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/datas.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/deleteController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/filterController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/getController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/loginController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/pageController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/queryController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/sendNotifyMerchant.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/controllers/updateController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/gojson/gojson.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/message_queue/active_mq.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/message_queue/send_message.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/account.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/account_history_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/agent_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/agent_profit.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/bank_card_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/init.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/menu_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/merchant_deploy_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/merchant_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/merchant_load_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/notify_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/order_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/order_profit_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/order_settle_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/payfor_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/platform_profit.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/power_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/road_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/road_pool_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/role_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/second_menu_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/transaction.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/models/user_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/routers/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/routers/router_pages.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/css/basic.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/css/login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/js/basic.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/js/filter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/js/jquery.ui.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/.jshintrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/.npmignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/Gruntfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/bower.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/build/build.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/build/build_standalone.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.az.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.bg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.bn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.cs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.da.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.de.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ee.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.el.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.es.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.he.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.hr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.hu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.hy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.id.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.is.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.it.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ja.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ka.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ko.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.lt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.lv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ms.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.nb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.nl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.no.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ro.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.rs-latin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.rs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.sk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.sl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.sv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.sw.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.th.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.tr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ua.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.uk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-TW.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/less/datetimepicker.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/minify.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/img/glyphicons-halflings-white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/img/glyphicons-halflings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/jquery/jquery-1.8.3.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/css/bootstrap-theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/css/bootstrap-theme.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/jquery/jquery-1.8.3.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/screenshot/standard_day.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/screenshot/standard_day_meridian.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/screenshot/standard_decade.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/screenshot/standard_full.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/screenshot/standard_hour.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/screenshot/standard_hour_meridian.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/screenshot/standard_month.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/screenshot/standard_year.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/_coverage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/assets/coverage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/assets/jquery-1.7.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/assets/mock.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/assets/qunit-logging.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/assets/qunit.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/assets/qunit.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/assets/utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/run-qunit.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/component.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/events.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/formats.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/inline.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/keyboard_navigation/2011.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/keyboard_navigation/2012.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/keyboard_navigation/all.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/mouse_navigation/2011.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/mouse_navigation/2012.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/mouse_navigation/all.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/suites/options.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/tests.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-datetimepicker/tests/tests.min.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-select/bootstrap-select.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-select/bootstrap-select.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap-select/jquery-1.9.1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/css/bootstrap-theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/css/bootstrap-theme.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/css/bootstrap-theme.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/css/bootstrap-theme.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/bootstrap/js/npm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/select2/select2.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/static/lib/select2/select2.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/alipay.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/consts.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/gateway_solve.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/init.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/kuaifu.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/order_settle.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/pay_solve.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/payfor_solve.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/supplier_interface.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/supplier/weixin.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/utils/AES_ECB.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/utils/date_time.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/utils/login_verify_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/utils/md5.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/utils/sign_verify.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/utils/sort_go.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/account.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/account_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/agent_profit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/agent_to_merchant.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/bank_card.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/choose_agent.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/confirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/create_agent.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/edit_role.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/first_menu.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/menu.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/merchant.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/merchant_payfor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/operator.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/order_info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/order_profit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/payfor_record.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/platform_profit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/power.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/road.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/road_pool.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/road_profit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/role.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/second_menu.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/self_notify.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/self_payfor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../boss/views/self_plus_sub.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/common/consts.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/common/mq_config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/common/pay_way_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/conf/app.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/conf/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/controllers/gateway/base_gateway.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/controllers/gateway/error_gateway.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/controllers/gateway/merchant_query.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/controllers/gateway/payfor_gateway.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/controllers/gateway/scan_gateway.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/controllers/gateway/supplier_notify.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/enum/bank_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/enum/conf.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/enum/constant.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/enum/pay_type.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/enum/regular_expression.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/enum/status.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/message_queue/active_mq.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/message_queue/send_message.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/account.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/account_history_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/agent_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/agent_profit.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/bank_card_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/init.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/menu_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/merchant_deploy_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/merchant_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/merchant_load_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/notify_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/order_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/order_profit_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/order_settle_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/payfor_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/platform_profit.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/power_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/road_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/road_pool_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/role_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/second_menu_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/transaction.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/models/user_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/routers/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmsm5b2jhrt21p7outd0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmsm64ijhrt4dp41q5k0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmsm83ijhrt0s31p3l1g.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmsm8u2jhrt0s31p3l30.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmsm9hijhrt0s31p3l4g.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmt351ijhrt0s31p3l60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmt360ijhrt0s31p3la0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmt36mijhrt4b307lbi0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmt36qqjhrt4b307lbjg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmt37oajhrt4ad201uu0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmt38cqjhrt0ff4cs4og.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmt3arijhrt0ff4cs4q0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bmvs3mqjhrt3c917cj8g.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bn9plpqjhrt18h4i3qf0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bn9ps0qjhrt1vs4onr50.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bn9qqbqjhrt0e45evqug.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bn9qrq2jhrt5te5tusug.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bnlmm5ijhrt47k47p7v0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bnlmppajhrt47k47p80g.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bnlmr82jhrt47k47p830.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bnmadhajhrt1g953sarg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bnmbeqijhrt0cdhd7670.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bnmbk5qjhrt0cdhd768g.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/img/bnmbnhijhrt0f0i4mcsg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/js/jquery.ui.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/js/reload.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/css/bootstrap-theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/css/bootstrap-theme.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/css/bootstrap-theme.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/css/bootstrap-theme.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/static/lib/bootstrap/js/npm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/alipay.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/consts.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/gateway_solve.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/init.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/kuaifu.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/order_settle.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/pay_solve.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/payfor_solve.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/supplier.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/supplier_interface.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/supplier/weixin.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/utils/AES_ECB.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/utils/date_time.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/utils/encryption.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/utils/login_verify_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/utils/md5.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/utils/mysql.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/utils/send_messages.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/utils/sign_verify.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/utils/sort_go.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/views/err/params.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/views/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/views/scan.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/common/consts.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/common/mq_config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/common/pay_way_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/common/supplier.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/conf/app.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/conf/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/gojson/gojson.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/message_queue/active_mq.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/message_queue/send_message.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/account.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/account_history_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/agent_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/agent_profit.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/bank_card_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/init.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/menu_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/merchant_deploy_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/merchant_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/merchant_load_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/notify_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/order_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/order_profit_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/order_settle_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/payfor_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/platform_profit.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/power_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/road_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/road_pool_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/role_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/second_menu_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/transaction.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/models/user_info.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/notify/order_notify.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/notify/payfor_notify.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/order_settle/settle.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/pay_for/payfor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/query/order_query.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/query/pay_for_query.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/alipay.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/consts.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/gateway_solve.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/init.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/kuaifu.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/order_settle.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/pay_solve.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/payfor_solve.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/supplier_interface.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/supplier/weixin.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/utils/AES_ECB.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/utils/date_time.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/utils/login_verify_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/utils/md5.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/utils/sign_verify.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../microservice/utils/sort_go.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/AES_ECB.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/date_time.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/login_verify_code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/md5.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/sign_verify.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/sort_go.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../doc/mysql.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../doc/pay_doc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../doc/安装使用说明.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../go.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/conf/app.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/controllers/account_history.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/controllers/deal_excel.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/controllers/index.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/controllers/keep_session.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/controllers/login.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/controllers/multi_withdraw.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/controllers/trade_record.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/controllers/user_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/controllers/withdraw.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/routers/commentsRouter_controllers.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/routers/router.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/css/custom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/css/fontastic.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/css/style.blue.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/css/style.default.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/css/style.font.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/css/style.sea.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/excel/batch_daifa_template.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/fonts/dashboard.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/fonts/dashboard.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/fonts/dashboard.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/fonts/dashboard.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/icons-reference/fonts/dashboard.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/icons-reference/fonts/dashboard.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/icons-reference/fonts/dashboard.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/icons-reference/fonts/dashboard.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/icons-reference/icons-reference.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/icons-reference/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/img/avatar-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/img/icon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/img/map-marker-sea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/js/deal_excel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/js/form_validate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/js/front.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/js/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/js/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/js/trade_record.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/js/withdraw_account_list.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/css/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-3.3.7/js/npm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-datetimepicker/css/datetimepicker.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap-paginator/bootstrap-paginator.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/font-awesome/css/font-awesome.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/font-awesome/css/font-awesome.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/font-awesome/fonts/FontAwesome.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/font-awesome/fonts/fontawesome-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/font-awesome/fonts/fontawesome-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/font-awesome/fonts/fontawesome-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/font-awesome/fonts/fontawesome-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/font-awesome/fonts/fontawesome-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/jquery.cookie/MIT-LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/jquery.cookie/component.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/jquery.cookie/cookie.jquery.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/jquery.cookie/jquery.cookie.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/jquery/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/jquery/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/jquery/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/jquery/jquery.slim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/jquery/jquery.slim.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/sweetalert.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/toastr-2.1.4-7/toastr.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/static/vendor/toastr-2.1.4-7/toastr.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/sys/enum/bank_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/sys/enum/conf.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/sys/enum/constant.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/sys/enum/pay_type.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/sys/enum/regular_expression.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/sys/enum/status.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/sys/public_method.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/sys/session.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/utils/encryption.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/utils/logs.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/utils/mysql.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/utils/send_messages.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/complaint_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/history_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/merchant.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/modify_userInfo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/pay_way.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/recharge_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/show_userInfo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/template/css.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/template/header.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/template/js.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/trade_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/withdraw/multi_withdraw.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/withdraw/withdraw.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhagent/views/withdraw/withdraw_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/conf/app.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/add.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/base_controller.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/datas.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/delete.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/filter.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/get.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/login.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/page_controller.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/query.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/send_notify_merchant.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/controllers/update.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/routers/router.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/routers/router_pages.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/css/basic.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/css/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/js/basic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/js/filter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/js/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/js/jquery.ui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/.jshintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/Gruntfile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/build/build.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/build/build_standalone.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.az.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.bg.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.bn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ca.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.cs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.da.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.de.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ee.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.el.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.es.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.he.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.hr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.hu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.hy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.id.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.is.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.it.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ja.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ka.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ko.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.lt.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.lv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ms.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.nb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.nl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.no.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.rs-latin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.rs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ru.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.sk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.sl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.sv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.sw.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.th.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.tr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ua.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.uk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-TW.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/less/datetimepicker.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/minify.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/img/glyphicons-halflings-white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/img/glyphicons-halflings.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v2/jquery/jquery-1.8.3.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/css/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/sample in bootstrap v3/jquery/jquery-1.8.3.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/screenshot/standard_day.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/screenshot/standard_day_meridian.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/screenshot/standard_decade.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/screenshot/standard_full.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/screenshot/standard_hour.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/screenshot/standard_hour_meridian.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/screenshot/standard_month.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/screenshot/standard_year.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/_coverage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/assets/coverage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/assets/jquery-1.7.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/assets/mock.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/assets/qunit-logging.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/assets/qunit.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/assets/qunit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/assets/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/run-qunit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/component.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/events.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/formats.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/inline.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/keyboard_navigation/2011.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/keyboard_navigation/2012.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/keyboard_navigation/all.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/mouse_navigation/2011.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/mouse_navigation/2012.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/mouse_navigation/all.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/suites/options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/tests.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-datetimepicker/tests/tests.min.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-select/bootstrap-select.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-select/bootstrap-select.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap-select/jquery-1.9.1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/css/bootstrap-theme.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/css/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/css/bootstrap-theme.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/bootstrap/js/npm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/select2/select2.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/static/lib/select2/select2.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/tests/default_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/account.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/account_history.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/agent_profit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/agent_to_merchant.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/bank_card.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/choose_agent.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/confirm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/create_agent.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/edit_role.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/first_menu.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/main.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/menu.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/merchant.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/merchant_payfor.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/operator.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/order_info.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/order_profit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/payfor_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/platform_profit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/power.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/road.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/road_pool.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/road_profit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/role.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/second_menu.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/self_notify.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/self_payfor.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhboss/views/self_plus_sub.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/conf/app.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/controllers/gateway/base_gateway.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/controllers/gateway/error_gateway.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/controllers/gateway/merchant_query.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/controllers/gateway/payfor_gateway.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/controllers/gateway/scan_gateway.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/controllers/gateway/supplier_notify.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/models/init.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/routers/router.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmsm5b2jhrt21p7outd0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmsm64ijhrt4dp41q5k0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmsm83ijhrt0s31p3l1g.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmsm8u2jhrt0s31p3l30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmsm9hijhrt0s31p3l4g.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmt351ijhrt0s31p3l60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmt360ijhrt0s31p3la0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmt36mijhrt4b307lbi0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmt36qqjhrt4b307lbjg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmt37oajhrt4ad201uu0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmt38cqjhrt0ff4cs4og.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmt3arijhrt0ff4cs4q0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bmvs3mqjhrt3c917cj8g.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bn9plpqjhrt18h4i3qf0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bn9ps0qjhrt1vs4onr50.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bn9qqbqjhrt0e45evqug.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bn9qrq2jhrt5te5tusug.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bnlmm5ijhrt47k47p7v0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bnlmppajhrt47k47p80g.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bnlmr82jhrt47k47p830.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bnmadhajhrt1g953sarg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bnmbeqijhrt0cdhd7670.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bnmbk5qjhrt0cdhd768g.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/img/bnmbnhijhrt0f0i4mcsg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/js/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/js/jquery.ui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/js/reload.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/css/bootstrap-theme.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/css/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/css/bootstrap-theme.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/static/lib/bootstrap/js/npm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/tests/default_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/views/err/params.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/views/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhgateway/views/scan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/conf/app.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/controllers/account_history.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/controllers/deal_excel.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/controllers/index.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/controllers/keep_session.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/controllers/login.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/controllers/multi_withdraw.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/controllers/trade_record.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/controllers/user_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/controllers/withdraw.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/routers/commentsRouter_controllers.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/routers/router.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/css/custom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/css/fontastic.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/css/style.blue.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/css/style.default.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/css/style.font.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/css/style.sea.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/excel/batch_daifa_template.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/fonts/dashboard.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/fonts/dashboard.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/fonts/dashboard.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/fonts/dashboard.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/icons-reference/fonts/dashboard.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/icons-reference/fonts/dashboard.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/icons-reference/fonts/dashboard.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/icons-reference/fonts/dashboard.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/icons-reference/icons-reference.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/icons-reference/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/img/avatar-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/img/icon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/img/map-marker-sea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/js/deal_excel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/js/form_validate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/js/front.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/js/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/js/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/js/trade_record.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/js/withdraw_account_list.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/css/bootstrap-theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/css/bootstrap-theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-3.3.7/js/npm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-datetimepicker/css/datetimepicker.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap-paginator/bootstrap-paginator.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/font-awesome/css/font-awesome.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/font-awesome/css/font-awesome.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/font-awesome/fonts/FontAwesome.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/font-awesome/fonts/fontawesome-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/font-awesome/fonts/fontawesome-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/font-awesome/fonts/fontawesome-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/font-awesome/fonts/fontawesome-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/font-awesome/fonts/fontawesome-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/jquery.cookie/MIT-LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/jquery.cookie/component.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/jquery.cookie/cookie.jquery.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/jquery.cookie/jquery.cookie.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/jquery/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/jquery/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/jquery/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/jquery/jquery.slim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/jquery/jquery.slim.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/sweetalert.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/toastr-2.1.4-7/toastr.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/static/vendor/toastr-2.1.4-7/toastr.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/sys/enum/bank_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/sys/enum/conf.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/sys/enum/constant.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/sys/enum/pay_type.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/sys/enum/regular_expression.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/sys/enum/status.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/sys/public_method.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/sys/session.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/utils/encryption.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/utils/logs.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/utils/mysql.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/utils/send_messages.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/complaint_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/history_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/modify_userInfo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/pay_way.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/recharge_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/show_userInfo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/template/css.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/template/header.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/template/js.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/trade_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/withdraw/multi_withdraw.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/withdraw/withdraw.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmerchant/views/withdraw/withdraw_record.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmicro/conf/app.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmicro/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmicro/notify/order_notify.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmicro/notify/payfor_notify.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmicro/order_settle/settle.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmicro/pay_for/payfor.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmicro/query/order_query.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jhmicro/query/pay_for_query.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/common/consts.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/common/mq_config.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/common/pay_way_code.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/common/supplier.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/conf/config.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/alipay.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/consts.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/gateway_solve.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/init.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/kuaifu.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/order_settle.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/pay_solve.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/payfor_solve.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/supplier_interface.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/controller/weixin.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/message_queue/active_mq.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/message_queue/send_message.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/account.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/account_history_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/agent_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/agent_profit.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/bank_card_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/init.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/menu_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/merchant_deploy_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/merchant_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/merchant_load_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/notify_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/order_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/order_profit_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/order_settle_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/payfor_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/platform_profit.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/power_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/road_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/road_pool_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/role_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/second_menu_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/transaction.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/models/user_info.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/routers/router.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/service_init/init_all.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/utils/AES_ECB.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/utils/date_time.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/utils/login_verify_code.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/utils/md5.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/utils/sign_verify.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service/utils/sort_go.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/page_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/page_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/pay.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/pay.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/scan_shop.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/scan_shop.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/windows_amd64/controllers.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/windows_amd64/models.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/windows_amd64/routers.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/windows_amd64/utils.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Go File" />
-        <option value="HTML File" />
-        <option value="CSS File" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>ShowHome</find>
-      <find>订单编号</find>
-      <find>H5支付</find>
-      <find>orderid</find>
-      <find>notifyUrl</find>
-      <find>amount</find>
-      <find>orderNo</find>
-      <find>QueryOrderStatus</find>
-      <find>收银台</find>
-      <find>Admin server Running on</find>
-      <find>8088</find>
-      <find>KJ_URL</find>
-      <find>Session</find>
-      <find>host_url</find>
-      <find>SCAN_URL</find>
-      <find>liansheng-pay-outside</find>
-      <find>liansheng-pay-outside.mysql.rds.aliyuncs.com</find>
-      <find>Payfor</find>
-      <find>KC_KJ_URL</find>
-      <find>kj_host</find>
-      <find>siteName</find>
-      <find>shopName</find>
-      <find>返回支付</find>
-      <find>此订单5分钟内交易有效!</find>
-      <find>ico_log</find>
-      <find>返回</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-      <replace>liansheng-pay-outside.mysql.rds.aliyuncs.com</replace>
-      <replace>rm-uf6zsdjy853uw7fivho.mysql.rds.aliyuncs.com</replace>
-    </replaceStrings>
-    <dirStrings>
-      <dir>C:\gopath\kvpay\merchant</dir>
-      <dir>C:\gopath\src\merchant</dir>
-    </dirStrings>
-  </component>
   <component name="GOROOT" path="C:\Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="GoLibraries">
-    <option name="urls">
-      <list>
-        <option value="file://$PROJECT_DIR$" />
-        <option value="file://$PROJECT_DIR$/third" />
-      </list>
-    </option>
+    <option name="indexEntireGoPath" value="false" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/controllers/GBPayfor_act.go" />
-        <option value="$PROJECT_DIR$/src/sysinit/init_system.go" />
-        <option value="$PROJECT_DIR$/src/tests/default_test.go" />
-        <option value="$PROJECT_DIR$/src/views/pay/pay_page.html" />
-        <option value="$PROJECT_DIR$/src/utils/logs.go" />
-        <option value="$PROJECT_DIR$/src/views/pay/userInfo.html" />
-        <option value="$PROJECT_DIR$/src/views/pay_ok.html" />
-        <option value="$PROJECT_DIR$/src/conf/app.conf" />
-        <option value="$PROJECT_DIR$/src/models/esshop_jufada.go" />
-        <option value="$PROJECT_DIR$/src/controllers/default.go" />
-        <option value="$PROJECT_DIR$/src/models/esshop_lijufu.go" />
-        <option value="$PROJECT_DIR$/src/models/esshop_0731999.go" />
-        <option value="$PROJECT_DIR$/src/routers/router.go" />
-        <option value="$PROJECT_DIR$/src/controllers/notify_transmit.go" />
-        <option value="$PROJECT_DIR$/src/models/init.go" />
-        <option value="$PROJECT_DIR$/src/views/index.html" />
-        <option value="$PROJECT_DIR$/src/views/pay_fail.html" />
-        <option value="$PROJECT_DIR$/src/static/css/pay.css" />
-        <option value="$PROJECT_DIR$/src/views/pay_page.html" />
-        <option value="$PROJECT_DIR$/src/views/pay/scan.html" />
-        <option value="$PROJECT_DIR$/src/views/pay/payfor.html" />
-        <option value="$PROJECT_DIR$/src/controllers/home_action.go" />
-        <option value="$PROJECT_DIR$/src/main.go" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1760" />
-    <option name="y" value="141" />
-    <option name="width" value="1944" />
-    <option name="height" value="1056" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="merchant" type="b2602c69:ProjectViewProjectNode" />
-              <item name="merchant" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="merchant" type="b2602c69:ProjectViewProjectNode" />
-              <item name="merchant" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="merchant" type="b2602c69:ProjectViewProjectNode" />
-              <item name="merchant" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+  <component name="ProjectId" id="1rhN8UzpOpbCnYQ5Hw4ElCuKaEA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DefaultGoTemplateProperty" value="Go File" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
-    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
-    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
-    <property name="go.gopath.indexing.explicitly.defined" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\gopath\src\merchant\src\static\img" />
+      <recent name="C:\go-product\dongfeng\shop" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="merchant" />
-      <working_directory value="$PROJECT_DIR$/" />
-      <go_parameters value="-i" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/" />
-      <directory value="$PROJECT_DIR$/" />
-    </configuration>
-    <configuration name="build-run" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="merchant" />
-      <working_directory value="$PROJECT_DIR$/" />
-      <go_parameters value="-i" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/src/main.go" />
-      <directory value="$PROJECT_DIR$/" />
-    </configuration>
-    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
-      <module name="merchant" />
-      <working_directory value="$PROJECT_DIR$/" />
-      <go_parameters value="-i" />
-      <framework value="gotest" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-    </configuration>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1066" extended-state="6" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17571884" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32903227" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3483871" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
-    </layout>
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="2" />
-    </breakpoint-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/views/pay/payfor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="25" column="40" lean-forward="true" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/home_action.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8064">
-          <caret line="576" column="23" lean-forward="true" selection-start-line="576" selection-start-column="23" selection-end-line="576" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/home_action.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1358">
-          <caret line="111" column="6" selection-start-line="111" selection-start-column="6" selection-end-line="111" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/pay_page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/home_action.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="32" column="37" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routers/router.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="13" column="40" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/conf/app.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/home_action.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="32" column="37" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routers/router.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="13" column="40" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/conf/app.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/home_action.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="32" column="37" lean-forward="true" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routers/router.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="13" column="40" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/conf/app.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sysinit/init_system.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/default_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-291">
-          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/cache.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routers/commentsRouter________________gopath_kvpay_merchant_src_controllers.go" />
-    <entry file="file://$PROJECT_DIR$/src/routers/commentsRouter_.go" />
-    <entry file="file://$PROJECT_DIR$/src/views/pay/pay_page.html" />
-    <entry file="file://$PROJECT_DIR$/src/utils/logs.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/string_pool.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/third/src/github.com/astaxie/beego/config.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="187" column="15" selection-start-line="187" selection-start-column="5" selection-end-line="187" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/third/src/github.com/astaxie/beego/admin.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="383" column="5" selection-start-line="383" selection-start-column="5" selection-end-line="383" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/pay/toPayfor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/pay/userInfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="35" column="62" lean-forward="true" selection-start-line="35" selection-start-column="62" selection-end-line="35" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/common.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="52" lean-forward="true" selection-start-column="52" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/esshop_jufada.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/pay_ok.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="30" column="114" selection-start-line="30" selection-start-column="107" selection-end-line="30" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/esshop_lijufu.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/360zip$Temp/360$1/sendto.php" />
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/360zip$Temp/360$0/Program.cs" />
-    <entry file="file://$PROJECT_DIR$/src/models/esshop_0731999.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/AES_ECB.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/default.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/notify_transmit.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="686">
-          <caret line="55" column="64" selection-start-line="55" selection-start-column="64" selection-end-line="55" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/GBPayfor_act.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="40" column="10" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/global.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1736">
-          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/pay_fail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="33" column="64" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/css/pay.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="139" column="66" lean-forward="true" selection-start-line="139" selection-start-column="66" selection-end-line="139" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/pay_page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1484">
-          <caret line="69" column="104" selection-start-line="69" selection-start-column="104" selection-end-line="69" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/pay/scan.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1204">
-          <caret line="86" column="48" selection-start-line="86" selection-start-column="48" selection-end-line="86" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/pay/payfor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/init.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/conf/app.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-182">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/home_action.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routers/router.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
-          <folding>
-            <element signature="e#17#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  <component name="WindowStateProjectService">
+    <state x="2583" y="236" width="593" height="578" key="find.popup" timestamp="1619424233800">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="2583" y="236" width="593" height="578" key="find.popup/0.0.1280.689/1920.0.1920.1050@1920.0.1920.1050" timestamp="1619424233800" />
   </component>
 </project>

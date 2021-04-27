@@ -10,9 +10,9 @@
 package controller
 
 import (
-	"github.com/astaxie/beego/logs"
-	"github.com/astaxie/beego/orm"
-	"dongfeng-pay/service/models"
+	"boss/models"
+	"github.com/beego/beego/v2/adapter/orm"
+	"github.com/beego/beego/v2/core/logs"
 )
 
 /*
@@ -20,22 +20,22 @@ import (
  */
 func InsertOrderAndOrderProfit(orderInfo models.OrderInfo, orderProfitInfo models.OrderProfitInfo) bool {
 	o := orm.NewOrm()
-	o.Begin()
+	_ = o.Begin()
 
 	defer func(interface{}) {
 		if err := recover(); err != nil {
-			o.Rollback()
+			_ = o.Rollback()
 		}
 	}(o)
 
 	if _, err := o.Insert(&orderInfo); err != nil {
 		logs.Error("insert orderInfo fail: ", err)
-		o.Rollback()
+		_ = o.Rollback()
 		return false
 	}
 	if _, err := o.Insert(&orderProfitInfo); err != nil {
 		logs.Error("insert orderProfit fail: ", err)
-		o.Rollback()
+		_ = o.Rollback()
 		return false
 	}
 

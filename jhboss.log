@@ -1,6 +1,0 @@
-2021/04/21 14:00:19.440 [I]  mysql init..... root:Kyb^15273031604@tcp(localhost:3306)/juhe_pay?charset=utf8 
-2021/04/21 14:00:19.452 [N]  快付支付，注册完毕
-2021/04/21 14:00:19.452 [N]  官方微信，注册完毕
-2021/04/21 14:00:19.452 [N]  官方支付宝，注册完毕
-2021/04/21 14:00:19.579 [I]  http server Running on http://:8080
-2021/04/21 14:00:19.581 [C]  ListenAndServe:  listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.

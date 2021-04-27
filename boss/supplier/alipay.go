@@ -10,7 +10,7 @@
 package controller
 
 import (
-	"dongfeng-pay/service/models"
+	"boss/models"
 )
 
 type AlipayImpl struct {

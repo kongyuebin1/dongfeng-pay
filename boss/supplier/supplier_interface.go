@@ -10,7 +10,7 @@
 package controller
 
 import (
-	"dongfeng-pay/service/models"
+	"boss/models"
 )
 
 //定义扫码支付的返回值

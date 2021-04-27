@@ -10,15 +10,15 @@
 package controller
 
 import (
+	"boss/common"
+	"boss/gojson"
+	"boss/models"
+	"boss/utils"
 	"fmt"
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/httplib"
-	"github.com/astaxie/beego/logs"
+	"github.com/beego/beego/v2/adapter/httplib"
+	"github.com/beego/beego/v2/core/logs"
+	beego "github.com/beego/beego/v2/server/web"
 	"github.com/rs/xid"
-	"github.com/widuu/gojson"
-	"dongfeng-pay/service/common"
-	"dongfeng-pay/service/models"
-	"dongfeng-pay/service/utils"
 	"strconv"
 	"strings"
 )
