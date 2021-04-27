@@ -1,0 +1,1171 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>管理后台</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+	<script src="../static/js/filter.js"></script>
+	<style>
+		.merchant-record, .merchant-edit{
+			overflow-x: hidden;
+		}
+		.add-merchant-button {
+			margin-bottom: 10px;
+		}
+		.modal-body-merchant div {
+			margin-bottom: 15px;
+		}
+		.modal-body-merchant span {
+			display: inline-block;
+			width: 100px;
+		}
+		.merchant-edit fieldset .row {
+			margin-bottom: 10px;
+		}
+		.merchant-edit fieldset div span {
+			display: inline-block;
+			width: 100px;
+		}
+		fieldset textarea {
+			width: 200px;
+			margin-top: 15px;
+		}
+		.merchant-edit {
+			/* position: relative; */
+			margin-bottom: 50px;
+		}
+		.merchant-deploy-footer {
+			position: absolute;
+			bottom: 0px;
+			border:  1px solid #e7e7e7;
+			left: 14%;
+			width: 86%;
+			height: 45px;
+			background-color: white;
+            padding-left: 30px;
+		}
+		.merchant-deploy-footer span {
+			line-height: 30px;
+			padding-left: 20px;
+			padding-right: 20px;
+			border-right: 1px solid #e7e7e7;
+		}
+		.merchant-deploy-footer span:hover {
+			cursor: pointer;
+			color: red;
+		}
+
+		#pay-type{
+			height: 30px;
+			width: 190px;
+		}
+		#merchant-name-error, #merchant-phone-error, #merchant-login-password-error {
+			padding-left: 10px;
+			color: red;
+		}
+		#merchant-edit-ip-white {
+			width: 50%;
+		}
+		#payfor-fee {
+			width: 50px;
+		}
+		#roll-or-road-list {
+			margin-bottom: 95px;
+			height: 500px;
+			overflow-y: hidden;
+		}
+		.modal-content {
+			overflow: auto;
+			max-height: 500px;
+		}
+		.modal-header {
+			padding: 10px;
+		}
+		.modal-footer {
+			padding-top: 10px;
+			padding-bottom: 30px;
+		}
+        #find-merchant {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+        #find-merchant:hover {
+            cursor: pointer;
+            color: red;
+        }
+	</style>
+</head>
+<body>
+	<div class="merchant-record">
+		<div class="search">
+			<div>
+				商户名称：
+				<input type="text" value="" placeholder="模糊匹配" id="merchant-name-search">
+			</div>
+			<div>
+				商户编号：
+				<input type="text" value="" placeholder="" id="merchant-no-search">
+			</div>
+			<div>
+				<button type="button" class="btn btn-default" id="merchant-search">搜索</button>
+			</div>
+		</div>
+		<button type="button" class="btn btn-default btn-xs glyphicon glyphicon-plus add-merchant-button">创建新商户</button>
+		<!-- 创建商户的模态框 -->
+		<div class="modal fade" id="create-merchant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">创建新商户</h4>
+		      </div>
+		      <div class="modal-body modal-body-merchant">
+		      	<div>
+		      		<span>商户名称：</span>
+		      		<input type="text" id="merchant-name-modal">
+		      		<span id="merchant-name-error"></span>
+		      	</div>
+		      	<div>
+		      		<span>注册手机号：</span>
+		      		<input type="text" id="merchant-phone-modal">
+		      		<span id="merchant-phone-error"></span>
+		      	</div>
+		      	<div>
+		      		<span>账号登录密码：</span>
+		      		<input type="password" id="merchant-login-password-modal">
+		      		<span id="merchant-login-password-error"></span>
+		      	</div>
+		      	<div>
+		      		<span>确认密码：</span>
+		      		<input type="password" id="merchant-vertify-password-modal">
+		      		<span id="merchant-verify-password-error"></span>
+		      	</div>
+		      	
+		      	<div>
+		      		<span>商户状态：</span>
+		      		<select id="add-merchant-status">
+		      			<option value="active">激活</option>
+		      			<option value="unactive">冻结</option>
+		      		</select>
+		      	</div>
+		      	<div>
+		      		<span>备注：</span>
+		      		<textarea id="merchant-remark"></textarea>
+		      	</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default cancel-merchant" data-dismiss="modal">取消</button>
+		        <button type="button" class="btn btn-primary save-merchant">保存</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- end -->
+		<div class="menu-table">
+			<table>
+				<thead class="thead-dark">
+					<tr>
+						<th>序列号</th>
+						<th>商户编号</th>
+						<th>商户名称</th>
+						<th>商户key</th>
+						<th>商户秘钥</th>
+						<th>手机号(登录账号)</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="merchant-table-body">
+				</tbody>
+			</table>
+		</div>
+		<!-- 分页插件 -->
+		<div class="cut_page">
+			<li>
+				每页显示
+				<select id="display_count">
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select>
+			</li>
+			
+			<li class="current_total_page">第<span class="current_page">0</span>/<span class="total_page">0</span>页</li>
+			<li class="pre_page">上一页</li>
+			<li class="next_page">下一页</li>
+			<li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+		</div>
+	</div>
+	<div class="merchant-edit">
+		<fieldset>
+			<legend style="width: 75px;">商户基本配置</legend>
+			<div class="row">
+				<div class="col-md-4">
+					<span>商户名称：</span>
+					<input type="text" readonly="true" value="不可修改" id="merchant-edit-merchant-name">
+				</div>
+				<div class="col-md-4">
+					<span>商户编号：</span>
+					<input type="text" readonly="true" value="" id="merchant-edit-merchant-no">
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<span>是否自动结算：</span>
+					<input type="radio" name="auto-settle-radio" value="yes" checked="checked">是
+					<input type="radio" name="auto-settle-radio" value="no">否
+				</div>
+				<div class="col-md-4">
+					<span>是否自动代付：</span>
+					<input type="radio" name="auto-payfor-radio" value="yes" checked="checked">是
+					<input type="radio" name="auto-payfor-radio" value="no">否
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span>请求ip白名单：</span>
+					<textarea placeholder="多个ip，以；隔开。" id="merchant-edit-ip-white"></textarea>
+				</div>
+			</div>
+		</fieldset>
+		
+		<fieldset class="pay-deploy">
+			<legend style="width: 50px;">支付配置</legend>
+			<span style="color: blue;display: block;margin-bottom: 10px;">注意：如果单代道和轮询通道均配置，系统会优先选择单通道；如果单通道不可用，系统会到轮询通道池中选择!</span>
+			<div class="row">
+				<div class="col-md-6">
+					<span>支付类型：</span>
+					<select id="pay-type" style="top: 31px;">
+						<option value="none">请选择</option>
+						<option value="WEIXIN-SCAN">微信扫码</option>
+						<option value="WEIXIN-H5">微信H5</option>
+						<option value="WEIXIN-SYT">微信收银台</option>
+						<option value="ALI-SCAN">支付宝扫码</option>
+						<option value="ALI-H5">支付宝H5</option>
+						<option value="ALI-SYT">支付宝收银台</option>
+						<option value="QQ-SCAN">QQ扫码</option>
+						<option value="QQ-H5">QQ-H5</option>
+						<option value="QQ-SYT">QQ收银台</option>
+						<option value="UNION_SCAN">银联扫码</option>
+						<option value="UNION_H5">银联H5</option>
+						<option value="UNION_PC_WAP">银联pc-web</option>
+						<option value="UNION_SYT">银联收银台</option>
+						<option value="UNION_FAST">银联快捷</option>
+						<option value="BAIDU_SCAN">百度钱包扫码</option>
+						<option value="BAIDU_H5">百度钱包H5</option>
+						<option value="BAIDU_SYT">百度钱包收银台</option>
+						<option value="JD_SCAN">京东扫码</option>
+						<option value="JD_H5">京东H5</option>
+						<option value="JD_SYT">京东收银台</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<span>单通道：</span>
+					<input type="text" readonly="true" id="single-road" value="" placeholder="">
+				</div>
+				<div class="col-md-3">
+					<span style="width: 150px;">平台净利率：</span>
+					<input style="width: 60px;" type="text" id="single-road-platform-fee" placeholder="例:0.3">
+				</div>
+				<div class="col-md-4">
+					<span style="width: 150px;">代理净利率：</span>
+					<input style="width: 60px;" type="text" id="single-road-agent-fee" placeholder="例:0.3">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<span>轮询通道：</span>
+					<input type="text" readonly="true" value="" placeholder="" id="roll-pool-road">
+				</div>
+				<div class="col-md-3">
+					<span style="width: 150px;">平台净利率：</span>
+					<input style="width: 60px;" type="text" name="" id="roll-road-platform-fee">
+				</div>
+				<div class="col-md-4">
+					<span style="width: 150px;">代理净利率：</span>
+					<input style="width: 60px;" type="text" placeholder="" id="roll-road-agent-fee">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<span>是否押款：</span>
+					<input type="radio" name="is-loan" value="yes" placeholder="">是
+					<input type="radio" name="is-loan" value="no" placeholder="" checked="">否
+				</div>
+				<div class="col-md-4">
+					<span style="width: 150px;">押款比例：</span>
+					<input style="width: 60px;" type="text" placeholder="例:0.4" id="loan-rate">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<span style="width: 100px;">押款天数：</span>
+					<input style="width: 60px;" type="text" name="" value="0" placeholder="x天" id="loan-days">
+				</div>
+				<div class="col-md-4">
+					<span style="width: 150px;">解款时间点：</span>
+					<select id="unfree-time-hour">
+						<option value="0"> 0 </option>
+						<option value="1"> 1 </option>
+						<option value="2"> 2 </option>
+						<option value="3"> 3 </option>
+						<option value="4"> 4 </option>
+						<option value="5"> 5 </option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<button class="btn btn-info merchant-paytype-save-button">保存</button>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend style="width: 50px;">代付配置</legend>
+			<span style="color: blue;display: block;margin-bottom: 10px;">注意：如果单代付通道和轮询代付通道均配置，系统会优先选择单通道；如果单通道不可用，系统会到轮询通道池中选择!</span>
+			<div class="row">
+				<div class="col-md-4">
+					<span>单代付通道：</span>
+					<input type="text" id="payfor-road-choose" value="" readonly="true" placeholder="">
+				</div>
+				<div class="col-md-4">
+					<span>轮询代付通道：</span>
+					<input type="text" id="roll-payfor-road-choose" value="" name="" readonly="true" placeholder="">
+				</div>
+				<div class="col-md-4">
+					<span>代付手续费：</span>
+					<input id="payfor-fee" type="text" name="" value="0">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend style="width: 85px;">商户所属代理商</legend>
+			<span style="color: blue;display: block;margin-bottom: 10px;">注意：每个商户同时最多只能有一个代理商</span>
+			<div class="row">
+				<span>代理商名称：</span>
+				<input type="text" id="belong-agent-name" readonly="readonly" value="" placeholder="">
+                <span>代理商uid：</span>
+                <input type="text" id="belong-agent-uid" readonly="readonly">
+                <span id="find-merchant" class="glyphicon glyphicon-search"></span>
+			</div>
+		</fieldset>
+		<div class="merchant-deploy-footer">	
+            <button class="btn btn-primary merchant-deploy-cannel-button" style="margin-top: 5px;">取消</button>
+            <button class="btn btn-success merchant-deploy-save-button" style="margin-top: 5px;margin-left: 20px;">保存</button>
+		</div>
+
+		<div class="modal fade" id="roll-or-road-list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+		  <div class="modal-dialog modal-sm" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">通道或者通道池选择</h4>
+		      </div>
+		      <div class="modal-body modal-body-roll-road menu-table">
+		      	<!-- TODO -->
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default cancel-single-roll" data-dismiss="modal">放弃</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+        {{/*展示代理商，配置商户*/}}
+        <div class="modal fade" id="agent-list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">选择代理商</h4>
+                    </div>
+                    <div class="modal-body modal-body-agent menu-table">
+                        <!-- TODO -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default cancel-agent" data-dismiss="modal">放弃</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	</div>
+	<script>
+
+		function getMerchantEditValues() {
+			let merchantName = $("#merchant-edit-merchant-name").val();
+			let merchantNo = $("#merchant-edit-merchant-no").val();
+			let isAutoSettle = $('input[name="auto-settle-radio"]:checked').val();
+			let isAutoPayfor = $('input[name="auto-payfor-radio"]:checked').val();
+			let ipWhite = $("#merchant-edit-ip-white").val();
+			let payforRoadChoose = $("#payfor-road-choose").val();
+			let rollPayforRoadChoose = $("#roll-payfor-road-choose").val();
+			let payforFee = $("#payfor-fee").val();
+			let belongAgentName = $("#belong-agent-name").val();
+			let belongAgentUid = $("#belong-agent-uid").val();
+
+			return {
+				"merchantName":merchantName,
+				"merchantNo":merchantNo,
+				"isAutoSettle":isAutoSettle,
+				"isAutoPayfor":isAutoPayfor,
+				"ipWhite":ipWhite,
+				"payforRoadChoose":payforRoadChoose,
+				"rollPayforRoadChoose":rollPayforRoadChoose,
+				"payforFee":payforFee,
+                "belongAgentName":belongAgentName,
+                "belongAgentUid":belongAgentUid
+			};
+		}
+	
+		function getMerchantModalvalues() {
+			let merchantName = $("#merchant-name-modal").val();
+			let phone = $("#merchant-phone-modal").val();
+			let loginPassword = $("#merchant-login-password-modal").val();
+			let verifyPassword = $("#merchant-vertify-password-modal").val();
+			let merchantStatus = $("#add-merchant-status").val();
+			let remark = $("#merchant-remark").val();
+
+			return {
+				"merchantName":merchantName,
+				"phone":phone,
+				"loginPassword":loginPassword,
+				"verifyPassword":verifyPassword,
+				"merchantStatus":merchantStatus,
+				"remark":remark
+			};
+		}
+		function clearMerchantModalValues() {
+			$("#merchant-name-modal").val("");
+			$("#merchant-phone-modal").val("");
+			$("#merchant-login-password-modal").val("");
+			$("#merchant-vertify-password-modal").val("");
+			$("#merchant-status").val("");
+			$("#merchant-remark").val("");
+		}
+		function clearMerchantModalError() {
+			$("#merchant-name-error").html("");
+			$("#merchant-phone-error").html("");
+			$("#merchant-login-password-error").html("");
+			$("#merchant-vertify-password-error").html("");
+		}
+
+		function getMerchantCutPageValues() {
+			let operatorName = $(".operator-name").val();
+			let displayCount = $("#display_count").val();
+			let currentPage = $(".current_page").html();
+			let totalPage = $(".total_page").html();
+			let jumpPage = $(".jump_page input").val();
+			let merchantName = $("#merchant-name-search").val();
+			let merchantNo = $("#merchant-no-search").val();
+			return dataJSON = {
+				"operatorName":operatorName,
+				"displayCount":displayCount,
+				"currentPage":currentPage,
+				"totalPage":totalPage,
+				"jumpPage":jumpPage,
+				"merchantName":merchantName,
+				"merchantNo":merchantNo
+			};
+		}
+		function showMerchantAjax(dataJSON) {
+			$.ajax({
+				url: "/get/merchant",
+				data:dataJSON,
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("系统异常，请稍后再试");
+					} else {
+						showMerchantList(res);
+					}
+				}
+			});
+		}
+		function showPaytypeValues(res) {
+			let merchantDeploy = res.MerchantDeploy;
+			let payType = res.MerchantDeploy.PayType;
+			$("#pay-type option").each(function(index, el) {
+				if ($(this).val() == payType) {
+					$(this).attr("selected", true);
+				}
+			});
+			$("#single-road").val(merchantDeploy.SingleRoadName);
+			$("#single-road-platform-fee").val(merchantDeploy.SingleRoadPlatformRate);
+			$("#single-road-agent-fee").val(merchantDeploy.SingleRoadAgentRate);
+			$("#roll-pool-road").val(merchantDeploy.RollRoadName);
+			$("#roll-road-platform-fee").val(merchantDeploy.RollRoadPlatformRate);
+			$("#roll-road-agent-fee").val(merchantDeploy.RollRoadAgentRate);
+
+			if (merchantDeploy.IsLoan == "yes") {
+				$("input[type=radio][name=is-loan][value=yes]").prop("checked",true);
+				$("input[type=radio][name=is-loan][value=no]").prop('checked', false);
+			} else {
+				$("input[type=radio][name=is-loan][value=no]").prop("checked",true);
+				$("input[type=radio][name=is-loan][value=yes]").prop("checked",false);
+			}
+			$("#loan-rate").val(merchantDeploy.LoanRate);
+			$("#loan-days").val(merchantDeploy.LoanDays);
+			let unfreezeTimeHour = merchantDeploy.UnfreezeHour;
+			$("#unfree-time-hour option").each(function(index, el) {
+				if ($(this).val() == unfreezeTimeHour) {
+					$(this).prop("selected", true);
+				}
+			});
+		}
+		function clearMerchantDeployValues() {
+			$("#single-road").val("");
+			$("#single-road-platform-fee").val("");
+			$("#single-road-agent-fee").val("");
+			$("#roll-pool-road").val("");
+			$("#roll-road-platform-fee").val("");
+			$("#roll-road-agent-fee").val("");
+			$("input[type=radio][name=is-loan][value=no]").prop("checked",true);
+			$("#loan-rate").val("");
+			$("#loan-days").val("");
+			$("#unfree-time-hour").val("0");
+		}
+
+		$("#pay-type").change(function() {
+			let merchantNo = $("#merchant-edit-merchant-no").val();
+			let payType = $("#pay-type").val();
+			$.ajax({
+				url: '/get/one/merchant/deploy',
+				data: {
+					"merchantNo": merchantNo,
+					"payType": payType
+				},
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						clearMerchantDeployValues();
+					} else {
+						showPaytypeValues(res);
+					}
+				}
+			});
+			
+		});
+		function showOneMerchant(res) {
+			let merchant = res.MerchantList[0];
+			$("#merchant-edit-merchant-name").val(merchant.MerchantName);
+			$("#merchant-edit-merchant-no").val(merchant.MerchantUid);
+			if (merchant.AutoSettle == "yes") {
+				$("input[type=radio][name=auto-settle-radio][value=yes]").prop("checked",true);
+				$("input[type=radio][name=auto-settle-radio][value=no]").prop('checked', false);
+			} else {
+				$("input[type=radio][name=auto-settle-radio][value=no]").prop("checked",true);
+				$("input[type=radio][name=auto-settle-radio][value=yes]").prop("checked", false);
+			}
+			if (merchant.AutoPayFor == "yes") {
+				$("input[type=radio][name=auto-payfor-radio][value=yes]").prop("checked",true);
+				$("input[type=radio][name=auto-payfor-radio][value=no]").prop('checked', false);
+			} else {
+				$("input[type=radio][name=auto-payfor-radio][value=no]").prop("checked",true);
+				$("input[type=radio][name=auto-payfor-radio][value=yes]").prop("checked", false);
+			}
+			$("#merchant-edit-ip-white").val(merchant.WhiteIps);
+			
+			$("#payfor-road-choose").val(merchant.SinglePayForRoadName);
+			
+			$("#roll-payfor-road-choose").val(merchant.RollPayForRoadName);
+
+			$("#payfor-fee").val(merchant.PayforFee);
+			$("#belong-agent-uid").val(merchant.BelongAgentUid);
+			$("#belong-agent-name").val(merchant.BelongAgentName);
+		}
+
+		function getMerchantPayTypeValues() {
+			let merchantNo = $("#merchant-edit-merchant-no").val();
+			let payType = $("#pay-type").val();
+			let singleRoad = $("#single-road").val();
+			let singleRoadPlatformFee = $("#single-road-platform-fee").val();
+			let singleRoadAgentFee = $("#single-road-agent-fee").val();
+			let rollPoolRoad = $("#roll-pool-road").val();
+			let rollRoadPlatformFee = $("#roll-road-platform-fee").val();
+			let rollRoadAgentFee = $("#roll-road-agent-fee").val();
+			let isLoan = $('input[name="is-loan"]:checked').val();
+			let loanRate = $("#loan-rate").val();
+			let loanDays = $("#loan-days").val();
+			let unfreezeTimeHour = $("#unfree-time-hour").val();
+			return {
+				"merchantNo": merchantNo,
+				"payType":payType,
+				"singleRoad":singleRoad,
+				"singleRoadPlatformFee":singleRoadPlatformFee,
+				"singleRoadAgentFee":singleRoadAgentFee,
+				"rollPoolRoad":rollPoolRoad,
+				"rollRoadPlatformFee":rollRoadPlatformFee,
+				"rollRoadAgentFee":rollRoadAgentFee,
+				"isLoan":isLoan,
+				"loanRate":loanRate,
+				"loanDays":loanDays,
+				"unfreezeTimeHour":unfreezeTimeHour
+			};
+		}
+
+		function showMerchantList(res) {
+			if (res.MerchantList.length == 0) {
+				$("#merchant-table-body").html("没有数据可显示");
+			} else {
+				$(".current_page").html(res.CurrentPage);
+				$(".total_page").html(res.TotalPage);
+				$("#display_count option").each(function() {
+					if ($(this).text() == res.DisplayCount) {
+						$(this).attr('selected', true);
+					}
+				});
+				$(".jump_page input").val("");
+				let str = "";
+				for (let i = 0; i < res.MerchantList.length; i ++) {
+					let v = res.MerchantList[i];
+					let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+						  "<th>" + v.MerchantUid + "</th>" + "<th>" + v.MerchantName + "</th>" + "<th>" + v.MerchantKey + "</th>" +
+						  "<th>" + v.MerchantSecret + "</th>" + "<th>" + v.LoginAccount + "</th>" + "<th>" + v.Status + "</th>";
+
+					tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' + 
+					'<button type="button" value="' + v.MerchantUid +'" class="btn btn-default" onclick="editMerchant(this.value);"><span>配置通道</span></button>' +
+					'<button type="button" value="' + v.MerchantUid +'" class="btn btn-default" onclick="updateMerchantStatus(this.value);"><span>冻结|解冻</span></button>' +
+					'<button type="button" value="' + v.MerchantUid +'" class="btn btn-default" onclick="deleteMerchant(this.value);"><span class="glyphicon glyphicon-trash"></span></button>' + 
+					'</div>' + "</th>" + "</tr>";
+					str = str + tmp;
+					str = str.replace(/unactive/, "冻结").replace(/active/, "激活");
+				}
+				$("#merchant-table-body").html(str);
+			}
+		}
+		function editMerchant(merchantUid) {
+			$(".merchant-record").hide();
+			$(".merchant-edit").show();
+			$.ajax({
+				url: "/get/one/merchant",
+				data: {
+					"merchantUid":merchantUid
+				},
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("获取单个用户信息失败");
+					} else {
+						showOneMerchant(res);
+					}
+				}
+			});
+		}
+		function updateMerchantStatus(merchantUid) {
+			$.ajax({
+				url: "/freeze/merchant",
+				data: {
+					"merchantUid": merchantUid
+				},
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("更新失败")
+					} else {
+						showMerchantAjax(getMerchantCutPageValues());
+					}
+				},
+
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				}
+			});
+		} 
+	
+		function deleteMerchant(merchantUid) {
+			if (!window.confirm("是否删除该用户？")) {
+				return;
+			}
+			$.ajax({
+				url: "/delete/merchant",
+				data: {
+					"merchantUid":merchantUid
+				},
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("删除用户失败");
+					} else {
+						showMerchantAjax(getMerchantCutPageValues());
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				}
+			});
+		}
+
+		//支付单通到配置处理函数
+		function signleRoad(e) {
+			let ar = $(e).text().trim().split(/\s+/);
+			let sr = ar[1];
+			$("#single-road").val(sr);
+			$(".cancel-single-roll").trigger('click');
+			if (ar[0] == "不选择") {
+				$("#single-road-platform-fee").val("");
+				$("#single-road-agent-fee").val("");
+			}
+		}
+
+		function getAllSingleRoad() {
+			let roadName = $("#choose-single-road-name").val();
+			
+			$.ajax({
+				url: "/get/all/road",
+				data: {
+					"roadName": roadName
+				},
+				success: function(res) {
+					if (res.Code== 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("获取单通道数据失败");
+					} else {
+						showChooseSingleRoad(res);
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				} 
+			});
+		}
+
+		function showChooseSingleRoad(res) {
+			let str = '<input type="text" id="choose-single-road-name" value="" style="margin-bottom: 10px;margin-right:10px;"><input type="button" name="" value="搜索" onclick="getAllSingleRoad();">';
+			str = str + '<table class="table table-bordered table-hover"><tbody>';
+			str = str + '<tr onclick="signleRoad(this);"><th>' + "不选择" + '</th><th> <span>' + "" + '</span></th></tr>';
+			for (let i = 0; i < res.RoadInfoList.length; i ++) {
+				let roadInfo = res.RoadInfoList[i];
+				str = str + '<tr onclick="signleRoad(this);"><th>' + (i+1) + '</th><th> <span>' + roadInfo.RoadName + '</span></th></tr>';
+			}
+			str = str + '</tbody></table>';
+			$(".modal-body-roll-road").html(str);
+		}
+
+        $("#single-road").click(function() {
+			$.ajax({
+				url: "/get/all/road",
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+					} else {
+						showChooseSingleRoad(res);
+					}
+				},
+				error: function() {
+					alert("系统异常，请稍后再试");
+				}
+			});
+			$("#roll-or-road-list").modal();
+		});
+		// 支付单通到配置处理函数 end
+
+		//支付轮询通道处理开始
+		function rollPool(e) {
+			let ar = $(e).text().trim().split(/\s+/);
+			let sr = ar[1];
+			$("#roll-pool-road").val(sr);
+			$(".cancel-single-roll").trigger('click');
+			if (ar[0] == "不选择") {
+				$("#roll-road-platform-fee").val("");
+				$("#roll-road-agent-fee").val("");
+			}
+		}
+
+		function getAllRollPool() {
+			let rollPoolName = $("#choose-roll-pool-name").val();
+			
+			$.ajax({
+				url: "/get/all/roll/pool",
+				data: {
+					"rollPoolName": rollPoolName
+				},
+				success: function(res) {
+					if (res.Code== 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("获取通道池数据失败");
+					} else {
+						showChooseRollPool(res);
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				} 
+			});
+		}
+
+		function showChooseRollPool(res) {
+			let str = '<input type="text" id="choose-roll-pool-name" value="" style="margin-bottom: 10px;margin-right:10px;"><input type="button" name="" value="搜索" onclick="getAllRollPool();">';
+			str = str + '<table class="table table-bordered table-hover"><tbody>';
+			str = str + '<tr onclick="rollPool(this);"><th>' + "不选择" + '</th><th> <span>' + "" + '</span></th></tr>';
+			for (let i = 0; i < res.RoadPoolInfoList.length; i ++) {
+				let roadPool = res.RoadPoolInfoList[i];
+				str = str + '<tr onclick="rollPool(this);"><th>' + (i+1) + '</th><th> <span>' + roadPool.RoadPoolName + '</span></th></tr>';
+			}
+			str = str + '</tbody></table>';
+			$(".modal-body-roll-road").html(str);
+		}
+
+		//保存支付类型
+		$(".merchant-paytype-save-button").click(function() {
+			let dataJSON = getMerchantPayTypeValues();
+			$.ajax({
+				url: "/add/merchant/payType",
+				data: dataJSON,
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else {
+						alert(res.Msg);
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				}
+			});
+		});
+
+		$("#roll-pool-road").click(function() {
+			$.ajax({
+				url: "/get/all/roll/pool",
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("获取通道池失败");
+					} else {
+						showChooseRollPool(res);
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				} 
+			});
+			$("#roll-or-road-list").modal();
+		});
+		//支付轮询通道处理结束  end
+
+		//代付单通到处理开始
+		function payforSignleRoad(e) {
+			let ar = $(e).text().trim().split(/\s+/);
+			let sr = ar[1];
+			$("#payfor-road-choose").val(sr);
+			$(".cancel-single-roll").trigger('click');
+		}
+
+		function getAllPayforSingleRoad() {
+			let roadName = $("#choose-payfor-single-road-name").val();
+			
+			$.ajax({
+				url: "/get/all/road",
+				data: {
+					"roadName": roadName
+				},
+				success: function(res) {
+					if (res.Code== 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("获取单通道数据失败");
+					} else {
+						showChoosePayforSingleRoad(res);
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				} 
+			});
+		}
+
+		function showChoosePayforSingleRoad(res) {
+			let str = '<input type="text" id="choose-payfor-single-road-name" value="" style="margin-bottom: 10px;margin-right:10px;"><input type="button" name="" value="搜索" onclick="getAllPayforSingleRoad();">';
+			str = str + '<table class="table table-bordered table-hover"><tbody>';
+			str = str + '<tr onclick="payforSignleRoad(this);"><th>' + "不选择" + '</th><th> <span>' + "" + '</span></th></tr>';
+			for (let i = 0; i < res.RoadInfoList.length; i ++) {
+				let roadInfo = res.RoadInfoList[i];
+				str = str + '<tr onclick="payforSignleRoad(this);"><th>' + (i+1) + '</th><th> <span>' + roadInfo.RoadName + '</span></th></tr>';
+			}
+			str = str + '</tbody></table>';
+			$(".modal-body-roll-road").html(str);	
+		}
+
+		$("#payfor-road-choose").click(function() {
+			$.ajax({
+				url: "/get/all/road",
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+					} else {
+						showChoosePayforSingleRoad(res);
+					}
+				},
+				error: function() {
+					alert("系统异常，请稍后再试");
+				}
+			});
+			$("#roll-or-road-list").modal();
+		});
+		//代付单通到处理结束end
+
+		//代付轮询通道处理开始
+		function payforRollPool(e) {
+			let ar = $(e).text().trim().split(/\s+/);
+			let sr = ar[1];
+			$("#roll-payfor-road-choose").val(sr);
+			$(".cancel-single-roll").trigger('click');
+		}
+
+		function getPayforAllRollPool() {
+			let rollPoolName = $("#choose-payfor-roll-pool-name").val();
+			
+			$.ajax({
+				url: "/get/all/roll/pool",
+				data: {
+					"rollPoolName": rollPoolName
+				},
+				success: function(res) {
+					if (res.Code== 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("获取通道池数据失败");
+					} else {
+						showChoosePayforRollPool(res);
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				} 
+			});
+		}
+
+		function showChoosePayforRollPool(res) {
+			let str = '<input type="text" id="choose-payfor-roll-pool-name" value="" style="margin-bottom: 10px;margin-right:10px;"><input type="button" name="" value="搜索" onclick="getPayforAllRollPool();">';
+			str = str + '<table class="table table-bordered table-hover"><tbody>';
+			str = str + '<tr onclick="payforRollPool(this);"><th>' + "不选择" + '</th><th> <span>' + "" + '</span></th></tr>';
+			for (let i = 0; i < res.RoadPoolInfoList.length; i ++) {
+				let roadPool = res.RoadPoolInfoList[i];
+				str = str + '<tr onclick="payforRollPool(this);"><th>' + (i+1) + '</th><th> <span>' + roadPool.RoadPoolName + '</span></th>' +  + '</tr>';
+			}
+			str = str + '</tbody></table>';
+			$(".modal-body-roll-road").html(str);
+		}
+
+		$("#roll-payfor-road-choose").click(function() {
+			$.ajax({
+				url: "/get/all/roll/pool",
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("获取通道池失败");
+					} else {
+						showChoosePayforRollPool(res);
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				} 
+			});
+			$("#roll-or-road-list").modal();
+		});
+		//代付轮询通道配置处理结束 end
+
+        function showAgentList(res) {
+            let str = '<input type="text" id="choose-agent-name" value="" style="margin-bottom: 10px;margin-right:10px;"><input type="button" name="" value="搜索" onclick="getAllAgent();">';
+            str = str + '<table class="table table-bordered table-hover"><tbody>';
+            str = str + '<tr onclick="checkedAgent(this);"><th>' + "不选择" + '</th><th> <span>' + "" + '</span></th>' + '</th><th> <span>' + "" + '</span></th></tr>';
+            for (let i = 0; i < res.AgentList.length; i ++) {
+                let agent = res.AgentList[i];
+                str = str + '<tr onclick="checkedAgent(this);"><th>' + (i+1) + '</th><th> <span>' + agent.AgentName + '</span></th>' + '<th> <span>' + agent.AgentUid +  '</span></th></tr>';
+            }
+            str = str + '</tbody></table>';
+            $(".modal-body-agent").html(str);
+        }
+        function checkedAgent(e) {
+            let ar = $(e).text().trim().split(/\s+/);
+            let sr = ar[1];
+            let er = ar[2];
+            $("#belong-agent-name").val(sr);
+            $("#belong-agent-uid").val(er);
+            $(".cancel-agent").trigger('click');
+        }
+        function getAllAgent() {
+            let agentName = $("#choose-agent-name").val();
+
+            $.ajax({
+                url: "/get/all/agent",
+                data: {
+                    "agentName": agentName
+                },
+                success: function(res) {
+                    if (res.Code== 404) {
+                        window.parent.location = "/login.html";
+                    } else if (res.Code == -1) {
+                    } else {
+                        showAgentList(res);
+                    }
+                },
+                error: function() {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        $("#find-merchant").click(function () {
+            $.ajax({
+                url: "/get/all/agent",
+                success: function(res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else if (res.Code == -1) {
+                    } else {
+                        showAgentList(res);
+                    }
+                },
+                error: function() {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+            $("#choose-agent-name").val("");
+            $("#agent-list").modal();
+        });
+	
+		$(".merchant-deploy-save-button").click(function() {
+			let dataJSON = getMerchantEditValues();
+			$.ajax({
+				url: "/add/merchant/deploy",
+				data: dataJSON,
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						alert("保存商户通道信息失败");
+					} else {
+						alert("配置成功");
+						$(".merchant-edit").hide();
+						$(".merchant-record").show();
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				}
+			});
+		});
+		//点击搜索按钮
+		$("#merchant-search").click(function() {
+			let dataJSON = getMerchantCutPageValues();
+			showMerchantAjax(dataJSON);
+		});
+		//当每页显示数更改后，执行的操作
+		$("#display_count").change(function() {
+			let dataJSON = getMerchantCutPageValues();
+			showMerchantAjax(dataJSON);
+		});
+
+		//点击上一页的按钮
+		$(".pre_page").click(function() {
+			let dataJSON = getMerchantCutPageValues();
+
+			if (dataJSON["currentPage"] == 1) {
+				return;
+			}
+			dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) - 1;
+			showMerchantAjax(dataJSON);
+		});
+	    //点击下一页的按钮时
+	    $(".next_page").click(function() {
+	 		let dataJSON = getMerchantCutPageValues();
+
+			if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+				return;
+			}
+
+			dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+			showMerchantAjax(dataJSON);
+	    });
+	    //点击跳转那一页的按钮
+	    $(".jump_page button").click(function() {
+	  		let dataJSON = getMerchantCutPageValues();
+
+			if (dataJSON["jumpPage"].length <= 0) {
+				return;
+			}
+			showMerchantAjax(dataJSON);	
+	    });
+
+		$(".save-merchant").click(function() {
+			clearMerchantModalError();
+			let dataJSON = getMerchantModalvalues();
+			$.ajax({
+				url: "/add/merchant",
+				data: dataJSON,
+
+				success: function(res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else if (res.Code == -1) {
+						$(res.Key).html(res.Msg);
+					} else {
+						alert("添加成功");
+						$(".cancel-merchant").trigger('click');
+						showMerchantAjax(getMerchantCutPageValues());
+					}
+				},
+				error: function(res) {
+					alert("系统异常，请稍后再试");
+				} 
+			});
+		});
+		$(".add-merchant-button").click(function() {
+			clearMerchantModalValues();
+			clearMerchantModalError();
+			$("#create-merchant").modal();
+		});
+		$(".merchant-deploy-cannel-button").click(function() {
+			$(".merchant-edit").hide();
+			$(".merchant-record").show();
+		});
+		$("#sigle-agent-span").hover(function() {
+			$("#sigle-agent-span-words").toggle();
+		});
+		$(function() {
+			$(".merchant-record").show();
+			$(".merchant-edit").hide();
+			showMerchantAjax(getMerchantCutPageValues());
+		});
+	</script>
+</body>
+</html>

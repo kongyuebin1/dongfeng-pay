@@ -1,0 +1,603 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>管理后台</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+		<script src="../static/js/filter.js"></script>
+		<style type="text/css" media="screen">
+			.search div {
+				display: inline-block;
+				margin-top: 10px;
+			}
+			.add-edit-road {
+				margin-top: 10px;
+				margin-right: 10px;
+			}
+			.add-edit-road div {
+				margin-bottom: 20px;
+				margin-left: 10px;
+			}
+			.add-edit-road textarea {
+				width: 90%;
+				height: 150px;
+			}
+			select {
+				height: 25px;
+				min-width: 150px;
+			}
+			.road-footer {
+				width: 83%;
+				position: fixed;
+				float: left;
+				bottom: 10px;
+				left: 14%;
+				height: 30px;
+				border: 1px solid #e7e7e7;
+				background-color: white;
+				box-sizing: border-box;
+			}
+			fieldset:last-child {
+				margin-bottom: 30px;
+			}
+
+			.road-cannel-button, .road-save-button {
+				display: inline-block;
+				border: 1px solid #e7e7e7;
+				border-radius: 5px;
+				font-size: 12px;
+				text-align: center;
+				width: 100px;
+				line-height: 26px;
+				font-weight: 700;
+			}
+			.road-cannel-button:hover, .road-save-button:hover {
+				cursor: pointer;
+				background-color: #e7e7e7;
+			}
+			#product-name {
+				margin-right: 80px;
+			}
+			.add-road-button {
+				margin-bottom: 10px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="road-record">
+			<div class="search">
+				<div>
+					<span>通道名称</span>
+					<input type="text" class="road-name-search" value="" placeholder="模糊匹配">
+				</div>
+				<div>
+					<span>产品名称</span>
+					<input type="text" class="product-name-search" value="" placeholder="模糊匹配">
+				</div>
+				<div>
+					<button type="button" class="btn btn-default road-search">搜索</button>
+				</div>
+			</div>
+			<button type="button" class="btn btn-default btn-xs glyphicon glyphicon-plus add-road-button">添加通道</button>
+			<div class="menu-table">
+				<table>
+					<thead class="thead-dark">
+						<tr>
+							<th>序列号</th>
+							<th>通道名称</th>
+							<th>产品名称</th>
+							<th>支付类型</th>
+							<th>成本汇率</th>
+							<th>状态</th>
+							<th>通道总额度</th>
+							<th>每天限额</th>
+							<th>单笔区间</th>
+							<th>开放时间段</th>
+							<th>总流水</th>
+							<th>今日流水</th>
+							<th>总利润</th>
+							<th>今日利润</th>
+							<th>成功数/请求数</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="road-table-body">
+					</tbody>
+				</table>
+			</div>
+			<!-- 分页插件 -->
+			<div class="cut_page">
+				<li>
+					每页显示
+					<select id="display_count">
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+				</li>
+				
+				<li class="current_total_page">第<span class="current_page">0</span>/<span class="total_page">0</span>页</li>
+				<li class="pre_page">上一页</li>
+				<li class="next_page">下一页</li>
+				<li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+			</div>
+		</div>
+
+		<div class="add-edit-road">
+			<input type="hidden" value="" class="road-uid">
+			<fieldset>
+				<legend style="width: 75px;">通道基本信息</legend>
+				<div>
+					<span>通道名称: </span>
+					<input type="text" class="road-name" value="">
+					<span class="star">*</span>
+					<span>备注：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<input type="text" value="" class="road-remark">
+				</div>
+				<div>
+					<span>产品名称: </span>
+					<select id="product-name">
+						{{/*<option value="WEIXIN">官方微信</option>*/}}
+						{{/*<option value="ALIPAY">官方支付宝</option>*/}}
+					</select>
+
+					<span>支付类型: </span>
+					<select id="pay-type">
+						<option value="WEIXIN_SCAN">微信扫码</option>
+						<option value="WEIXIN_H5">微信H5</option>
+						<option value="WEIXIN_SYT">微信收银台</option>
+						<option value="ALI_SCAN">支付宝扫码</option>
+						<option value="ALI_H5">支付宝H5</option>
+						<option value="ALI_SYT">支付宝收银台</option>
+						<option value="QQ_SCAN">QQ扫码</option>
+						<option value="QQ_H5">QQ-H5</option>
+						<option value="QQ_SYT">QQ收银台</option>
+						<option value="UNION_SCAN">银联扫码</option>
+						<option value="UNION_H5">银联H5</option>
+						<option value="UNION_PC_WAP">银联pc-web</option>
+						<option value="UNION_SYT">银联收银台</option>
+						<option value="UNION_FAST">银联快捷</option>
+						<option value="BAIDU_SCAN">百度钱包扫码</option>
+						<option value="BAIDU_H5">百度钱包H5</option>
+						<option value="BAIDU_SYT">百度钱包收银台</option>
+						<option value="JD_SCAN">京东扫码</option>
+						<option value="JD_H5">京东H5</option>
+						<option value="JD_SYT">京东收银台</option>
+					</select>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend style="width: 50px;">费用配置</legend>
+				<div>
+					<span>成本费率：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<input type="text" value="" class="basic-rate" placeholder="样例：1.2">
+					<span class="star">*</span>
+					<span>代付手续费：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<input type="text" value="" class="settle-fee" placeholder="单位：元">
+					<span class="star">*</span>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend style="width: 50px;">额度设置</legend>
+				<div>
+					<span>通道总额度：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<input type="text" value="" class="road-total-limit">
+					<span class="star">*</span>
+					<span>每天额度：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<input type="text" value="" class="road-everyday-limit">
+					<span class="star">*</span>
+				</div>
+				<div>
+					<span>单笔金额最小：</span>
+					<input type="text" value="" class="single-min-limit">
+					<span class="star">*</span>
+					<span>单笔金额最大：</span>
+					<input type="text" value="" class="single-max-limit">
+					<span class="star">*</span>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend style="width: 50px;">时间规则</legend>
+				<div>
+					<span>开始时间：</span>
+					<select id="road-start-hour">
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+					</select>
+					<span class="star"></span>
+					<span>结束时间：</span>
+					<select id="road-end-hour">
+						<option value="23">23</option>
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+					</select>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend style="width: 110px;">参数配置JSON格式</legend>
+				<div>
+					<code>
+						<textarea class="road-param-json"></textarea>
+					</code>
+				</div>
+			</fieldset>
+			<div class="road-footer">	
+				<span class="road-cannel-button">取消</span>
+				<span class="road-save-button">保存</span>
+			</div>
+		</div>
+
+		<script>
+			$(function() {
+				let dataJSON = getRoadCutPagevalues();
+				showRoadRecord(dataJSON);
+				$(".add-edit-road").hide();
+			});
+			function showProduct() {
+                $.ajax({
+                    url: "/get/product",
+                    success: function (res) {
+                        if (res.Code == 404) {
+                            window.parent.location = "/login.html"
+                        } else if (res.Code == -1) {
+
+                        } else {
+                            let  str = "";
+                            for (let key in res.ProductMap) {
+                                let  v = res.ProductMap[key];
+                                str = str + '<option value="' + key + '">' + v + '</option>'
+                            }
+                            $("#product-name").html(str);
+                        }
+                    },
+                    error: function () {
+                        alert("系统异常，请稍后再试");
+                    }
+                });
+            }
+			//点击添加通道按钮，隐藏通道列表页面，展示通道编辑添加页面
+			$(".add-road-button").click(function() {
+				clearRoadValues();
+				showProduct();
+				$(".add-edit-road").show();
+				$(".road-record").hide();
+			});
+			function showRoadRecord(dataJSON) {
+				$.ajax({
+					url: "/get/road",
+					data: dataJSON,
+
+					success: function(res) {
+						if (res.Code == 404) {
+							window.parent.location = "/login.html";
+						} else {
+
+							$(".current_page").html(res.CurrentPage);
+							$(".total_page").html(res.TotalPage);
+							$("#display_count option").each(function() {
+								if ($(this).text() == res.DisplayCount) {
+									$(this).attr('selected', true);
+								}
+							});
+							$(".jump_page input").val("");
+
+							let str = "";
+							for (let i = 0; i < res.RoadInfoList.length; i ++) {
+								let v = res.RoadInfoList[i];
+								let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+									  "<th>" + v.RoadName + "</th>" + "<th>" + v.ProductName + "</th>" + "<th>" + v.PayType + "</th>" +
+									  "<th>" + v.BasicFee + "</th>" + "<th>" + v.Status + "</th>" + "<th>" + v.TotalLimit + "</th>" +
+									  "<th>" + v.TodayLimit + "</th>" + "<th>" + v.SingleMinLimit + "-" + v.SingleMaxLimit + "</th>" + 
+									  "<th>" + v.StarHour + "-" + v.EndHour + "</th>" + "<th>" + v.TotalIncome + "</th>" + "<th>" + v.TodayIncome + "</th>" + 
+									  "<th>" + v.TotalProfit + "</th>" + "<th>" + v.TodayProfit + "</th>" + "<th>" + v.RequestSuccess + "/" + v.RequestAll + '</th>';
+								tmp = tmp.replace("unactive", "冻结").replace("active", "激活");
+								tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' + 
+								'<button type="button" value="' + v.RoadUid +'" class="btn btn-default" onclick="editRoad(this.value);"><span class="glyphicon glyphicon-pencil"></span></button>' +
+								'<button type="button" value="' + v.RoadUid +'" class="btn btn-default" onclick="updateRoadStatus(this.value);">'+ "激活|冻结" +'</button>' +
+								'<button type="button" value="' + v.RoadUid +'" class="btn btn-default" onclick="deleteRoad(this.value);"><span class="glyphicon glyphicon-trash"></span></button>' + 
+								'</div>' + "</th>" + "</tr>";
+								str = str + tmp;
+							}
+							
+							$("#road-table-body").html(str);
+						}
+					},
+
+					error: function() {
+						alert("系统异常，请稍后再试");
+					}
+				});
+			}
+			$(".road-save-button").click(function() {
+				let dataJSON = getRoadvalues();
+				$.ajax({
+					url:"/add/road",
+					data: dataJSON,
+
+					success: function(res) {
+						if (res.Code == 404) {
+							window.parent.location = "/login.html";
+						} else {
+							if (res.Code != 200) {
+								alert(res.Msg);
+							} else {
+								alert("添加成功");
+								$(".add-edit-road").hide();
+								showRoadRecord(getRoadCutPagevalues());
+								$(".road-record").show();
+							}
+						}
+					},
+				});
+			});
+			$(".road-cannel-button").click(function() {
+				$(".road-record").show();
+				$(".add-edit-road").hide();
+			});
+			$(function() {
+				$(".road-record").show();
+				$(".add-edit-road").hide();
+			});
+			//当每页显示数更改后，执行的操作
+			$("#display_count").change(function() {
+				let dataJSON = getRoadCutPagevalues();
+				showRoadRecord(dataJSON);
+			});
+
+			//点击上一页的按钮
+			$(".pre_page").click(function() {
+				let dataJSON = getRoadCutPagevalues();
+
+				if (dataJSON["currentPage"] == 1) {
+					return;
+				}
+				dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) - 1;
+				showRoadRecord(dataJSON);
+			});
+		    //点击下一页的按钮时
+		    $(".next_page").click(function() {
+		 		let dataJSON = getRoadCutPagevalues();
+				if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+					return;
+				}
+				dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+				showRoadRecord(dataJSON);
+		    });
+		    //点击跳转那一页的按钮
+		    $(".jump_page button").click(function() {
+		  		let dataJSON = getRoadCutPagevalues();
+
+				if (dataJSON["jumpPage"].length <= 0) {
+					return;
+				}
+				showRoadRecord(dataJSON);	
+		    });
+		    $(".road-search").click(function() {
+		    	let dataJSON = getRoadCutPagevalues();
+		    	showRoadRecord(dataJSON);
+		    });
+		    function editRoad(roadUid) {
+		    	$(".road-record").hide();
+		    	showProduct();
+		    	$.ajax({
+		    		url: "/get/oneRoad",
+		    		data: {
+		    			"roadUid":roadUid
+		    		},
+
+		    		success: function(res) {
+		    			if (res.Code == 404) {
+		    				window.parent.location = "/login.html";
+		    			} else if (res.Code != 200) {
+		    				alert("获取单通道信息失败");
+		    			} else {
+		    				let v = res.RoadInfoList[0];
+		    				$(".road-uid").val(v.RoadUid);
+							$(".road-name").val(v.RoadName);
+							$(".road-name").prop("readonly", "readonly");
+							$(".road-remark").val(v.Remark);
+							$("#product-name").val(v.ProductUid);
+                            $("#product-name").attr("disabled", "disabled");
+							$("#pay-type").val(v.PayType);
+                            $("#pay-type").attr("disabled", "disabled");
+							$(".basic-rate").val(v.BasicFee);
+							$(".settle-fee").val(v.SettleFee);
+							$(".road-total-limit").val(v.TotalLimit);
+							$(".road-everyday-limit").val(v.TodayLimit);
+							$(".single-min-limit").val(v.SingleMinLimit);
+							$(".single-max-limit").val(v.SingleMaxLimit);
+							$("#road-star-hour").val(v.StarHour);
+							$("#road-end-hour").val(v.EndHour);
+							$(".road-param-json").val(v.Params);
+							$(".road-record").hide();
+							$(".add-edit-road").show();
+		    			}
+		    		}
+		    	});
+		    }
+		    function updateRoadStatus(roadUid) {
+		    	$.ajax({
+		    		url: "/update/roadStatus",
+		    		data: {"roadUid":roadUid},
+
+		    		success: function(res) {
+		    			if (res.Code == 404) {
+		    				window.parent.location = "/login.html";
+		    			} else if (res.Code != 200) {
+		    				alert("状态更新失败");
+		    			} else {
+		    				alert("更新状态成功")
+		    				showRoadRecord(getRoadCutPagevalues());
+		    			}
+		    		},
+		    		error: function(res) {
+		    			alert("系统异常，请稍后再试");
+		    		}
+		    	});
+		    }
+		    function deleteRoad(roadUid) {
+		    	if (!window.confirm("是否删除该项")) {
+		    		return false;
+		    	}
+		    	let dataJSON = getRoadCutPagevalues();
+		    	dataJSON["roadUid"] = roadUid;
+		    	$.ajax({
+		    		url: "/delete/road",
+		    		data:dataJSON,
+
+		    		success: function(res) {
+		    			if (res.Code == 404) {
+		    				window.parent.location = "/login.html";
+		    			} else if (res.Code != 200) {
+		    				alert("删除失败")
+		    			} else {
+		    				alert("删除成功");
+		    				showRoadRecord(getRoadCutPagevalues());
+		    			}
+		    		},
+		    		error: function(res) {
+		    			alert("系统异常，请稍后再试");
+		    		}
+		    	});
+		    }
+
+			function getRoadCutPagevalues() {
+				let displayCount = $("#display_count").val();
+				let currentPage = $(".current_page").html();
+				let totalPage = $(".total_page").html();
+				let jumpPage = $(".jump_page input").val();
+				let roadName = $(".road-name-search").val();
+				let roadUid = $(".road-number-search").val();
+				let productName = $(".product-name-search").val();
+				let productUid = $(".product-number-search").val();
+				return dataJSON = {
+					"roadName":roadName,
+					"roadUid":roadUid,
+					"productName":productName,
+					"productUid":productUid,
+					"displayCount":displayCount,
+					"currentPage":currentPage,
+					"totalPage":totalPage,
+					"jumpPage":jumpPage
+				};
+			}
+
+			function clearRoadValues() {
+				$(".road-uid").val("");
+				$(".road-name").val("");
+				$(".road-remark").val("");
+				$("#product-name").val("");
+				$("#pay-type").val("");
+				$(".basic-rate").val("");
+				$(".settle-fee").val("");
+				$(".road-total-limit").val("");
+				$(".road-everyday-limit").val("");
+				$(".single-min-limit").val("");
+				$(".single-max-limit").val("");
+				$(".road-star-hour").val("");
+				$(".road-end-hour").val("");
+				$(".road-param-json").val("");
+			}
+			//判断字符串是不是json串的函数
+			function isJSON(str) {
+				try {
+					// statements
+					var obj = JSON.parse(str);
+					if (typeof obj == 'object' && obj) {
+						return true;
+					} else {
+						return false;
+					}
+				} catch(e) {
+					// statements
+					return false;
+				}
+			}
+			function getRoadvalues() {
+				let roadUid = $(".road-uid").val();
+				let roadName = $(".road-name").val();
+				let roadRemark = $(".road-remark").val();
+				let productName = $("#product-name").val();
+				let payType = $("#pay-type").val();
+				let basicRate = $(".basic-rate").val();
+				let settleFee = $(".settle-fee").val();
+				let roadTotalLimit = $(".road-total-limit").val();
+				let roadEverydayLimit = $(".road-everyday-limit").val();
+				let singleMinLimit = $(".single-min-limit").val();
+				let singleMaxLimit = $(".single-max-limit").val();
+				let startHour = $("#road-start-hour").val();
+				let endHour = $("#road-end-hour").val();
+				let params = $(".road-param-json").val();
+
+				if (params.length > 0 ) {
+					if (!isJSON(params)) {
+						alert("参数配置不是json格式");
+						return
+					}
+				}
+
+				return {
+					"roadUid":roadUid,
+					"roadName":roadName,
+					"roadRemark":roadRemark,
+					"productName":productName,
+					"payType":payType,
+					"basicRate":basicRate,
+					"settleFee":settleFee,
+					"roadTotalLimit":roadTotalLimit,
+					"roadEverydayLimit":roadEverydayLimit,
+					"singleMinLimit":singleMinLimit,
+					"singleMaxLimit":singleMaxLimit,
+					"startHour":startHour,
+					"endHour":endHour,
+					"params":params
+				};
+			}
+		</script>
+	</body>
+</html>

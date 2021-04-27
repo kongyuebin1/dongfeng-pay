@@ -10,12 +10,12 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/httplib"
-	"github.com/astaxie/beego/logs"
+	"github.com/beego/beego/v2/client/httplib"
+	"github.com/beego/beego/v2/core/logs"
+	beego "github.com/beego/beego/v2/server/web"
 	"github.com/skip2/go-qrcode"
 	"github.com/widuu/gojson"
-	"dongfeng-pay/service/utils"
+	"shop/utils"
 	"strings"
 )
 

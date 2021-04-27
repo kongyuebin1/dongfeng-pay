@@ -1,0 +1,268 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>管理后台</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+	<script src="../static/js/filter.js"></script>
+	<style type="text/css">
+		.explain {
+			display: block;
+			color: blue;
+			padding-left: 10px;
+			margin-bottom: 10px;
+		}
+
+		.account-edit .col-md-6 div {
+			line-height: 40px;
+			margin-right: 20px;
+		}
+	</style>
+</head>
+<body>
+<div class="account-record">
+	<div class="search">
+		<div>
+			商户名称：
+			<input type="text" id="account-name">
+		</div>
+		<div>
+			商户编号：
+			<input type="text" id="account-no">
+		</div>
+		<div>
+			<button type="button" class="btn btn-default" id="account-search">搜索</button>
+		</div>
+	</div>
+	<div>
+        <span class="explain">账户余额：用户充值成功后立马相加，提款成功后相减的结果。结算金额：用户充值成功过一段时间后相加，出款成功后相减的结果。</span>
+		<span class="explain">可用金额 = （结算金额 - 冻结金额 -  押款金额 - 正在出款金额）</span>
+	</div>
+	<div class="menu-table">
+		<table>
+			<thead class="thead-dark">
+				<tr>
+					<th>序列号</th>
+					<th>账户编号</th>
+					<th>账户名称</th>
+					<th>账户余额</th>
+					<th>结算金额</th>
+					<th>待结算金额</th>
+					<th>押款金额</th>
+					<th>冻结金额</th>
+					<th>正在出款的金额</th>
+					<th>可用金额</th>
+					<th>账户状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="account-table-body">
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页插件 -->
+	<div class="cut_page">
+		<li>
+			每页显示
+			<select id="display_count">
+				<option value="4">4</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+		</li>
+		
+		<li class="current_total_page">第<span class="current_page">0</span>/<span class="total_page">0</span>页</li>
+		<li class="pre_page">上一页</li>
+		<li class="next_page">下一页</li>
+		<li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+	</div>
+</div>
+<script>
+	function getAccountCutPageValues() {
+		let displayCount = $("#display_count").val();
+		let currentPage = $(".current_page").html();
+		let totalPage = $(".total_page").html();
+		let jumpPage = $(".jump_page input").val();
+		let accountName = $("#account-name").val();
+		let accountNo = $("#account-no").val();
+
+		return {
+			"displayCount":displayCount,
+			"currentPage":currentPage,
+			"totalPage":totalPage,
+			"jumpPage":jumpPage,
+			"accountName":accountName,
+			"accountNo":accountNo
+		};
+	}
+	function clearAccountSearchValues() {
+		$("#account-name").val("");
+		$("#account-no").val("");
+	}
+	function clearAccountCutPageValues(res) {
+		$(".current_page").html(res.CurrentPage);
+		$(".total_page").html(res.TotalPage);
+		$("#display_count option").each(function() {
+			if ($(this).text() == res.DisplayCount) {
+				$(this).attr('selected', true);
+			}
+		});
+		$(".jump_page input").val("");
+	}
+	//渲染账户数据列表
+	function showAccountList(res) {
+		clearAccountCutPageValues(res);
+		let str = "";
+		for (let i = 0; i < res.AccountList.length; i ++) {
+			let v = res.AccountList[i];
+			let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+				    "<th>" + v.AccountUid + "</th>" + "<th>" + v.AccountName + "</th>" + "<th>" + v.Balance + "</th>" +
+				    "<th>" + v.SettleAmount + "</th>" + "<th>" + v.WaitAmount + "</th>" + "<th>" + v.LoanAmount + "</th>" +
+                    "<th>" + v.FreezeAmount + "</th>" +"<th>" + v.PayforAmount + "</th>" +
+                    "<th>" + (v.SettleAmount-v.FreezeAmount-v.PayforAmount-v.LoanAmount) + "</th>" + "<th>" + v.Status + "</th>";
+			tmp = tmp.replace("unactive", "冻结").replace("active", "激活");
+			tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' + 
+			'<button type="button" value="' + v.AccountUid +'" class="btn btn-default" onclick="updateAccountStatus(this.value);">'+ "激活|冻结" +'</button>' +
+			'<button type="button" value="' + v.AccountUid +'" class="btn btn-default" onclick="deleteAccount(this.value);"><span class="glyphicon glyphicon-trash"></span></button>' + 
+			'</div>' + "</th>" + "</tr>";
+			str = str + tmp;
+		}
+		
+		$("#account-table-body").html(str);
+	}
+	function updateAccountStatus(accountUid) {
+		$.ajax({
+			url: "/update/account/status",
+			data: {
+				"accountUid":accountUid
+			},
+
+			success: function(res) {
+				if (res.Code == 404) {
+					window.parent.location = "/login.html";
+				} else if (res.Code == -1) {
+					alert("操作失败");
+				} else {
+					alert("操作成功");
+					ajaxAccountList(getAccountCutPageValues());
+				}
+			},
+			error: function(res) {
+				alert("系统异常，请稍后再试");
+			}
+		});
+	} 
+	function deleteAccount(accountUid) {
+		$.ajax({
+			url: "/delete/account",
+			data: {
+				"accountUid":accountUid
+			},
+
+			success: function(res) {
+				if (res.Code == 404) {
+					window.parent.location = "/login.html";
+				} else if (res.Code == -1) {
+					alert(res.Msg);
+				} else {
+					alert("操作成功");
+					ajaxAccountList(getAccountCutPageValues());
+				}
+			},
+			error: function(res) {
+				alert("系统异常，请稍后再试");
+			}
+		});
+	}
+	function ajaxAccountList(dataJSON) {
+		$.ajax({
+			url:"/get/account",
+			data: dataJSON,
+
+			success: function(res) {
+				if (res.Code == 404) {
+					window.parent.location = "/login.html";
+				} else if (res.Code == -1) {
+					alert("获取账户数据列表失败");
+				} else {
+					showAccountList(res);
+				}
+			},
+			error: function(res) {
+				alert("系统异常，请稍后再试");
+			} 
+		});
+	}
+	$(".account-edit-save").click(function() {
+		let accountUid = $("#account-uid-edit").html();
+		let accountOperator = $("#account-edit-opertor").val();
+		let amount = $("#account-edit-opertor-amount").val();
+
+		$.ajax({
+			url: "/account/operator",
+			data: {
+				"accountUid":accountUid,
+				"accountOperator":accountOperator,
+				"amount":amount
+			},
+			success: function(res) {
+				if (res.Code == 404) {
+					window.parent.location = "/login.html";
+				} else{
+					$("#account-edit-opertor-result").html(res.Msg);
+					randerAccountEdit(accountUid);
+				}
+			}
+		});
+	});
+	//当每页显示数更改后，执行的操作
+	$("#display_count").change(function() {
+		let dataJSON = getAccountCutPageValues();
+		ajaxAccountList(dataJSON);
+	});
+
+	//点击上一页的按钮
+	$(".pre_page").click(function() {
+		let dataJSON = getAccountCutPageValues();
+
+		if (dataJSON["currentPage"] == 1) {
+			return;
+		}
+		dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) - 1;
+		ajaxAccountList(dataJSON);
+	});
+    //点击下一页的按钮时
+    $(".next_page").click(function() {
+ 		let dataJSON = getAccountCutPageValues();
+		if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+			return;
+		}
+		dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+		ajaxAccountList(dataJSON);
+    });
+    //点击跳转那一页的按钮
+    $(".jump_page button").click(function() {
+  		let dataJSON = getAccountCutPageValues();
+
+		if (dataJSON["jumpPage"].length <= 0) {
+			return;
+		}
+		ajaxAccountList(dataJSON);	
+    });
+    $(".account-edit-back").click(function() {
+    	$(".account-record").show();
+    	$(".account-edit").hide();
+    	ajaxAccountList({});
+    });
+    $(function() {
+    	$(".account-record").show();
+    	$(".account-edit").hide();
+    	clearAccountSearchValues();
+    	ajaxAccountList({});
+    });
+</script>
+</body>
+</html>

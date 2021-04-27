@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "template/css.html"}}
+</head>
+<body>
+<div class="page">
+    <!-- Main Navbar-->
+    {{template "template/header.html"}}
+    <div class="page-content d-flex align-items-stretch">
+        <!-- Side Navbar -->
+        <nav class="side-navbar">
+            <!-- Sidebar Header-->
+            <div class="sidebar-header d-flex align-items-center">
+                <a href="/index/ui/">
+                    <div class="avatar">
+                        <img src="../../static/img/avatar-1.jpg" alt="..."
+                             class="img-fluid rounded-circle">
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="title">
+                        <h1 class="h4">{{.userName}}</h1>
+                        <p>欢迎您！</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Sidebar Navidation Menus--><span class="heading">主菜单</span>
+            <ul class="list-unstyled">
+                <li><a href="/index/ui/"> <i class="icon-home"></i>首页 </a></li>
+                <li>
+                    <a href="#exampledropdownDropdown" aria-expanded="true" data-toggle="collapse"> <i
+                                class="icon icon-user"></i>账户管理 </a>
+                    <ul id="exampledropdownDropdown" class=" list-unstyled ">
+                        <li><a href="/user_info/show_modify_ui">修改密码</a></li>
+                        <li class="active"><a href="/user_info/show_ui">账户资料</a></li>
+                        <li><a href="/index/show_pay_way_ui">通道配置</a></li>
+                    </ul>
+                </li>
+                <li><a href="#exampledropdownDropdown1" aria-expanded="false" data-toggle="collapse"> <i
+                                class="icon icon-presentation"></i>订单管理 </a>
+                    <ul id="exampledropdownDropdown1" class="collapse list-unstyled ">
+                        <li><a href="/trade/show_ui">订单记录</a></li>
+                        <li><a href="/trade/show_complaint_ui">投诉列表</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"> <i
+                                class="icon icon-bill"></i>财务管理 </a>
+                    <ul id="exampledropdownDropdown2" class="collapse list-unstyled ">
+                        <li><a href="/withdraw/show_ui">申请提现</a></li>
+                        <li><a href="/multi_withdraw/show_multi_ui">批量申请提现</a></li>
+                        <li><a href="/withdraw/show_list_ui">提现记录</a></li>
+                        {{/*                        <li><a href="/recharge/show_recharge_list_ui">自定义记录</a></li>*/}}
+                        <li><a href="/history/show_history_list_ui">资产变动明细</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="content-inner">
+            <!-- Page Header-->
+            <header class="page-header">
+                <div class="container-fluid">
+                    <h2 class="no-margin-bottom">账户资料</h2>
+                </div>
+            </header>
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-holder container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/index/ui/">首页</a></li>
+                    <li class="breadcrumb-item active">账户资料</li>
+                </ul>
+            </div>
+            <!-- Forms Section-->
+            <section class="forms">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Basic Form-->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form id="modify_userInfo">
+                                        <div class="form-group">
+                                            <label class="form-control-label">用户名</label>
+                                            <input type="text" id="or_pwd" name="or_pwd" value="{{.userName}}"
+                                                   class="form-control" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label">手机号</label>
+                                            <input type="text" id="new_pwd" name="new_pwd"
+                                                   value="{{.mobile}}"
+                                                   class="form-control" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label">邮箱</label>
+                                            <input type="text" id="confirm_pwd" name="confirm_pwd"
+                                                   value="{{.email}}"
+                                                   class="form-control" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label">风险预存期</label>
+                                            <input type="text" id="confirm_pwd" name="confirm_pwd"
+                                                   value="T+{{.riskDay}}"
+                                                   class="form-control" readonly>
+                                        </div>
+                                        {{/*                                        <div class="form-group">*/}}
+                                        {{/*                                            <label class="form-control-label">payKey</label>*/}}
+                                        {{/*                                            <input type="text" id="confirm_pwd" name="confirm_pwd"*/}}
+                                        {{/*                                                   value="{{.key}}"*/}}
+                                        {{/*                                                   class="form-control" readonly>*/}}
+                                        {{/*                                        </div>*/}}
+                                        {{/*                                        <div class="form-group">*/}}
+                                        {{/*                                            <label class="form-control-label">paySecret</label>*/}}
+                                        {{/*                                            <input type="text" id="confirm_pwd" name="confirm_pwd"*/}}
+                                        {{/*                                                   value="{{.secret}}"*/}}
+                                        {{/*                                                   class="form-control" readonly>*/}}
+                                        {{/*                                        </div>*/}}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!-- JavaScript files-->
+{{template "template/js.html"}}
+</body>
+</html>

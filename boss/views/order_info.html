@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理后台</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <script src="../static/js/filter.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="../static/js/basic.js"></script>
+    <style>
+        .order-record .search{
+            margin: 0;
+            padding: 10px;
+        }
+        .search label {
+            font-weight: normal;
+            padding-right: 20px;
+        }
+
+        .order-record .search div {
+            height: 20px;
+        }
+        #search-order-status, #search-order-pay-way-code,#search-order-supplier-name, #search-order-free-status {
+            height: 30px;
+            margin-right: 15px;
+        }
+        #order-search {
+            background-color: skyblue;
+            width: 120px;
+            margin-right: 30px;
+        }
+        #notify {
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-record">
+        <div class="search form-inline">
+            <label for="">
+                <span>开始时间：</span>
+                <input type="text" name="" id="search-order-start-time" class="start-time" value="">
+            </label>
+            <label for="">
+                <span>结束时间：</span>
+                <input type="text" name=""  id="search-order-end-time" class="end-time" value="">
+            </label>
+            <label for="">
+                <span>商户名称：</span>
+                <input type="text" id="search-order-merchant-name" placeholder="模糊匹配">
+            </label>
+            <label for="">
+                <span>商户订单号：</span>
+                <input type="text" id="search-order-merchant-order-id" value="">
+            </label>
+           {{/* <label>
+                <span>本系统订单号：</span>
+                <input type="text" id="search-order-bank-order-id" value="" >
+            </label>*/}}
+            <label for="">
+                订单状态：
+                <select name="" id="search-order-status">
+                    <option value="">请选择</option>
+                    <option value="success">支付成功</option>
+                    <option value="wait">等待支付</option>
+                    <option value="fail">支付失败</option>
+                    <option value="cancel">放弃支付</option>
+                </select>
+            </label>
+            <label for="">
+                上游名称：
+                <select name="" id="search-order-supplier-name">
+                </select>
+            </label>
+            <label for="">
+                支付类型：
+                <select name="" id="search-order-pay-way-code">
+                    <option value="">请选择</option>
+                    <option value="WEIXIN_SCAN">微信扫码</option>
+                    <option value="WEIXIN_H5">微信H5</option>
+                    <option value="WEIXIN_SYT">微信收银台</option>
+                    <option value="ALI_SCAN">支付宝扫码</option>
+                    <option value="ALI_H5">支付宝H5</option>
+                    <option value="ALI_SYT">支付宝收银台</option>
+                    <option value="QQ_SCAN">QQ扫码</option>
+                    <option value="QQ_H5">QQ-H5</option>
+                    <option value="QQ_SYT">QQ收银台</option>
+                    <option value="UNION_SCAN">银联扫码</option>
+                    <option value="UNION_H5">银联H5</option>
+                    <option value="UNION_PC_WAP">银联pc-web</option>
+                    <option value="UNION_SYT">银联收银台</option>
+                    <option value="UNION_FAST">银联快捷</option>
+                    <option value="BAIDU_SCAN">百度钱包扫码</option>
+                    <option value="BAIDU_H5">百度钱包H5</option>
+                    <option value="BAIDU_SYT">百度钱包收银台</option>
+                    <option value="JD_SCAN">京东扫码</option>
+                    <option value="JD_H5">京东H5</option>
+                    <option value="JD_SYT">京东收银台</option>
+                </select>
+            </label>
+            <label for="">
+                冻结状态：
+                <select name="" id="search-order-free-status">
+                    <option value="">请选择</option>
+                    <option value="freeze_amount">冻结</option>
+                    <option value="refund">退款</option>
+                </select>
+            </label>
+            <button type="button" class="btn btn-default" id="order-search">搜索</button>
+            <label class="color-red" style="font-size: 16px;">
+                交易金额：
+                <span id="order-all-amount"></span>
+            </label>
+
+            <label class="color-red" style="font-size: 16px;">
+                成功率:
+                <span id="success-rate"></span>
+            </label>
+        </div>
+
+        <div class="menu-table">
+            <table>
+                <thead class="thead-dark">
+                <tr>
+                    <th>序列号</th>
+                    <th>商户名称</th>
+                    <th>商户订单号</th>
+                    <th>订单金额</th>
+                    <th>实际支付金额</th>
+                    <th>支付状态</th>
+                    <th>冻结状态</th>
+                    <th>退款状态</th>
+                    <th>下单时间</th>
+                    <th>上游供应商</th>
+                    <th>支付类型</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="order-table-body">
+                </tbody>
+            </table>
+        </div>
+        <!-- 分页插件 -->
+        <div class="cut_page">
+            <li>
+                每页显示
+                <select id="display_count">
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </li>
+
+            <li class="current_total_page">第<span class="current_page">0</span>/<span class="total_page">0</span>页</li>
+            <li class="pre_page">上一页</li>
+            <li class="next_page">下一页</li>
+            <li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+        </div>
+        <!-- 模态框 -->
+        <div class="modal fade" id="order-details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">订单详情</h4>
+                    </div>
+
+                    <div class="modal-body modal-body-order-details">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div>商品名称：<span id="shop-name"></span></div>
+                                <div>商户订单id：<span id="merchant-order-id"></span></div>
+                                <div>系统订单id：<span id="bank-order-id"></span></div>
+                                <div>银行流水id：<span id="bank-trans-id"></span></div>
+                                <div>订单金额：<span id="order-amount"></span></div>
+                                <div>实际金额：<span id="fact-amount"></span></div>
+                                <div>轮询池id：<span id="roll-pool-code"></span></div>
+                                <div>轮询池名：<span id="roll-pool-name"></span></div>
+                                <div>通道id：<span id="road-uid"></span></div>
+                                <div>通道名称：<span id="road-name"></span></div>
+                                <div>上游商编码：<span id="pay-product-code"></span></div>
+                                <div>上游商名称：<span id="pay-product-name"></span></div>
+                                <div>支付类型编码：<span id="pay-type-code"></span></div>
+                                <div>支付类型名称：<span id="pay-type-name"></span></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>订单有效时间：<span id="order-period"></span></div>
+                                <div>支付状态：<span id="status"></span></div>
+                                <div>是否退款：<span id="refund"></span></div>
+                                <div>退款时间：<span id="refund-time"></span></div>
+                                <div>是否冻结：<span id="free"></span></div>
+                                <div>冻结时间：<span id="free-time"></span></div>
+                                <div>是否解冻：<span id="unfree"></span></div>
+                                <div>解冻时间：<span id="unfree-time"></span></div>
+                                <div>商户名称：<span id="merchant-name"></span></div>
+                                <div>商户编号：<span id="merchant-uid"></span></div>
+                                <div>代理编号：<span id="agent-uid"></span></div>
+                                <div>代理名称：<span id="agent-name"></span></div>
+                                <div>下单时间：<span id="create—time"></span></div>
+                                <div>更新时间：<span id="update-time"></span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                回调地址：<span id="notify"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default cancel-order-details" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="order-solve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">订单处理</h4>
+                    </div>
+
+                    <div class="modal-body modal-body-order-solve">
+                        <input type="radio" name="order-solve-radio" value="success" style="margin-left: 10%;"><span style="color: blue;">处理成功</span>
+                        <input type="radio" name="order-solve-radio" value="fail" style="margin-left: 15%;"><span style="color: red;">处理失败</span>
+                        <input type="text" hidden value="" id="order-solve-bank-order-id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default save-order-solve">确定</button>
+                        <button type="button" class="btn btn-default cancel-order-solve" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //将上游通道供应商写入
+        function setSupplier() {
+            $.ajax({
+                url: "/get/product",
+                success: function (res) {
+                    if (res.Code == 404) {window.parent.location = "/login.html";}
+                    else if (res.Code == -1) {alert("没有获取到上游供应商数据");}
+                    else {
+                        let  str = '<option value="' + "" + '">' + "请选择" + '</option>';
+                        for (let key in res.ProductMap) {
+                            let  v = res.ProductMap[key];
+                            str = str + '<option value="' + key + '">' + v + '</option>'
+                        }
+                        $("#search-order-supplier-name").html(str);
+                    }
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        //获取搜索去的参数
+        function getOrderSearchValues() {
+            let displayCount = $("#display_count").val();
+            let currentPage = $(".current_page").html();
+            let totalPage = $(".total_page").html();
+            let jumpPage = $(".jump_page input").val();
+            let startTime = $("#search-order-start-time").val();
+            let endTime = $("#search-order-end-time").val();
+            let merchantName = $("#search-order-merchant-name").val();
+            let merchantOrderId = $("#search-order-merchant-order-id").val();
+            // let bankOrderId = $("#search-order-bank-order-id").val();
+            let orderStatus = $("#search-order-status").val();
+            let supplierUid = $("#search-order-supplier-name").val();
+            let payWayCode = $("#search-order-pay-way-code").val();
+            let freeStatus = $("#search-order-free-status").val();
+            return {
+                "displayCount":displayCount,
+                "currentPage":currentPage,
+                "totalPage":totalPage,
+                "jumpPage":jumpPage,
+                "startTime":startTime,
+                "endTime":endTime,
+                "merchantName":merchantName,
+                "merchantOrderId":merchantOrderId,
+                // "bankOrderId":bankOrderId,
+                "orderStatus":orderStatus,
+                "supplierUid":supplierUid,
+                "payWayCode":payWayCode,
+                "freeStatus":freeStatus
+            };
+        }
+        function setOrderCutPageValues(res) {
+            $(".current_page").html(res.CurrentPage);
+            $(".total_page").html(res.TotalPage);
+            $("#display_count option").each(function() {
+                if ($(this).text() == res.DisplayCount) {
+                    $(this).attr('selected', true);
+                }
+            });
+            $(".jump_page input").val("");
+        }
+        function showOrderList(res) {
+            setOrderCutPageValues(res);
+            let str = "";
+            for (let i = 0; i < res.OrderList.length; i ++) {
+                let v = res.OrderList[i];
+                let tmp = "<tr>";
+                if (v.Status == "success") {
+                    tmp = "<tr style='color: blue;'>"
+                } else if (v.Status == "fail") {
+                    tmp = "<tr style='color: red;'>"
+                }
+                tmp = tmp + "<th>" + (res.StartIndex+i+1) + "</th>" +
+                        "<th>" + v.MerchantName + "</th>" + "<th>" + v.MerchantOrderId + "</th>" +
+                        "<th>" + v.OrderAmount + "</th>" + "<th>" + v.FactAmount + "</th>" + "<th>" + v.Status + "</th>";
+                if (v.Freeze == "yes") {
+                    tmp = tmp + "<th style='color: red;'>" + "已经冻结" + "</th>"
+                } else {
+                    tmp = tmp + "<th>" + "未被冻结" + "</th>"
+                }
+
+                if (v.Refund == "yes") {
+                    tmp = tmp + "<th style='color: red;'>" + "已经退款" + "</th>"
+                } else {
+                    tmp = tmp + "<th>" + "未被退款" + "</th>"
+                }
+                tmp = tmp + "<th>" + v.CreateTime + "</th>" + "<th>" + v.PayProductName + "</th>" + "<th>" + v.PayTypeName + "</th>";
+                tmp = tmp.replace("wait", "等待支付").replace("success", "支付成功").replace("fail", "支付失败").replace("cancel", "放弃支付");
+                tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' +
+                        '<button type="button" class="btn btn-default" style="padding:0;margin-right: 5px;" value="' + v.BankOrderId +'"  onclick="orderDetails(this.value);">' + "详情" +'</button>';
+                if (v.Status == "wait") {
+                    tmp = tmp + '<button type="button" class="btn btn-info" style="padding: 0;margin-right: 5px;" value="' + v.BankOrderId +'" onclick="orderQuery(this.value);">'+ "查询" +'</button>';
+                    tmp = tmp + '<button type="button" class="btn btn-success" style="padding: 0;margin-right: 5px;" value="' + v.BankOrderId +'" onclick="solveResult(this.value);">'+ "处理" +'</button>';
+                }
+                if (v.Status == "success" || v.Status == "fail") {
+                    tmp = tmp + '<button type="button" class="btn btn-primary" style="padding: 0;margin-right: 5px;" value="' + v.BankOrderId +'" onclick="orderNotify(this.value);">' + "回调" + '</button>';
+                    if (v.Freeze == "yes") {
+                        tmp = tmp + '<button type="button" class="btn btn-default" style="padding: 0;margin-right: 5px;" value="' + v.BankOrderId + '" onclick="unfreeze(this.value);">' + "解冻" + '</button>';
+                        tmp = tmp + '<button type="button" class="btn btn-danger" style="padding: 0;margin-right: 5px;" value="' + v.BankOrderId + '" onclick="refund(this.value);">' + "退款" + '</button>';
+                    } else {
+                        if (v.Refund != "yes") {
+                            tmp = tmp + '<button type="button" class="btn btn-warning" style="padding: 0;margin-right: 5px;" value="' + v.BankOrderId + '" onclick="freeze(this.value);">' + "冻结" + '</button>'
+                        }
+                    }
+
+                    if (v.Refund == "yes") {
+                        tmp = tmp + '<button type="button" class="btn btn-default" style="padding: 0;" value="' + v.BankOrderId + '" onclick="orderRoll(this.value);">' + "回滚" + '</button>';
+                    }
+                }
+                tmp = tmp + '</div>' + "</th>" + "</tr>";
+                str = str + tmp;
+            }
+            $("#order-all-amount").html(res.AllAmount);
+            $("#success-rate").html(res.SuccessRate);
+            $("#order-table-body").html(str);
+        }
+        function freeze(bankOrderId) {
+            $.ajax({
+                url: "/update/order/status",
+                data: {
+                    "bankOrderId":bankOrderId,
+                    "solveType":"freeze_amount"
+                },
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                        return
+                    } else if (res.Code == 200) {
+                        alert("冻结成功");
+                    } else {
+                        alert("冻结失败")
+                    }
+                    AjaxOrderList(getOrderSearchValues());
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        function unfreeze(bankOrderId) {
+            $.ajax({
+                url: "/update/order/status",
+                data: {
+                    "bankOrderId":bankOrderId,
+                    "solveType":"unfreeze_amount"
+                },
+                success:function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                        return
+                    } else if (res.Code == 200) {
+                        alert("解冻成功")
+                    } else {
+                        alert("解冻失败")
+                    }
+                    AjaxOrderList(getOrderSearchValues());
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试")
+                }
+            });
+        }
+        function refund(bankOrderId) {
+            $.ajax({
+                url: "/update/order/status",
+                data: {
+                    'bankOrderId':bankOrderId,
+                    "solveType":"refund"
+                },
+                success:function (res) {
+                    if (res.Code == 404){
+                        window.parent.location = "/login.html";
+                        return
+                    }else if (res.Code == 200) {
+                        alert("退款成功");
+                    } else {
+                        alert("退款失败");
+                    }
+                    AjaxOrderList(getOrderSearchValues());
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        function orderRoll(bankOrderId) {
+            $.ajax({
+                url: "/update/order/status",
+                data:{
+                    "bankOrderId":bankOrderId,
+                    "solveType":"order_roll"
+                },
+                success:function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                        return
+                    } else if (res.Code == 200 ){
+                        alert("加款成功");
+                    } else {
+                        alert("加款失败");
+                    }
+                    AjaxOrderList(getOrderSearchValues());
+                },
+                error:function () {
+                    alert("系统异常，请稍后再试")
+                }
+            });
+        }
+        function solveResult(bankOrderId) {
+            $("#order-solve-bank-order-id").val(bankOrderId);
+            $("#order-solve").modal();
+        }
+        $(".save-order-solve").click(function () {
+            let bankOrderId = $("#order-solve-bank-order-id").val();
+            let solveType = $("input[name='order-solve-radio']:checked").val();
+            if (solveType != "success" && solveType != "fail") {
+                alert("没有选择那种处理方式");return;
+            } else {
+                $.ajax({
+                    url: "/update/order/status",
+                    data: {
+                        "bankOrderId":bankOrderId,
+                        "solveType":solveType
+                    },
+                    success: function (res) {
+                        if (res.Code == 404) {
+                            window.parent.location = "/login.html";
+                            return;
+                        } else if (res.Code == 200){
+                            alert("受理成功")
+                        } else {
+                            alert("受理失败");
+                        }
+                        $(".cancel-order-solve").trigger('click');
+                        AjaxOrderList(getOrderSearchValues());
+                    },
+                    error: function () {
+                        alert("系统异常，请稍后再试");
+                    }
+                });
+            }
+        });
+        function orderNotify(bankOrderId) {
+            $.ajax({
+                url: "/send/notify",
+                data:{
+                    "bankOrderId":bankOrderId
+                },
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else {
+                        alert(res.Msg);
+                    }
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        function orderQuery(bankOrderid) {
+            $.ajax({
+                url: "/supplier/order/query",
+                data: {
+                  "bankOrderId":bankOrderid
+                },
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else {
+                        alert(res.Msg);
+                        AjaxOrderList(getOrderSearchValues());
+                    }
+                },
+                error: function (res) {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        function orderDetails(bankOrderId) {
+            $("#order-details").modal();
+            $.ajax({
+                url: "/get/one/order",
+                data: {
+                    "bankOrderId":bankOrderId
+                },
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else if (res.Code == 200) {
+                        let order = res.OrderList[0];
+                        $("#order-period").html(order.OrderPeriod);
+                        $("#shop-name").html(order.ShopName);
+                        $("#merchant-order-id").html(order.MerchantOrderId);
+                        $("#bank-order-id").html(order.BankOrderId);
+                        $("#bank-trans-id").html(order.BankTransId);
+                        $("#order-amount").html(order.OrderAmount);
+                        $("#fact-amount").html(order.FactAmount);
+                        $("#roll-pool-code").html(order.RollPoolCode);
+                        $("#roll-pool-name").html(order.RollPoolName);
+                        $("#road-uid").html(order.RoadUid);
+                        $("#road-name").html(order.RoadName);
+                        $("#pay-product-code").html(order.PayProductCode);
+                        $("#pay-product-name").html(order.PayProductName);
+                        $("#pay-type-code").html(order.PayTypeCode);
+                        $("#pay-type-name").html(order.PayTypeName);
+                        $("#notify").html(res.NotifyUrl);
+                        $("#status").html(order.Status);
+                        $("#refund").html(order.Refund);
+                        $("#refund-time").html(order.RefundTime);
+                        $("#free").html(order.Freeze);
+                        $("#free-time").html(order.FreezeTime);
+                        $("#unfree").val(order.Unfreeze);
+                        $("#unfree-time").html(order.UnfreezeTime);
+                        $("#merchant-name").html(order.MerchantName);
+                        $("#merchant-uid").html(order.MerchantUid);
+                        $("#agent-uid").html(order.AgentUid);
+                        $("#agent-name").html(order.AgentName);
+                        $("#create—time").html(order.CreateTime);
+                        $("#update-time").html(order.UpdateTime);
+                        $("#order-details").modal();
+                    }
+                }
+            });
+        }
+        function AjaxOrderList(dataJSON) {
+            $.ajax({
+                url:"/get/order",
+                data: dataJSON,
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else if (res.Code == -1) {
+
+                    } else {
+                        showOrderList(res);
+                    }
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        //当每页显示数更改后，执行的操作
+        $("#display_count").change(function() {
+            let dataJSON = getOrderSearchValues();
+            AjaxOrderList(dataJSON);
+        });
+
+        //点击上一页的按钮
+        $(".pre_page").click(function() {
+            let dataJSON = getOrderSearchValues();
+
+            if (dataJSON["currentPage"] == 1) {
+                return;
+            }
+            dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) - 1;
+            AjaxOrderList(dataJSON);
+        });
+        //点击下一页的按钮时
+        $(".next_page").click(function() {
+            let dataJSON = getOrderSearchValues();
+            if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+                return;
+            }
+            dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+            AjaxOrderList(dataJSON);
+        });
+        //点击跳转那一页的按钮
+        $(".jump_page button").click(function() {
+            let dataJSON = getOrderSearchValues();
+
+            if (dataJSON["jumpPage"].length <= 0) {
+                return;
+            }
+            AjaxOrderList(dataJSON);
+        });
+        $("#order-search").click(function () {
+            let dataJSON = getOrderSearchValues();
+            AjaxOrderList(dataJSON);
+        });
+        $(function () {
+            let day = new Date(new Date().getTime() - 86400000);
+            let s = dateFtt("yyyy-MM-dd hh:mm:ss", day);
+            $("#search-order-start-time").val();
+            setSupplier();
+            let dataJSON = getOrderSearchValues();
+            AjaxOrderList(dataJSON);
+        });
+    </script>
+</body>
+</html>

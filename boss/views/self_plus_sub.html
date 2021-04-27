@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理后台</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <script src="../static/js/filter.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../static/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="../static/js/basic.js"></script>
+    <style>
+        .panel-body label {
+            font-weight: normal;
+            margin-right: 10px;
+        }
+        #select-self-name {
+            height: 30px;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title">自定义商户金额操作</h3>
+    </div>
+    <div class="panel-body">
+        <label for="">
+            <span>操作账户：</span>
+            <select name="" id="select-self-name">
+            </select>
+        </label>
+        <label for="">
+            <span>操作类型：</span>
+            <select name="" id="select-self-type">
+                <option value="">请选择</option>
+                <option value="plus_amount">加款</option>
+                <option value="sub_amount">减款</option>
+                <option value="freeze_amount">冻结</option>
+                <option value="unfreeze_amount">解冻</option>
+            </select>
+        </label>
+        <label for="">
+            <span>操作金额：</span>
+            <input type="text" id="select-self-amount" placeholder="单位：元">
+        </label>
+        <input type="button" class="btn btn-primary" value="执行" onclick="selfOperateAccount();">
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">操作结果</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-responsive table-bordered">
+            <thead>
+                <tr>
+                    <td class="algin-right">结果</td><td><span id="operate-result">待处理......</span></td>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="algin-right">账户余额</td><td><span id="balance"> </span></td>
+            </tr>
+            <tr>
+                <td class="algin-right">结算金额</td><td><span id="settle-amount"></span></td>
+            </tr>
+            <tr>
+                <td class="algin-right">在途金额</td><td><span id="wait-amount"></span></td>
+            </tr>
+            <tr>
+                <td class="algin-right">冻结金额</td><td><span id="freeze-amount"></span></td>
+            </tr>
+            <tr>
+                <td class="algin-right">押款金额</td><td><span id="loan-amount"></span></td>
+            </tr>
+            <tr>
+                <td class="algin-right">代付中金额</td><td><span id="payfor-amount"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function getValues() {
+        let accountUid = $("#select-self-name").val();
+        let accountOperator = $("#select-self-type").val();
+        let amount = $("#select-self-amount").val();
+
+        return {
+            "accountUid":accountUid,
+            "accountOperator":accountOperator,
+            "amount":amount
+        };
+    }
+    function clearResult() {
+        $("#operate-result").html("待处理......");
+        $("#balance").html("");
+        $("#settle-amount").html("");
+        $("#wait-amount").html("");
+        $("#freeze-amount").html("");
+        $("#loan-amount").html("");
+        $("#payfor-amount").html("");
+    }
+    function randResult(res) {
+        let account = res.AccountList[0];
+        $("#operate-result").html(res.Msg);
+        $("#balance").html(account.Balance);
+        $("#settle-amount").html(account.SettleAmount);
+        $("#wait-amount").html(account.WaitAmount);
+        $("#freeze-amount").html(account.FreezeAmount);
+        $("#loan-amount").html(account.LoanAmount);
+        $("#payfor-amount").html(account.PayforAmount);
+    }
+    function selfOperateAccount() {
+        clearResult();
+        let dataJSON = getValues();
+        $.ajax({
+            url:"/account/operator",
+            data: dataJSON,
+            success: function (res) {
+                if (res.Code == 404) {
+                    window.parent.location = "/login.html";
+                } else if (res.Code == -1) {
+                    $("#operate-result").html(res.Msg);
+                } else {
+                    randResult(res);
+                    alert("操作成功，请仔细检查商户的资金状态");
+                }
+            },
+            error: function () {
+                alert("系统异常，请稍后再试")
+            }
+        });
+    }
+    $("#select-self-name").change(function () {
+        clearResult();
+    });
+    $("#select-self-type").click(function () {
+        clearResult();
+    });
+    function setAccount() {
+        $.ajax({
+            url: "/get/all/account",
+            success: function (res) {
+                if (res.Code == 404) {
+                    window.parent.location = "/login.html";
+                } else {
+                    let str = '<option value="' + "" + '">' + "请选择" + '</option>';
+                    for (let i = 0; i < res.AccountList.length; i ++) {
+                        let account = res.AccountList[i];
+                        str = str + '<option value="' + account.AccountUid + '">' + account.AccountName + '</option>';
+                    }
+                    $("#select-self-name").html(str);
+                }
+            }
+        });
+    }
+    $(function () {
+        setAccount();
+    });
+</script>
+</body>
+</html>

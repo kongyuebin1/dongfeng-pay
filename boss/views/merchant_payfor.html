@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理后台</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/basic.css">
+    <link src="../static/lib/bootstrap/css/bootstrap.min.css">
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/js/filter.js"></script>
+    {{/*<script src="../static/js/basic.js"></script>*/}}
+    <style>
+        .panel .panel-body input {
+            width: 50%;
+        }
+        .algin-right {
+            text-align: right;
+        }
+        table tr td {
+            display: inline-block;
+            width: 50%;
+        }
+
+        .panel-heading:hover {
+            cursor: pointer;
+        }
+        .panel-footer {
+            padding-left: 45%;
+        }
+        #modal-search {
+            height: 40px;
+            position: relative;
+        }
+        #modal-search button {
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel panel-info">
+        <div class="panel-heading" onclick="merchantList({});">
+            <span class="panel-title">选择下发商户</span>
+            <span class="glyphicon glyphicon-search"></span>
+        </div>
+        <table class="table table-responsive table-bordered">
+            <thead>
+                <tr>
+                    <td class="algin-right">下发所属商户</td><td><span id="merchant-name">未选择</span></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="algin-right">商户uid</td><td><span id="merchant-uid">未选择</span></td>
+                </tr>
+                <tr>
+                    <td class="algin-right">可用金额</td><td><span id="able-amount"></span> 元</td>
+                </tr>
+                <tr>
+                    <td class="algin-right">创建时间</td><td><span id="create-time">未选择</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="panel-heading" onclick="bankList({});">
+            <span class="panel-title">选择下发银行卡</span>
+            <span class="glyphicon glyphicon-search"></span>
+        </div>
+        <table class="table table-responsive table-bordered">
+            <input type="text" hidden="hidden" id="bank-uid" value="">
+            <thead>
+            <tr>
+                <td class="algin-right">银行名称</td><td><span id="bank-name">未选择</span></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="algin-right">开户名</td><td><span id="account-name">未选择</span></td>
+            </tr>
+            <tr>
+                <td class="algin-right">卡号</td><td><span id="card-number">未选择</span></td>
+            </tr>
+            <tr>
+                <td class="algin-right">开户卡类型</td>
+                <td>
+                    <input type="radio" name="card-type" value="private" checked>对私卡
+                    <input type="radio" name="card-type" value="public">对公卡
+                </td>
+            </tr>
+            <tr>
+                <td class="algin-right">开户行所在地</td><td><span id="bank-address">未选择</span></td>
+            </tr>
+            <tr>
+                <td class="algin-right">开户人手机号码</td><td><span id="phone">未选择</span></td>
+            </tr>
+            <tr>
+                <td class="algin-right">下发金额</td><td><input type="text" value="" id="payfor-amount"><span> 元</span></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <input type="button" class="btn btn-default" name="" id="" value="取消">
+            <input type="button" class="btn btn-primary" value="提交" id="submit">
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="menu-table table-responsive">
+                        <table>
+                            <div id="modal-search">
+                                <input type="text" hidden="hidden" id="modal-search-hidden" value="">
+                                搜索：<input type="text" value="" id="modal-search-input" placeholder="名称">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal" id="cannel">取消</button>
+                            </div>
+                            <thead class="thead-dark" id="table-head">
+                            </thead>
+
+                            <tbody id="table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 分页插件 -->
+                    <div class="cut_page">
+                        <li>
+                            每页显示
+                            <select id="display_count">
+                                <option value="4">4</option>
+                                <option value="30">20</option>
+                                <option value="50">30</option>
+                                <option value="100">50</option>
+                            </select>
+                        </li>
+
+                        <li class="current_total_page">第<span class="current_page">0</span>/<span class="total_page">0</span>页</li>
+                        <li class="pre_page">上一页</li>
+                        <li class="next_page">下一页</li>
+                        <li class="jump_page">跳转 <input type="text" name="jump_page" value=""> <button type="button" class="btn btn-default">Go</button></li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getCutPagesValues() {
+            let displayCount = $("#display_count").val();
+            let currentPage = $(".current_page").html();
+            let totalPage = $(".total_page").html();
+            let jumpPage = $(".jump_page input").val();
+            return {
+                "displayCount":displayCount,
+                "currentPage":currentPage,
+                "totalPage":totalPage,
+                "jumpPage":jumpPage
+            };
+        }
+        function setOrderCutPageValues(res) {
+            $(".current_page").html(res.CurrentPage);
+            $(".total_page").html(res.TotalPage);
+            $("#display_count option").each(function() {
+                if ($(this).text() == res.DisplayCount) {
+                    $(this).attr('selected', true);
+                }
+            });
+            $(".jump_page input").val("");
+        }
+        function clearModal() {
+            $("#table-head").html("");
+            $("#table-body").html("");
+        }
+        function randMerchantList(res) {
+            clearModal();
+            setOrderCutPageValues(res);
+            let head = "<tr>" + "<th>" + "序号" + "</th>" + "<th>" + "商户名称" + "</th>" + "<th>" + "商户uid" + "</th>" +
+                    "<th>" + "可用金额" + "</th>" + "<th>" + "选择" + "</th>";
+            $("#table-head").html(head);
+            let str = "";
+            for (let i = 0; i < res.AccountList.length; i ++) {
+                let v = res.AccountList[i];
+                let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" +
+                        "<th>" + v.AccountName + "</th>" + "<th>" + v.AccountUid + "</th>" + "<th>" + (v.SettleAmount-v.FreezeAmount-v.LoanAmount-v.PayforAmount) + "</th>";
+                tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' +
+                        '<button type="button" value="' + v.AccountUid +'" class="btn btn-default" onclick="saveMerchant(this.value);">' + "确定" +'</button>';
+                tmp = tmp + '</div>' + "</th>" + "</tr>";
+                str = str + tmp;
+            }
+            $("#table-body").html(str);
+            $("#myModal").modal();
+            //标记是商户选择
+            $("#modal-search-hidden").val("merchant-list");
+        }
+
+        function saveMerchant(accountUid) {
+            $("#cannel").trigger('click');
+            $.ajax({
+                url:"/get/one/account",
+                data: {
+                    "accountUid":accountUid
+                },
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else {
+
+                        let v = res.AccountList[0];
+                        $("#merchant-name").html(v.AccountName);
+                        $("#merchant-uid").html(v.AccountUid);
+                        $("#able-amount").html((v.SettleAmount - v.FreezeAmount -v.PayforAmount));
+                        $("#create-time").html(v.CreateTime);
+                    }
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        function merchantList(dataJSON) {
+            if (JSONIsEmpty(dataJSON)) {
+                dataJSON = getCutPagesValues();
+            }
+            dataJSON["accountName"] = $("#modal-search-input").val();
+            $.ajax({
+                url: "/get/account",
+                data: dataJSON,
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else {
+                        randMerchantList(res);
+                    }
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+
+        $("#modal-search-input").change(function () {
+            let dataJSON = getCutPagesValues();
+            let type = $("#modal-search-hidden").val();
+            if (type == "merchant-list") {
+                merchantList(dataJSON);
+            } else {
+                bankList(dataJSON);
+            }
+        });
+        
+        function f(dataJSON) {
+            let type = $("#modal-search-hidden").val();
+            if (type == "merchant-list") {
+                merchantList(dataJSON);
+            } else {
+                bankList(dataJSON);
+            }
+        }
+        
+        function randBankCardList(res) {
+            clearModal();
+            setOrderCutPageValues(res);
+            let head = "<tr>" + "<th>" + "序号" + "</th>" + "<th>" + "开户名" + "</th>" + "<th>" + "银行名称" + "</th>" +
+                    "<th>" + "卡号" + "</th>" + "<th>" + "手机号码" + "</th>" + "<th>" + "选择" + "</th>";
+            $("#table-head").html(head);
+            let str = "";
+            for (let i = 0; i < res.BankCardInfoList.length; i ++) {
+                let v = res.BankCardInfoList[i];
+                let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + "<th>" + v.AccountName + "</th>" + "<th>" + v.BankName + "</th>" +
+                        "<th>" + v.BankNo + "</th>" + "<th>" + v.PhoneNo + "</th>";
+                tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' +
+                        '<button type="button" value="' + v.Uid +'" class="btn btn-default" onclick="saveBankCard(this.value);">' + "确定" +'</button>';
+                tmp = tmp + '</div>' + "</th>" + "</tr>";
+                str = str + tmp;
+            }
+            $("#table-body").html(str);
+            $("#myModal").modal();
+            //标记是商户选择
+            $("#modal-search-hidden").val("bank-list");
+        }
+        function saveBankCard(uid) {
+            $("#cannel").trigger('click');
+            $.ajax({
+                url:"/get/oneBankCard",
+                data: {
+                    "uid":uid
+                },
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else {
+                        let v = res.BankCardInfoList[0];
+                        $("#bank-uid").val(v.Uid);
+                        $("#bank-name").html(v.BankName);
+                        $("#account-name").html(v.AccountName);
+                        $("#bank-address").html(v.BankAddress);
+                        $("#card-number").html(v.BankNo);
+                        $("#phone").html(v.PhoneNo);
+                    }
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        }
+        //当每页显示数更改后，执行的操作
+        $("#display_count").change(function() {
+            let dataJSON = getCutPagesValues();
+            f(dataJSON);
+        });
+
+        //点击上一页的按钮
+        $(".pre_page").click(function() {
+            let dataJSON = getCutPagesValues();
+
+            if (dataJSON["currentPage"] == 1) {
+                return;
+            }
+            dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) - 1;
+            f(dataJSON);
+        });
+        //点击下一页的按钮时
+        $(".next_page").click(function() {
+            let dataJSON = getCutPagesValues();
+            if (dataJSON["currentPage"] == dataJSON["totalPage"]) {
+                return;
+            }
+            dataJSON["currentPage"] = parseInt(dataJSON["currentPage"]) + 1;
+            f(dataJSON);
+        });
+        //点击跳转那一页的按钮
+        $(".jump_page button").click(function() {
+            let dataJSON = getCutPagesValues();
+
+            if (dataJSON["jumpPage"].length <= 0) {
+                return;
+            }
+            f(dataJSON);
+        });
+        function bankList(dataJSON) {
+            if (JSONIsEmpty(dataJSON)) {
+                dataJSON = getCutPagesValues();
+            }
+            dataJSON["accountNameSearch"] = $("#modal-search-input").val();
+            $.ajax({
+                url: "/get/bankCard",
+                data: dataJSON,
+                success: function(res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else {
+                        randBankCardList(res);
+                    }
+                },
+                error:function() {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+            $("#myModal").modal();
+        }
+        $("#submit").click(function () {
+            let merchantUid = $("#merchant-uid").html();
+            let merchantName = $("#merchant-name").html();
+            let ableAmount = $("#able-amount").html();
+
+            let bankUid = $("#bank-uid").val();
+            let bankName = $("#bank-name").html();
+            let accountName = $("#account-name").html();
+            let bankNo = $("#card-number").html();
+            let cardType = $("input[name=\"card-type\"]").val();
+            let bankAddress = $("#bank-address").html();
+            let phone = $("#phone").html();
+            let payForAmount = $("#payfor-amount").val();
+
+            $.ajax({
+                url: "/add/payfor",
+                data:{
+                    "merchantUid":merchantUid,
+                    "merchantName":merchantName,
+                    "ableAmount":ableAmount,
+                    "bankUid":bankUid,
+                    "bankName":bankName,
+                    "accountName":accountName,
+                    "bankNo":bankNo,
+                    "cardType":cardType,
+                    "bankAddress":bankAddress,
+                    "phone":phone,
+                    "payForAmount":payForAmount
+                },
+                success: function (res) {
+                    if (res.Code == 404) {
+                        window.parent.location = "/login.html";
+                    } else if (res.Code == -1){
+                        alert(res.Msg);
+                    } else {
+                        alert("已经提交成功，请耐心等待结果");
+                        loadMainContent("/payfor_record.html")
+                    }
+                },
+                error: function () {
+                    alert("系统异常，请稍后再试");
+                }
+            });
+        });
+        //判断json是否为空
+        function JSONIsEmpty(dataJSON) {
+            let b = (JSON.stringify(dataJSON) == "{}");
+            return b;
+        }
+    </script>
+</body>
+</html>

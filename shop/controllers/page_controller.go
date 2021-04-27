@@ -10,7 +10,7 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
+	beego "github.com/beego/beego/v2/server/web"
 	"github.com/rs/xid"
 )
 
@@ -21,7 +21,7 @@ type HomeAction struct {
 /*加载首页及数据*/
 func (c *HomeAction) ShowHome() {
 	//取值
-	siteName := beego.AppConfig.String("site.name")
+	siteName, _ := beego.AppConfig.String("site.name")
 	orderNo := xid.New().String()
 	productName := "测试应用-支付功能体验(非商品消费)"
 

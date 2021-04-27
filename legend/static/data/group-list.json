@@ -1,0 +1,74 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 10,
+  "data": [
+    {
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    },{
+      "id": 1,
+      "groupname": "星沙组",
+      "rechargecount": 123,
+      "rechargemoney": "100",
+      "income": 100000
+    }
+  ]
+}
