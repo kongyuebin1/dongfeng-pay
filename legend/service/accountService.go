@@ -1,15 +1,18 @@
 package service
 
-import "legend/models/fast"
+import (
+	"legend/models/fast"
+)
 
 type AccountService struct {
 	BaseService
 }
 
-func (c *AccountService) GetAccountInfo(userName string) *fast.RpAccount {
-	userInfo := fast.GetUserInfoByUserName(userName)
+func (c *AccountService) GetAccountInfo(userName string) *fast.AccountInfo {
 
-	accountInfo := fast.GetAccontInfo(userInfo.UserNo)
+	merchantInfo := fast.GetMerchantInfoByUserName(userName)
+
+	accountInfo := fast.GetAccountInfo(merchantInfo.MerchantUid)
 
 	return accountInfo
 }

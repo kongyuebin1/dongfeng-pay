@@ -1,4 +1,4 @@
 package common
 
-const ACTIVE = "ACTIVE"
-const UNACTIVE = "UNACTIVE"
+const ACTIVE = "active"
+const UNACTIVE = "unactive"

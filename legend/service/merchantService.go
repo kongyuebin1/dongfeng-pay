@@ -9,11 +9,11 @@ type MerchantService struct {
 	BaseService
 }
 
-func (c *MerchantService) GetMerchantBankInfo(mobile string) (*fast.RpUserInfo, *fast.RpUserBankAccount, *fast.RpUserPayConfig) {
+func (c *MerchantService) GetMerchantBankInfo(mobile string) (*fast.MerchantInfo, *fast.RpUserBankAccount, *fast.RpUserPayConfig) {
 
-	userInfo := fast.GetUserInfoByUserName(mobile)
-	bankInfo := fast.GetBankInfoByUserNo(userInfo.UserNo)
-	userPayConfig := fast.GetUserPayConfigByUserNo(userInfo.UserNo)
+	userInfo := fast.GetMerchantInfoByUserName(mobile)
+	bankInfo := fast.GetBankInfoByUserNo(userInfo.LoginAccount)
+	userPayConfig := fast.GetUserPayConfigByUserNo(userInfo.LoginAccount)
 
 	return userInfo, bankInfo, userPayConfig
 }
@@ -25,13 +25,13 @@ func (c *MerchantService) UserPayConfig(userName string) map[string]string {
 
 	merchantMapData := make(map[string]string)
 
-	userInfo := fast.GetUserInfoByUserName(userName)
+	userInfo := fast.GetMerchantInfoByUserName(userName)
 
-	if userInfo == nil || userInfo.Mobile == "" {
+	if userInfo == nil || userInfo.LoginAccount == "" {
 		return merchantMapData
 	}
 
-	userNo := userInfo.UserNo
+	userNo := userInfo.LoginAccount
 
 	userPayConfig := fast.GetUserPayConfigByUserNo(userNo)
 	if nil == userPayConfig || userPayConfig.UserNo == "" {
@@ -44,9 +44,9 @@ func (c *MerchantService) UserPayConfig(userName string) map[string]string {
 /**
 ** 获取商户信息
  */
-func (c *MerchantService) MerchantInfo(mobile string) *fast.RpUserInfo {
-	userInfo := fast.GetUserInfoByUserName(mobile)
-	if nil == userInfo || userInfo.UserNo == "" {
+func (c *MerchantService) MerchantInfo(mobile string) *fast.MerchantInfo {
+	userInfo := fast.GetMerchantInfoByUserName(mobile)
+	if nil == userInfo || userInfo.LoginAccount == "" {
 		logs.Error("获取用户信息失败")
 	}
 

@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+	"github.com/beego/beego/v2/core/logs"
 	"legend/controllers/base"
 	"legend/service"
 	"legend/utils"
@@ -21,13 +23,18 @@ func (c *ShowPageController) WelcomePage() {
 
 	userName := c.GetSession("userName").(string)
 
+	fmt.Println(userName)
+
 	accountService := new(service.AccountService)
 	accountInfo := accountService.GetAccountInfo(userName)
 
+	logs.Debug("account信息：", accountInfo)
+
 	c.Data["balance"] = accountInfo.Balance
-	c.Data["unBalance"] = accountInfo.Unbalance
-	c.Data["settleAmount"] = accountInfo.SettAmount
-	c.Data["todayAmount"] = accountInfo.TodayIncome
+	c.Data["unBalance"] = accountInfo.FreezeAmount
+	c.Data["settleAmount"] = accountInfo.SettleAmount
+	//c.Data["todayAmount"] = accountInfo.TodayIncome
+	// 获取今天充值金额
 
 	c.TplName = "welcome.html"
 }
@@ -136,7 +143,7 @@ func (c *ShowPageController) PersonPage() {
 	} else {
 		merchantService := new(service.MerchantService)
 		userInfo := merchantService.MerchantInfo(userName)
-		c.Data["userName"] = userInfo.UserName
+		c.Data["userName"] = userInfo.MerchantName
 	}
 
 	c.TplName = "person.html"

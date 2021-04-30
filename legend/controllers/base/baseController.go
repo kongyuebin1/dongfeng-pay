@@ -18,9 +18,9 @@ func (c *BasicController) Prepare() {
 	userName, ok := c.GetSession("userName").(string)
 	if ok {
 		logs.Info("该用户已经登录， userName：", userName)
-		userInfo := fast.GetUserInfoByUserName(userName)
-		if userInfo.Mobile != "" {
-			c.Data["nickName"] = userInfo.UserName
+		userInfo := fast.GetMerchantInfoByUserName(userName)
+		if userInfo.LoginAccount != "" {
+			c.Data["nickName"] = userInfo.MerchantName
 		}
 	} else {
 		c.Data["nickName"] = "史蒂芬-库里"

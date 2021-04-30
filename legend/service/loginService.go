@@ -19,24 +19,25 @@ type LoginJsonData struct {
 }
 
 func (c *LoginService) Login(userName, password string) *LoginJsonData {
+
 	loginJsonData := new(LoginJsonData)
 	loginJsonData.Code = 200
 
-	userInfo := fast.GetUserInfoByUserName(userName)
+	userInfo := fast.GetMerchantInfoByUserName(userName)
 	logs.Info("登录账户信息：", fmt.Sprintf("%+v", userInfo))
-	if nil == userInfo || userInfo.Mobile == "" {
+	if nil == userInfo || userInfo.LoginAccount == "" {
 		logs.Error("用户不存在，账户：", userName)
 		loginJsonData.Code = 404
 		loginJsonData.Msg = "用户不存在"
 	} else {
-		if userInfo.Status == common.UNACTIVE {
+		if strings.ToLower(userInfo.Status) == strings.ToLower(common.UNACTIVE) {
 			logs.Warn("账号异常，请联系管理员，账号：", userName)
 			loginJsonData.Code = 503
 			loginJsonData.Msg = "账户已经被冻结"
 		} else {
 			md5Password := utils.EncodeMd5(password)
-			logs.Info("账户密码md5后：", md5Password, "；数据库保存的为：", userInfo.Password)
-			if strings.ToLower(utils.EncodeMd5(password)) != strings.ToLower(userInfo.Password) {
+			logs.Info("账户密码md5后：", md5Password, "；数据库保存的为：", userInfo.LoginPassword)
+			if strings.ToLower(utils.EncodeMd5(password)) != strings.ToLower(userInfo.LoginPassword) {
 				logs.Error("密码错误，账户:", userName)
 				loginJsonData.Code = -1
 				loginJsonData.Msg = "密码错误"
@@ -57,15 +58,15 @@ func (c *LoginService) PersonPassword(newPassword, oldPassword, repeatPassword, 
 	logoutJsonData := new(LoginJsonData)
 	logoutJsonData.Code = -1
 
-	userInfo := fast.GetUserInfoByUserName(userName)
-	if userInfo.Password != utils.EncodeMd5(oldPassword) {
+	userInfo := fast.GetMerchantInfoByUserName(userName)
+	if userInfo.LoginPassword != utils.EncodeMd5(oldPassword) {
 		logoutJsonData.Msg = "旧密码输入不正确"
 	} else if newPassword != repeatPassword {
 		logoutJsonData.Msg = "2次密码不一致"
 	} else {
 		passwordMd5 := utils.EncodeMd5(newPassword)
-		userInfo.Password = passwordMd5
-		if !fast.UpdateUserInfo(userInfo) {
+		userInfo.LoginPassword = passwordMd5
+		if !fast.UpdateMerchantInfo(userInfo) {
 			logoutJsonData.Msg = "密码更新失败"
 		} else {
 

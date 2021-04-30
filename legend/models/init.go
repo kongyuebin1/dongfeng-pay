@@ -42,10 +42,10 @@ func initFastPay() {
 	orm.SetMaxIdleConns("default", 30)
 	orm.SetMaxIdleConns("default", 30)
 
-	orm.RegisterModel(new(fast.RpUserInfo))
+	orm.RegisterModel(new(fast.MerchantInfo))
 	orm.RegisterModel(new(fast.RpUserPayConfig))
 	orm.RegisterModel(new(fast.RpUserBankAccount))
-	orm.RegisterModel(new(fast.RpAccount))
+	orm.RegisterModel(new(fast.AccountInfo))
 
 	logs.Info("init fast success ......")
 }
@@ -72,7 +72,15 @@ func initLegend() {
 		os.Exit(1)
 	}
 
+	orm.SetMaxIdleConns("default", 30)
+	orm.SetMaxIdleConns("default", 30)
+
+	orm.RegisterModel(new(fast.MerchantInfo))
+	orm.RegisterModel(new(fast.RpUserPayConfig))
+	orm.RegisterModel(new(fast.RpUserBankAccount))
+	orm.RegisterModel(new(fast.AccountInfo))
+	orm.RegisterModel(new(fast.OrderInfo))
+
 	logs.Info("init legend success ......")
 
-	orm.RegisterModel()
 }
