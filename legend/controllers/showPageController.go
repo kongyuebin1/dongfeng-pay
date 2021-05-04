@@ -33,8 +33,10 @@ func (c *ShowPageController) WelcomePage() {
 	c.Data["balance"] = accountInfo.Balance
 	c.Data["unBalance"] = accountInfo.FreezeAmount
 	c.Data["settleAmount"] = accountInfo.SettleAmount
-	//c.Data["todayAmount"] = accountInfo.TodayIncome
 	// 获取今天充值金额
+	todayIncome := accountService.GetTodayIncome()
+	logs.Debug("获取到当天充值金额：", todayIncome)
+	c.Data["todayAmount"] = todayIncome
 
 	c.TplName = "welcome.html"
 }

@@ -1,5 +1,10 @@
 package fast
 
+import (
+	"github.com/beego/beego/v2/adapter/orm"
+	"github.com/beego/beego/v2/core/logs"
+)
+
 type OrderInfo struct {
 	Id              string `orm:"pk;column(id)"`
 	MerchantOrderId string
@@ -35,4 +40,24 @@ type OrderInfo struct {
 	Response        string
 	UpdateTime      string
 	CreateTime      string
+}
+
+const ORDERINFO = "order_info"
+
+func (c *OrderInfo) TableName() string {
+	return ORDERINFO
+}
+
+/**
+** 获取短时间内的充值金额
+ */
+func GetRangeDateIncome(startTime, endTime string) float64 {
+	o := orm.NewOrm()
+	sum := 0.00
+	err := o.Raw("select sum(order_amount) from order_info where status = ? and create_time >= ? and create_time <= ?", "success", startTime, endTime).QueryRow(&sum)
+	if err != nil {
+		logs.Error("获取短时间内金额失败，err：", err)
+	}
+
+	return sum
 }
