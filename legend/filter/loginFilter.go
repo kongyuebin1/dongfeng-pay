@@ -14,10 +14,14 @@ var LoginFilter = func(ctx *context.Context) {
 
 	_, ok := ctx.Input.Session("userName").(string)
 	if !ok {
+		if ctx.Request.RequestURI == "/login.html" {
+			return
+		}
+
 		if !strings.Contains(ctx.Request.RequestURI, "/login") {
 			ctx.Redirect(302, "/login.html")
 		} else {
-			logs.Info("该用户没有登录.......")
+			logs.Error("该用户没有登录.......")
 		}
 	}
 

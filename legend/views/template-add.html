@@ -27,29 +27,31 @@
                 <div class="layui-card-header"><b>配置模板</b></div>
                 <div class="layui-card-body">
                     <div class="layui-row">
-                        <form class="layui-form" action="">
+                        <form class="layui-form" action="" method="post">
                             <div class="layui-collapse">
                                 <div class="layui-colla-item">
                                     <h1 class="layui-colla-title">基础配置</h1>
                                     <div class="layui-colla-content layui-show">
+
                                         <div class="layui-form-item">
                                             <label class="layui-form-label"><strong>模板名称</strong></label>
                                             <div class="layui-input-inline">
-                                                <input type="text" name="scale-templete-name" required lay-verify="required" autocomplete="off" class="layui-input">
+                                                <input type="text" name="scaleTemplateName" required lay-verify="required" autocomplete="off" class="layui-input">
                                             </div>
                                             <div class="layui-form-mid layui-word-aux">取名保证唯一性</div>
                                         </div>
+
                                         <div class="layui-form-item">
                                             <label class="layui-form-label"><strong>用户标识</strong></label>
                                             <div class="layui-input-inline">
-                                                <input type="text" name="scale-user-name" required lay-verify="required" autocomplete="off" class="layui-input">
+                                                <input type="text" name="scaleUserName" required lay-verify="required" autocomplete="off" class="layui-input">
                                             </div>
                                             <div class="layui-form-mid layui-word-aux">可填写角色名、或者角色ID；不可为空</div>
                                         </div>
                                         <div class="layui-form-item">
                                             <label class="layui-form-label"><strong>用户标识提示</strong></label>
                                             <div class="layui-input-inline">
-                                                <input type="text" name="scale-user-name-point" required lay-verify="required" placeholder="如：通过角色属性面板查看角色ID" autocomplete="off" class="layui-input">
+                                                <input type="text" name="scaleUserNamePoint"  placeholder="如：通过角色属性面板查看角色ID" autocomplete="off" class="layui-input">
                                             </div>
                                             <div class="layui-form-mid layui-word-aux">此提示会在充值页面显示，提示玩家如何查看用户标识</div>
                                         </div>
@@ -57,8 +59,8 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label"><strong>金额类型</strong></label>
                                             <div class="layui-input-block">
-                                                <input type="radio" lay-filter="money-type-filter" name="money-type" value="any-money" title="任意金额" checked>
-                                                <input type="radio" lay-filter="money-type-filter" name="money-type" value="fixed-money-type" title="固定金额">
+                                                <input type="radio" lay-filter="money-type-filter" name="moneyType" value="radio-any-money" title="任意金额" checked>
+                                                <input type="radio" lay-filter="money-type-filter" name="moneyType" value="radio-fixed-money" title="固定金额">
                                             </div>
                                         </div>
 
@@ -68,7 +70,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label"><strong>游戏币名称</strong></label>
                                                 <div class="layui-input-inline">
-                                                    <input type="text" name="game-money-name" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                                    <input type="text" name="gameMoneyName" placeholder="" autocomplete="off" class="layui-input">
                                                 </div>
                                                 <div class="layui-form-mid layui-word-aux">默认是元宝，也可以是钻石、点券</div>
                                             </div>
@@ -76,7 +78,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label"><strong>游戏币比例</strong></label>
                                                 <div class="layui-input-inline">
-                                                    <input type="text" name="game-money-scale" required lay-verify="required" autocomplete="off" class="layui-input">
+                                                    <input type="text" name="gameMoneyScale" autocomplete="off" class="layui-input">
                                                 </div>
                                                 <div class="layui-form-mid layui-word-aux">默认是100，既充值1元人命币转为100游戏币</div>
                                             </div>
@@ -84,7 +86,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label"><strong>最低充值金额</strong></label>
                                                 <div class="layui-input-inline">
-                                                    <input type="text" name="limit-low-money" required lay-verify="required" autocomplete="off" class="layui-input">
+                                                    <input type="text" name="limitLowMoney" autocomplete="off" class="layui-input">
                                                 </div>
                                                 <div class="layui-form-mid layui-word-aux">默认最低为10元</div>
                                             </div>
@@ -92,24 +94,6 @@
 
                                         <!-- 固定金额的样式-->
                                         <div id="fixed-money-style" class="layui-row" style="margin-left: 40px;">
-                                            <div class="layui-form-item">
-                                                <div class="layui-col-md1" style="margin-left: 10px;">
-                                                    <input type="text" name="limit-low-money" required lay-verify="required" placeholder="售价（元）" autocomplete="off" class="layui-input">
-                                                </div>
-                                                <div class=" layui-col-md2" style="margin-left: 10px;">
-                                                    <input type="text" name="limit-low-money" required lay-verify="required" placeholder="商品名称" autocomplete="off" class="layui-input">
-                                                </div>
-                                                <div class="layui-col-md2" style="margin-left: 10px;">
-                                                    <input type="text" name="limit-low-money" required lay-verify="required" placeholder="商品编号" autocomplete="off" class="layui-input">
-                                                </div>
-                                                <div class="layui-col-md1" style="margin-left: 10px;">
-                                                    <input type="text" name="limit-low-money" required lay-verify="required" placeholder="可够次数" autocomplete="off" class="layui-input">
-                                                </div>
-                                                <div class="layui-inline" style="margin-left: 10px;">
-                                                    <div class="layui-btn layui-btn-danger fixed-money-child-del"><i class="layui-icon layui-icon-delete">删除</i> </div>
-                                                </div>
-                                            </div>
-
                                             <div id="fixed-money-child-style"></div>
 
                                             <div class="layui-btn" style="margin-left: 10px;" onclick="addFixedMoenyStyle();"><i class="layui-icon layui-icon-add-circle">添加商品</i></div>
@@ -126,58 +110,34 @@
                                         <div class="layui-form-item">
                                             <label class="layui-form-label"><strong>赠送方式</strong></label>
                                             <div class="layui-input-block">
-                                                <input type="radio" lay-filter="present-type-filter" name="present-type" value="close-present" title="关闭" checked>
-                                                <input type="radio" lay-filter="present-type-filter" name="present-type" value="fixed-money-present" title="固定金额赠送">
-                                                <input type="radio" lay-filter="present-type-filter" name="present-type" value="fscale-present" title="按百分比赠送">
+                                                <input type="radio" lay-filter="present-type-filter" name="presentType" value="close-present" title="关闭" checked>
+                                                <input type="radio" lay-filter="present-type-filter" name="presentType" value="fixed-money-present" title="固定金额赠送">
+                                                <input type="radio" lay-filter="present-type-filter" name="presentType" value="scale-present" title="按百分比赠送">
                                             </div>
                                         </div>
 
                                         <!-- 按金额赠送-->
                                         <div id="present-type-money-style">
-                                            <div class="layui-form-item">
-                                                <label class="layui-form-label"><strong>充值：</strong></label>
-                                                <div class="layui-input-inline">
-                                                    <input type="text" name="scale-user-name" required lay-verify="required" placeholder="金额（元）" autocomplete="off" class="layui-input">
-                                                </div>
-                                                <div class="layui-input-inline">
-                                                    <input type="text" name="scale-user-name" required lay-verify="required" placeholder="赠送金额（元）" autocomplete="off" class="layui-input">
-                                                </div>
-                                                <div class="layui-inline">
-                                                    <div class="layui-btn layui-btn-danger fixed-money-child-del"><i class="layui-icon layui-icon-delete">删除</i></div>
-                                                </div>
-                                            </div>
                                             <div id="present-type-money-child-style"></div>
                                             <div class="layui-btn" style="margin-left: 50px;" onclick="addPresentTypeMoneyStyle();"><i class="layui-icon layui-icon-add-circle"></i>添加</div>
                                         </div>
 
                                         <!-- 按百分比赠送-->
                                         <div id="present-type-scale-style">
-                                            <div class="layui-form-item">
-                                                <label class="layui-form-label"><strong>充值：</strong></label>
-                                                <div class="layui-input-inline">
-                                                    <input type="text" name="scale-user-name" required lay-verify="required" placeholder="金额（元）" autocomplete="off" class="layui-input">
-                                                </div>
-                                                <div class="layui-input-inline">
-                                                    <input type="text" name="scale-user-name" required lay-verify="required" placeholder="赠送比例（%）" autocomplete="off" class="layui-input">
-                                                </div>
-                                                <div class="layui-inline">
-                                                    <div class="layui-btn layui-btn-danger fixed-money-child-del"><i class="layui-icon layui-icon-delete">删除</i></div>
-                                                </div>
-                                            </div>
                                             <div id="present-type-scale-child-style"></div>
                                             <div class="layui-btn" style="margin-left: 50px;" onclick="addPresentTypeScaleStyle();"><i class="layui-icon layui-icon-add-circle"></i>添加</div>
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="layui-form-item">
+                                <br>
+                                <button class="layui-btn" lay-filter="add" lay-submit="">保存/添加</button>
+                                <div class="layui-btn layui-btn-danger" onclick="back();">返回当前页</div>
                             </div>
                         </form>
                     </div>
-                    <div class="layui-form-item">
-                        <br>
-                        <button class="layui-btn" lay-filter="add">保存/添加</button>
-                        <button class="layui-btn layui-btn-danger" lay-filter="back" lay-submit="">返回当前页</button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -186,9 +146,12 @@
 
             // 动态添加固定金额赠送input框
             function addPresentTypeMoneyStyle() {
+                let s = randomString(20)
                 let str = '<div class="layui-form-item"><label class="layui-form-label"><strong>充值：</strong></label><div class="layui-input-inline">' +
-                    '<input type="text" name="scale-user-name" required lay-verify="required" placeholder="金额（元）" autocomplete="off" class="layui-input"></div><div class="layui-input-inline">' +
-                    '<input type="text" name="scale-user-name" required lay-verify="required" placeholder="赠送金额（元）" autocomplete="off" class="layui-input">' +
+                    '<input type="text" name="present-fix-money" placeholder="金额（元）" autocomplete="off" class="layui-input present-fix-money">' +
+                    '<input type="hidden" name="present-fix-uid" value="' + s + '" autocomplete="off" class="layui-input present-fix-uid">' +
+                    '</div><div class="layui-input-inline">' +
+                    '<input type="text" name="present-fix-present-money" placeholder="赠送金额（元）" autocomplete="off" class="layui-input present-fix-present-money">' +
                     '</div><div class="layui-inline"><div class="layui-btn layui-btn-danger fixed-money-child-del"><i class="layui-icon layui-icon-delete">删除</i></div></div></div>';
 
                 $("#present-type-money-child-style").append(str);
@@ -196,9 +159,11 @@
 
             // 动态添加按百分比赠送input框
             function addPresentTypeScaleStyle() {
+                let s = randomString(20)
                 let str = '<div class="layui-form-item"><label class="layui-form-label"><strong>充值：</strong></label><div class="layui-input-inline">' +
-                    '<input type="text" name="scale-user-name" required lay-verify="required" placeholder="金额（元）" autocomplete="off" class="layui-input">' +
-                    '</div><div class="layui-input-inline"><input type="text" name="scale-user-name" required lay-verify="required" placeholder="赠送比例（%）" autocomplete="off" class="layui-input">' +
+                    '<input type="text" name="present-scale-money"  placeholder="金额（元）" autocomplete="off" class="layui-input present-scale-money">' +
+                    '<input type="hidden" name="present-scale-uid" value="' + s + '" autocomplete="off" class="layui-input present-scale-uid">' +
+                    '</div><div class="layui-input-inline"><input type="text" name="present-scale" placeholder="赠送比例（%）" autocomplete="off" class="layui-input present-scale">' +
                     '</div><div class="layui-inline"><div class="layui-btn layui-btn-danger fixed-money-child-del"><i class="layui-icon layui-icon-delete">删除</i></div></div></div>';
 
                 $("#present-type-scale-child-style").append(str);
@@ -206,19 +171,22 @@
 
             // 动态添加固定金额的input输入框
             function addFixedMoenyStyle() {
+                let s = randomString(20)
                 let str = '<div class="layui-form-item">' +
                     '<div class="layui-col-md1" style="margin-left: 10px;">' +
-                    '<input type="text" name="limit-low-money" required lay-verify="required" placeholder="售价（元）" autocomplete="off" class="layui-input">' +
+                    '<input type="text" name="fix-price"  placeholder="售价（元）" autocomplete="off" class="layui-input fix-price">' +
+                    '<input type="hidden" name="fix-uid" autocomplete="off" class="layui-input fix-uid" value="' + s + '">' +
                     '</div><div class=" layui-col-md2" style="margin-left: 10px;">' +
-                    '<input type="text" name="limit-low-money" required lay-verify="required" placeholder="商品名称" autocomplete="off" class="layui-input">' +
+                    '<input type="text" name="fix-goods-name"  placeholder="商品名称" autocomplete="off" class="layui-input fix-goods-name">' +
                     '</div><div class="layui-col-md2" style="margin-left: 10px;">' +
-                    '<input type="text" name="limit-low-money" required lay-verify="required" placeholder="商品编号" autocomplete="off" class="layui-input">' +
-                    '</div><div class="layui-col-md1" style="margin-left: 10px;"><input type="text" name="limit-low-money" required lay-verify="required" placeholder="可够次数" autocomplete="off" class="layui-input">' +
+                    '<input type="text" name="fix-goods-no"  placeholder="商品编号" autocomplete="off" class="layui-input fix-goods-no">' +
+                    '</div><div class="layui-col-md1" style="margin-left: 10px;"><input type="text" name="fix-limit-low"  placeholder="可够次数" autocomplete="off" class="layui-input fix-limit-low">' +
                     '</div><div class="layui-inline" style="margin-left: 10px;">' +
                     '<div class="layui-btn layui-btn-danger fixed-money-child-del"><i class="layui-icon layui-icon-delete"> 删除</i></div></div></div>';
 
 
                 $("#fixed-money-child-style").append(str);
+                // $(".fix-uid").val(randomString(20))
             }
 
             // 删除固金额input
@@ -228,14 +196,16 @@
 
 
             layui.use(['form', 'layer', 'element'], function() {
-                // 启动element木块
                 let element = layui.element;
                 $ = layui.jquery;
-                var form = layui.form,
+                let form = layui.form,
                 layer = layui.layer;
                 // 进入该页面首先做的事情
                 $(document).ready(function () {
-                    $("#fixed-money-style").toggle();
+                    // $("#fixed-money-style").toggle();
+                    $("#fixed-money-style").hide();
+                    $("#any-money-style").show();
+
                     $("#present-type-money-style").hide();
                     $("#present-type-scale-style").hide();
                 })
@@ -264,7 +234,7 @@
                     } else if ("fixed-money-present" === radioValue) {
                         $("#present-type-money-style").show();
                         $("#present-type-scale-style").hide();
-                    } else if ("fscale-present" === radioValue) {
+                    } else if ("scale-present" === radioValue) {
                         $("#present-type-money-style").hide();
                         $("#present-type-scale-style").show();
                     }
@@ -273,39 +243,99 @@
                 // 监听金额类型的radio
                 form.on('radio(money-type-filter)', function (data) {
                     let value = data.value;
-                    if ("any-monty" === value) {
+                    if ("radio-any-money" === value) {
                         //处理任何金额
-                        $("#any-money-style").toggle();
-                        $("#fixed-money-style").toggle();
+                        $("#any-money-style").show();
+                        $("#fixed-money-style").hide();
                     } else {
                         // 处理固定金额
-                        $("#any-money-style").toggle();
-                        $("#fixed-money-style").toggle();
+                        $("#any-money-style").hide();
+                        $("#fixed-money-style").show();
                     }
                 })
 
 
                 //监听提交
                 form.on('submit(add)', function(data) {
-                    console.log(data);
+
+                    let jsonObj = {}
+                    jsonObj.scaleTemplateName = data.field.scaleTemplateName
+                    jsonObj.scaleUserName = data.field.scaleUserName
+                    jsonObj.scaleUserNamePoint = data.field.scaleUserNamePoint
+                    jsonObj.moneyType = data.field.moneyType
+                    jsonObj.gameMoneyName = data.field.gameMoneyName
+                    jsonObj.gameMoneyScale = data.field.gameMoneyScale
+                    if (data.field.limitLowMoney === "" || data.field.limitLowMoney === null) {
+                        jsonObj.limitLowMoney = "10"
+                    } else {
+                        jsonObj.limitLowMoney = data.field.limitLowMoney
+                    }
+                    jsonObj.presentType = data.field.presentType
+                    jsonObj.fixPrices = getArrays(".fix-price")
+                    jsonObj.goodsNames = getArrays(".fix-goods-name")
+                    jsonObj.goodsNos = getArrays(".fix-goods-no")
+                    jsonObj.limits = getArrays(".fix-limit-low")
+                    jsonObj.presentFixMoneys = getArrays(".present-fix-money")
+                    jsonObj.presentFixPresentMoneys = getArrays(".present-fix-present-money")
+                    jsonObj.presentScaleMoneys =getArrays(".present-scale-money")
+                    jsonObj.presentScales = getArrays(".present-scale")
+                    jsonObj.fixUids = getArrays(".fix-uid")
+                    jsonObj.presentScaleUids = getArrays(".present-scale-uid")
+                    jsonObj.presentFixUids = getArrays(".present-fix-uid")
+
+                    console.log(JSON.stringify(jsonObj))
+
                     //发异步，把数据提交给php
-                    layer.alert("增加成功", {
-                        icon: 6
-                    },
-                    function() {
-                        // 获得frame索引
-                        var index = parent.layer.getFrameIndex(window.name);
-                        //关闭当前frame
-                        parent.layer.close(index);
+                    $.ajax({
+                        url: "/add/template",
+                        data: jsonObj,
+
+                        success: function (res) {
+                            alert(res.Msg)
+                            if (res.Code === 0) {
+                                window.history.back(-1);
+                            }
+                        },
+                        error: function () {
+                            layer.alert("系统异常")
+                        }
                     });
+
                     return false;
                 });
 
-                form.on('submit(back)',
-                    function () {
-                        window.history.back(-1);
-                    });
             });
+
+            function getArrays(obj) {
+
+                let arrays = []
+                $(obj).each(function () {
+                    let v = $(this).val();
+                    if (v === null || v.length <=0) {
+                        arrays.push(0)
+                    } else {
+                        arrays.push(v)
+                    }
+                })
+
+                return arrays.join(",")
+            }
+
+            function back() {
+                window.history.back(-1);
+            }
+
+            function randomString(n) {
+                let chars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                let res = "";
+                for(let i = 0; i < n ; i ++) {
+                    let id = Math.ceil(Math.random()*35);
+                    res += chars[id];
+                }
+                return res;
+            }
+
+
         </script>
 
     </body>

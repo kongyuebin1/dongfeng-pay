@@ -1,11 +1,12 @@
 {
-  "code":0,"msg":"",
+  "code":0,
+  "msg":"",
   "count":10,
   "data":[
     {
       "id": 1,
       "areaname": "狗日的1-2区",
-      "usetemplete": "狗日",
+      "usetemplate": "狗日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",
@@ -14,7 +15,7 @@
     {
       "id": 2,
       "areaname": "猪日1-2区",
-      "usetemplete": "猪日",
+      "usetemplate": "猪日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",
@@ -23,7 +24,7 @@
     {
       "id": 3,
       "areaname": "牛日1-2区",
-      "usetemplete": "牛日",
+      "usetemplate": "牛日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",
@@ -32,7 +33,7 @@
     {
       "id": 4,
       "areaname": "鸡日1-2区",
-      "usetemplete": "鸡日",
+      "usetemplate": "鸡日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",
@@ -41,7 +42,7 @@
     {
       "id": 5,
       "areaname": "鸭日1-2区",
-      "usetemplete": "鸭日",
+      "usetemplate": "鸭日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",
@@ -50,7 +51,7 @@
     {
       "id": 6,
       "areaname": "蚯蚓1-2区",
-      "usetemplete": "蚯蚓日",
+      "usetemplate": "蚯蚓日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",
@@ -59,7 +60,7 @@
     {
       "id": 7,
       "areaname": "蛇日1-2区",
-      "usetemplete": "蛇日",
+      "usetemplate": "蛇日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",
@@ -68,7 +69,7 @@
     {
       "id": 8,
       "areaname": "人日1-2区",
-      "usetemplete": "人日",
+      "usetemplate": "人日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",
@@ -77,7 +78,7 @@
     {
       "id": 9,
       "areaname": "苍蝇1-2区",
-      "usetemplete": "苍蝇日",
+      "usetemplate": "苍蝇日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",
@@ -86,7 +87,7 @@
     {
       "id": 10,
       "areaname": "蚊子1-2区",
-      "usetemplete": "蚊子日",
+      "usetemplate": "蚊子日",
       "currencyname": "元宝",
       "rechargescale": 10,
       "areastatus": "开放",

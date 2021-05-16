@@ -1,8 +1,8 @@
 package fast
 
 import (
-	"github.com/astaxie/beego/logs"
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/core/logs"
 )
 
 type AccountInfo struct {

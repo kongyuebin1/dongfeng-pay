@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/astaxie/beego/logs"
+	"github.com/beego/beego/v2/core/logs"
 	"legend/models/fast"
 )
 
@@ -9,19 +9,18 @@ type MerchantService struct {
 	BaseService
 }
 
-func (c *MerchantService) GetMerchantBankInfo(mobile string) (*fast.MerchantInfo, *fast.RpUserBankAccount, *fast.RpUserPayConfig) {
+func (c *MerchantService) GetMerchantBankInfo(mobile string) (*fast.MerchantInfo, *fast.BankCardInfo) {
 
-	userInfo := fast.GetMerchantInfoByUserName(mobile)
-	bankInfo := fast.GetBankInfoByUserNo(userInfo.LoginAccount)
-	userPayConfig := fast.GetUserPayConfigByUserNo(userInfo.LoginAccount)
+	merchantInfo := fast.GetMerchantInfoByUserName(mobile)
+	bankInfo := fast.GetBankCardInfoByUserNo(merchantInfo.MerchantUid)
 
-	return userInfo, bankInfo, userPayConfig
+	return merchantInfo, bankInfo
 }
 
 /**
 ** 获取商户的密钥等信息
  */
-func (c *MerchantService) UserPayConfig(userName string) map[string]string {
+/*func (c *MerchantService) UserPayConfig(userName string) map[string]string {
 
 	merchantMapData := make(map[string]string)
 
@@ -39,7 +38,7 @@ func (c *MerchantService) UserPayConfig(userName string) map[string]string {
 	}
 
 	return merchantMapData
-}
+}*/
 
 /**
 ** 获取商户信息

@@ -1,7 +1,7 @@
 package base
 
 import (
-	"github.com/astaxie/beego/logs"
+	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
 	"legend/models/fast"
 )
@@ -21,8 +21,8 @@ func (c *BasicController) Prepare() {
 		userInfo := fast.GetMerchantInfoByUserName(userName)
 		if userInfo.LoginAccount != "" {
 			c.Data["nickName"] = userInfo.MerchantName
+			c.Data["merchantUid"] = userInfo.MerchantUid
 		}
 	} else {
-		c.Data["nickName"] = "史蒂芬-库里"
 	}
 }

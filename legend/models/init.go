@@ -7,6 +7,7 @@ import (
 	"github.com/beego/beego/v2/server/web"
 	_ "github.com/go-sql-driver/mysql"
 	"legend/models/fast"
+	"legend/models/legend"
 	"os"
 )
 
@@ -43,10 +44,17 @@ func initLegend() {
 	orm.SetMaxIdleConns("default", 30)
 
 	orm.RegisterModel(new(fast.MerchantInfo))
-	orm.RegisterModel(new(fast.RpUserPayConfig))
-	orm.RegisterModel(new(fast.RpUserBankAccount))
+	orm.RegisterModel(new(fast.MerchantDeployInfo))
+	orm.RegisterModel(new(fast.BankCardInfo))
 	orm.RegisterModel(new(fast.AccountInfo))
 	orm.RegisterModel(new(fast.OrderInfo))
+
+	orm.RegisterModel(new(legend.AnyMoney))
+	orm.RegisterModel(new(legend.FixMoney))
+	orm.RegisterModel(new(legend.FixPresent))
+	orm.RegisterModel(new(legend.ScalePresent))
+	orm.RegisterModel(new(legend.ScaleTemplate))
+	orm.RegisterModel(new(legend.Group))
 
 	logs.Info("init legend success ......")
 

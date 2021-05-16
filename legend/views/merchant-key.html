@@ -33,36 +33,34 @@
                         <td><h3>{{.userName}}</h3></td></tr>
                     <tr>
                         <th><h3>商户账户号：</h3></th>
-                        <td>{{.userInfo.UserNo}}</td></tr>
+                        <td>{{.userInfo.MerchantUid}}</td></tr>
+
                     <tr>
                         <th><h3>商户密钥：</h3></th>
-                        <td><h3 id="copy-key" style="float:left;">{{.payConfigInfo.PaySecret}} </h3>
+                        <td><h3 id="copy-key" style="float:left;">{{.userInfo.MerchantSecret}} </h3>
                             <button style="float:left; margin-left: 20px;" class="layui-btn layui-btn-normal layui-btn-sm" onclick="copy();">点击复制</button>
                         </td>
                     </tr>
 
                     <tr>
                         <th><h3>商户KEY：</h3></th>
-                        <td><h3 id="copy-pay" style="float:left;">{{.payConfigInfo.PayKey}}</h3>
+                        <td><h3 id="copy-pay" style="float:left;">{{.userInfo.MerchantKey}}</h3>
                             <button style="float: left; margin-left: 20px;" class="layui-btn layui-btn-normal layui-btn-sm" onclick="copy(1);">点击复制</button></td></tr>
                     <tr>
-                        <th><h3>邮箱地址：</h3></th>
-                        <td><h3>{{.userInfo.Email}}</h3></td></tr>
-                    <tr>
                         <th><h3>银行开户名：</h3></th>
-                        <td><h3>{{.bankInfo.BankAccountName}}</h3></td></tr>
+                        <td><h3>{{.bankInfo.AccountName}}</h3></td></tr>
                     <tr>
                         <th><h3>开户银行：</h3></th>
                         <td><h3>{{.bankInfo.BankName}}</h3></td></tr>
                     <tr>
                         <th><h3>银行卡号：</h3></th>
-                        <td><h3>{{.bankInfo.BankAccountNo}}</h3></td></tr>
+                        <td><h3>{{.bankInfo.BankNo}}</h3></td></tr>
                     <tr>
                         <th><h3>银行编码：</h3></th>
                         <td><h3>{{.bankInfo.BankCode}}</h3></td></tr>
                     <tr>
                         <th><h3>手机号码：</h3></th>
-                        <td><h3>{{.userInfo.Mobile}}</h3></td></tr>
+                        <td><h3>{{.bankInfo.PhoneNo}}</h3></td></tr>
                     </tbody>
                 </table>
             </div>

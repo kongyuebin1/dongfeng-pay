@@ -77,7 +77,7 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>序列号</th>
-						<th>用户名称</th>
+						<th>商户名称(UID)</th>
 						<th>银行名称</th>
 						<th>银行编码</th>
 						<th>对账卡类型</th>
@@ -121,8 +121,9 @@
 				<div class="col-md-4">
 					<input type="hidden" value="" class="bank-card-uid">
 					<div>
-						<span>用户名称：</span>
-					    <input type="text" value="" class="user-name">
+						<span>商户名称：</span>
+						<select name="" class="user-name" id="select-self-name">
+						</select>
 					</div>
 					<div>
 						<span>银行编码：</span>
@@ -441,6 +442,27 @@
 					}
 				}
 			});
+		});
+
+		function setAccount() {
+			$.ajax({
+				url: "/get/all/account",
+				success: function (res) {
+					if (res.Code == 404) {
+						window.parent.location = "/login.html";
+					} else {
+						let str = '<option value="' + "" + '">' + "请选择" + '</option>';
+						for (let i = 0; i < res.AccountList.length; i ++) {
+							let account = res.AccountList[i];
+							str = str + '<option value="' + account.AccountUid + '">' + account.AccountName + '</option>';
+						}
+						$("#select-self-name").html(str);
+					}
+				}
+			});
+		}
+		$(function () {
+			setAccount();
 		});
 	</script>
 </body>

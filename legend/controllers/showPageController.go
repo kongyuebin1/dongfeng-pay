@@ -48,28 +48,34 @@ func (c *ShowPageController) MerchantKeyPage() {
 	userName := c.GetSession("userName").(string)
 
 	merchantService := new(service.MerchantService)
-	userInfo, bankInfo, payConfigInfo := merchantService.GetMerchantBankInfo(userName)
+	userInfo, bankInfo := merchantService.GetMerchantBankInfo(userName)
 
 	c.Data["currentTime"] = utils.GetNowTime()
 	c.Data["userName"] = userName
 	c.Data["userInfo"] = userInfo
 	c.Data["bankInfo"] = bankInfo
-	c.Data["payConfigInfo"] = payConfigInfo
 	c.TplName = "merchant-key.html"
 }
 
 /**
 ** 比例模板
  */
-func (c *ShowPageController) ScaleTempletePage() {
-	c.TplName = "scale-templete.html"
+func (c *ShowPageController) ScaleTemplatePage() {
+	c.TplName = "scale-template.html"
 }
 
 /**
 ** 增加模板
  */
-func (c *ShowPageController) TempleteAdd() {
-	c.TplName = "templete-add.html"
+func (c *ShowPageController) TemplateAdd() {
+	c.TplName = "template-add.html"
+}
+
+func (c *ShowPageController) TemplateEdit() {
+	templateName := c.GetString("templateName")
+	fmt.Println(templateName)
+	c.Data["scaleTemplateName"] = templateName
+	c.TplName = "template-edit.html"
 }
 
 /**
