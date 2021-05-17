@@ -95,7 +95,10 @@
                                         if (res.Code === 0) {
                                             obj.del()
                                             table.reload('demo', {
-                                                url: "/template/list"
+                                                url: "/template/list",
+                                                where: {
+                                                    "page":1
+                                                }
                                             })
                                         } else {
                                             alert(res.Msg)

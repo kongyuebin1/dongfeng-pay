@@ -49,5 +49,9 @@ func logicInit() {
 	web.Router("/template/list", &controllers.TemplateController{}, "*:TemplateList")
 	web.Router("/delete/template", &controllers.TemplateController{}, "*:TemplateDelete")
 	web.Router("/template/info", &controllers.TemplateController{}, "*:TemplateAllInfo")
+	web.Router("/group/list", &controllers.GroupController{}, "*:ListGroup")
+	web.Router("/add/group", &controllers.GroupController{}, "*:AddGroup")
+	web.Router("/delete/group", &controllers.GroupController{}, "*:DeleteGroup")
+	web.Router("/edit/group", &controllers.GroupController{}, "*:EditGroup")
 	web.InsertFilter("/*", web.BeforeRouter, filter.LoginFilter)
 }

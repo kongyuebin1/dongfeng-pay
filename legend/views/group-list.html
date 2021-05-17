@@ -54,15 +54,15 @@
                     table.render({
                         elem: "#demo"
                         ,height: 500
-                        ,url: '/static/data/group.json' //数据接口
+                        ,url: '/group/list' //数据接口
                         ,page: true //开启分页
-                        ,limits: [10, 20, 30, 50, 100, 200]
+                        ,limits: [10, 20, 30, 50, 100]
                         ,cols: [[ //表头
-                            {field: 'id', title: 'ID', sort: true, fixed: 'left'}
-                            ,{field: 'groupname', title: '分组名称'}
-                            ,{field: 'createtime', title: '创建时间', sort: true}
-                            ,{field: 'updatetime', title: '修改时间', sort:true}
-                            ,{fixed: 'right', title: "操作", width:240, align:'center', toolbar: '#toolbarDemo'}
+                            {field: 'Id', title: 'ID', sort: true, fixed: 'left'}
+                            ,{field: 'GroupName', title: '分组名称'}
+                            ,{field: 'Uid', title: "分组id"}
+                            ,{field: 'CreateTime', title: '创建时间', sort: true}
+                            ,{fixed: 'right', title: "操作", width:260, align:'center', toolbar: '#toolbarDemo'}
                         ]]
                         ,toolbar: "#toolbarHead"
                     });
@@ -78,7 +78,32 @@
                                 btnAlign:'c'
                             }, function (value, index, elem) {
                                 // 做分组的修改内容
-                                layer.close(index);
+                                $.ajax({
+                                    url: "/add/group",
+                                    data: {
+                                        "groupName": value
+                                    },
+                                    success: function (res) {
+                                        if (res.Code !== 0) {
+                                            alert(res.Msg)
+                                        } else {
+                                            table.reload('demo', {
+                                                url: "/group/list",
+                                                where: {
+                                                    "page":1
+                                                }
+                                            })
+                                        }
+                                        layer.close(index)
+                                    }
+                                })
+                            })
+                        } else if ("flush" === event) {
+                            table.reload('demo', {
+                                url: "/group/list",
+                                where: {
+                                    "page":1
+                                }
                             })
                         }
                     });
@@ -86,17 +111,63 @@
                     // 监听行工具事件
                     table.on('tool(test)', function (data) {
                         let event = data.event;
+                        console.log(data)
                         if ("recharge-url" === event) {
                             location.href = "https://www.taobao.com";
                         } else if ("edit-group" === event) {
-                            layer.msg("请做编辑逻辑的代码");
+                            layer.prompt({
+                                formType:2,
+                                value: data.data.GroupName,
+                                title: "修改分组名",
+                                area:['180px', '30px'],
+                                btnAlign:'c'
+                            }, function (value, index, elem) {
+                                // 做分组的修改内容
+                                $.ajax({
+                                    url: "/edit/group",
+                                    data: {
+                                        "uid": data.data.Uid,
+                                        "groupName":value
+                                    },
+                                    success: function (res) {
+                                        if (res.Code !== 0) {
+                                            alert(res.Msg)
+                                        } else {
+                                            table.reload('demo', {
+                                                url: "/group/list"
+                                            })
+                                        }
+                                        layer.close(index)
+                                    }
+                                })
+                            })
+                            // layer.msg("请做编辑逻辑的代码");
                         } else if ("delete-group" === event) {
                             layer.confirm("是否要删除该行？", {
                                 btn:["YES", "NO"]
-                            }, function () {
-                                layer.msg("做删除代码的逻辑");
-                            }, function () {
-                                return false;
+                            }, function (index) {
+                                $.ajax({
+                                    url: '/delete/group',
+                                    data: {
+                                        "uid": data.data.Uid
+                                    },
+                                    success: function (res) {
+                                        if (res.Code === 0) {
+                                            data.del()
+                                            table.reload('demo', {
+                                                url: "/group/list",
+                                                where: {
+                                                    "page": 1
+                                                }
+                                            })
+                                        } else {
+                                            alert(res.Msg)
+                                        }
+                                    }
+                                })
+                                layer.close(index)
+                            }, function (index) {
+                                layer.close(index)
                             })
                         }
                     })
