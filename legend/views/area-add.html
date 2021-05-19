@@ -6,7 +6,7 @@
     <title>充值商户后台</title>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+{{/*    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />*/}}
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="stylesheet" href="../static/x-admin/css/font.css">
     <link rel="stylesheet" href="../static/x-admin/css/xadmin.css">
@@ -39,16 +39,13 @@
                        <div class="layui-form-item">
                            <label class="layui-form-label">分区名称</label>
                            <div class="layui-input-inline">
-                               <input type="text" name="areaname" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                               <input type="text" name="areaName" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                            </div>
                        </div>
                        <div class="layui-form-item">
                            <label class="layui-form-label">选择分组</label>
                            <div class="layui-input-inline">
-                               <select name="groupname" lay-verify="required">
-                                   <option value=""></option>
-                                   <option value="0">轩辕</option>
-                                   <option value="1">日狗</option>
+                               <select name="groupName" lay-verify="required" id="groupnames">
                                </select>
                            </div>
                        </div>
@@ -56,11 +53,7 @@
                        <div class="layui-form-item">
                            <label class="layui-form-label">选择模板</label>
                            <div class="layui-input-inline">
-                               <select name="selecttemplate" lay-verify="required">
-                                   <option value=""></option>
-                                   <option value="xingsha">星沙二区</option>
-                                   <option value="dongguan">东莞</option>
-                                   <option value="huizhou">惠州</option>
+                               <select name="templateName" id="selecttemplates" lay-verify="required">
                                </select>
                            </div>
                        </div>
@@ -68,19 +61,19 @@
                        <div class="layui-form-item">
                            <label class="layui-form-label">通知地址</label>
                            <div class="layui-input-block">
-                               <input type="text" name="notifyaddress" required lay-verify="required" autocomplete="on" class="layui-input">
+                               <input type="text" name="notifyUrl" required lay-verify="required" autocomplete="on" class="layui-input">
                            </div>
                        </div>
 
                        <div class="layui-form-item layui-form-text">
                            <label class="layui-form-label">附加参数</label>
                            <div class="layui-input-block">
-                               <textarea name="desc" placeholder="系统会自动发送必带参数，附加参数只为补充，不填也行。填写格式：key1=value1&key2=value2&key3=value3" class="layui-textarea"></textarea>
+                               <textarea name="attachParams" placeholder="系统会自动发送必带参数，附加参数只为补充，不填也行。填写格式：key1=value1&key2=value2&key3=value3" class="layui-textarea"></textarea>
                            </div>
                        </div>
                        <div class="layui-form-item">
                            <div class="layui-input-block">
-                               <button class="layui-btn" lay-submit lay-filter="formDemo">添加/更新</button>
+                               <button class="layui-btn" lay-submit lay-filter="formDemo">添加</button>
                                <button type="reset" class="layui-btn layui-btn-primary" onclick="backPrePage();">返回上级</button>
                            </div>
                        </div>
@@ -91,6 +84,43 @@
     </div>
 
     <script>
+        // 进入页面
+        // function onchange() {
+        $(document).ready(function () {
+            $.ajax({
+                url: "/group/list",
+                success: function (res) {
+                    $("#groupnames option").remove()
+                    let str = '<option value=""></option>'
+                    for (let i = 0; i < res.data.length; i++) {
+                        let group = res.data[i]
+                        str = str + '<option value="' + group.GroupName + '">' + group.GroupName + '</option>'
+                    }
+                    console.log(str)
+                    $("#groupnames").append(str)
+                    layui.use('form', function () {
+                        let form = layui.form
+                        form.render('select')
+                    })
+                }
+            })
+            $.ajax({
+                url: "/template/list",
+                success: function (res) {
+                    let str = '<option value=""></option>'
+                    for (let i = 0; i < res.data.length; i++) {
+                        let template = res.data[i]
+                        str = str + '<option value="' + template.TemplateName + '">' + template.TemplateName + '</option>'
+                    }
+                    $("#selecttemplates").append(str)
+                    layui.use('form', function () {
+                        let form = layui.form
+                        form.render('select')
+                    })
+                }
+            })
+        })
+
         // 返回上级页面
         function backPrePage() {
             window.history.back(-1);
@@ -98,9 +128,20 @@
 
         layui.use('form', function () {
             let form = layui.form;
-            form.on('submit(back)', function () {
-                window.history.back(-1);
-            });
+            form.on('submit(formDemo)', function (data) {
+                console.log(data.field)
+                $.ajax({
+                    url: "/add/area",
+                    data: data.field,
+                    success: function (res) {
+                        if (res.Code !== 0) {
+                            layer.alert(res.Msg)
+                        } else {
+                            window.history.back(-1);
+                        }
+                    }
+                })
+            })
         })
     </script>
 </body>

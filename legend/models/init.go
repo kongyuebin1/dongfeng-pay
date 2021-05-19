@@ -55,6 +55,7 @@ func initLegend() {
 	orm.RegisterModel(new(legend.ScalePresent))
 	orm.RegisterModel(new(legend.ScaleTemplate))
 	orm.RegisterModel(new(legend.Group))
+	orm.RegisterModel(new(legend.Area))
 
 	logs.Info("init legend success ......")
 

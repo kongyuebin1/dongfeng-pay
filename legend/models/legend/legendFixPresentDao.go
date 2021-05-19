@@ -11,8 +11,7 @@ type FixPresent struct {
 	TemplateName string
 	Money        float64
 	PresentMoney float64
-	UpdateTime   string
-	CreateTime   string
+	BaseDao
 }
 
 const FIXPRESENT = "legend_fix_present"

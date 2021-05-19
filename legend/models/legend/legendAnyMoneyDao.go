@@ -11,8 +11,7 @@ type AnyMoney struct {
 	GameMoneyName  string
 	GameMoneyScale int
 	LimitLow       float64
-	UpdateTime     string
-	CreateTime     string
+	BaseDao
 }
 
 const ANYMONEY = "legend_any_money"

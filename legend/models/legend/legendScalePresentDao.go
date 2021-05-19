@@ -11,8 +11,7 @@ type ScalePresent struct {
 	TemplateName string
 	Money        float64
 	PresentScale float64
-	UpdateTime   string
-	CreateTime   string
+	BaseDao
 }
 
 const SCALEPRESENT = "legend_scale_present"

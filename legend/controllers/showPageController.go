@@ -92,6 +92,12 @@ func (c *ShowPageController) AreaListPage() {
 	c.TplName = "area-list.html"
 }
 
+func (c *ShowPageController) AreaEdit() {
+	uid := c.GetString("uid")
+	c.Data["uid"] = uid
+	c.TplName = "area-edit.html"
+}
+
 /**
 ** 充值订单
  */

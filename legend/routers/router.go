@@ -35,6 +35,7 @@ func pageInit() {
 	web.Router("/areaChargeCount.html", &controllers.ShowPageController{}, "*:AreaChargePage")
 	web.Router("/person.html", &controllers.ShowPageController{}, "*:PersonPage")
 	web.Router("areaAddOrEdit.html", &controllers.ShowPageController{}, "*:AreaAddOrEdit")
+	web.Router("/areaEdit.html", &controllers.ShowPageController{}, "*:AreaEdit")
 }
 
 /**
@@ -53,5 +54,11 @@ func logicInit() {
 	web.Router("/add/group", &controllers.GroupController{}, "*:AddGroup")
 	web.Router("/delete/group", &controllers.GroupController{}, "*:DeleteGroup")
 	web.Router("/edit/group", &controllers.GroupController{}, "*:EditGroup")
+	web.Router("/add/area", &controllers.AreaController{}, "*:AreaAdd")
+	web.Router("/area/list", &controllers.AreaController{}, "*:AreaList")
+	web.Router("/delete/area", &controllers.AreaController{}, "*:AreaDelete")
+	web.Router("/get/area", &controllers.AreaController{}, "*:AreaGet")
+	web.Router("/edit/area", &controllers.AreaController{}, "*:AreaEdit")
+
 	web.InsertFilter("/*", web.BeforeRouter, filter.LoginFilter)
 }

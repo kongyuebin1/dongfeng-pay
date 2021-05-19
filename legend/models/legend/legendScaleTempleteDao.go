@@ -13,8 +13,7 @@ type ScaleTemplate struct {
 	UserWarn     string
 	MoneyType    string
 	PresentType  string
-	UpdateTime   string
-	CreateTime   string
+	BaseDao
 }
 
 const SCALETMPLETE = "legend_scale_template"

@@ -6,11 +6,10 @@ import (
 )
 
 type Group struct {
-	Id         int `orm:"pk;column(id)"`
-	GroupName  string
-	Uid        string
-	UpdateTime string
-	CreateTime string
+	Id        int `orm:"pk;column(id)"`
+	GroupName string
+	Uid       string
+	BaseDao
 }
 
 const GROUP = "legend_group"

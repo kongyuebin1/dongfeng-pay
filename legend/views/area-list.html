@@ -6,7 +6,7 @@
     <title>充值商户后台</title>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+{{/*    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />*/}}
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="stylesheet" href="../static/x-admin/css/font.css">
     <link rel="stylesheet" href="../static/x-admin/css/xadmin.css">
@@ -37,7 +37,7 @@
 <script type="text/html" id="toolbarHead">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="create-area"><i class="layui-icon layui-icon-add-1"></i>创建分区</button>
-        <button class="layui-btn layui-btn-sm" lay-event="flush"><i class="layui-icon layui-icon-refresh-3"></i></button>
+        <button class="layui-btn layui-btn-sm" lay-event="flush" onclick="flush()"><i class="layui-icon layui-icon-refresh-3"></i></button>
     </div>
 </script>
 
@@ -51,47 +51,62 @@
 </script>
 
 <script>
+
     layui.use('table', function () {
         let table = layui.table;
         table.render({
             elem: "#demo"
             ,height: 500
-            ,url: '/static/data/area.json' //数据接口
+            ,url: '/area/list' //数据接口
             ,page: true //开启分页
-            ,limits: [10, 20, 30, 50, 100, 200]
+            ,limits: [10, 20, 30, 50, 100]
             ,cols: [[ //表头
-                {field: 'id', title: 'ID', sort: true, fixed: 'left'}
-                ,{field: 'areaname', title: '分区名称'}
-                ,{field: 'usetemplate', title: '使用模板', sort: true}
-                ,{field: 'currencyname', title: '货币名称', sort:false}
-                ,{field: 'rechargescale', title: '充值比例', sort: true}
-                ,{field: 'areastatus', title: '分区状态', sort: true}
-                ,{field: 'createtime', title: '创建时间', sort:true}
-                ,{fixed: 'right', title: "操作", width:240, align:'center', toolbar: '#toolbarDemo'}
+                {field: 'Id', title: 'ID', sort: true, fixed: 'left'}
+                ,{field: 'AreaName', title: '分区名称'}
+                ,{field: 'Uid', title: "分区id"}
+                ,{field: "GroupName", title: "分组名称"}
+                ,{field: 'TemplateName', title: '使用模板', sort: true}
+                ,{field: "NotifyUrl", title: "通知地址"}
+                ,{field: "AttachParams", title:"附加参数"}
+                ,{field: 'CreateTime', title: '创建时间', sort:true}
+                ,{fixed: 'right', title: "操作", width:260, align:'center', toolbar: '#toolbarDemo'}
             ]]
             ,toolbar: "#toolbarHead"
         });
 
-        table.on('toolbar(test)', function (data) {
-            let event = data.event;
-
-            if ("create-area" === event) {
-
-            }
-        });
 
         // 监听行工具事件
         table.on('tool(test)', function (data) {
             let event = data.event;
             if ("imitate-recharge-url" === event) {
-                location.href = "https://www.baidu.com";
+                // location.href = "https://www.baidu.com";
             } else if ("edit-area" === event) {
-                location.href = "/areaAddOrEdit.html" + "?id=" + data.data.id;
+                location.href = "/areaEdit.html" + "?uid=" + data.data.Uid;
             } else if ("delete-area" === event) {
                 layer.confirm("是否要删除该行？", {
                     btn:["YES", "NO"]
-                },function () {
-                    layer.msg("请做删除分组的代码逻辑");
+                },function (index) {
+                    console.log(data.data)
+                    $.ajax({
+                        url: "/delete/area",
+                        data: {
+                            "uid":data.data.Uid
+                        },
+                        success: function (res) {
+                            if (res.Code !== 0) {
+                                layer.alert("删除分组失败")
+                            } else {
+                                data.del()
+                                table.reload('demo',{
+                                    url: "/area/list",
+                                    where: {
+                                        "page": 1
+                                    }
+                                })
+                            }
+                            layer.close(index)
+                        }
+                    })
                 }, function (index) {
                     layer.close(index);
                     return false;
@@ -105,6 +120,13 @@
             let event = data.event;
             if ("create-area" === event) {
                 location.href = "/areaAddOrEdit.html"
+            } else if ("flush" === event) {
+                table.reload('demo', {
+                    url: "/area/list",
+                    where : {
+                        "page":1
+                    }
+                })
             }
         })
     })

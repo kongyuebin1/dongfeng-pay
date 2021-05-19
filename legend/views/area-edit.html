@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8">
+    <title>充值商户后台</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    {{/*    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />*/}}
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="../static/x-admin/css/font.css">
+    <link rel="stylesheet" href="../static/x-admin/css/xadmin.css">
+    <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
+    <script src="../static/x-admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../static/x-admin/js/xadmin.js"></script>
+    <script type="text/javascript" src="../static/js/jquery-3.5.1.min.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        // 是否开启刷新记忆tab功能
+        // var is_remember = false;
+    </script>
+</head>
+
+<body>
+<script>
+
+</script>
+
+<div class="layui-fluid">
+    <div class="layui-collapse">
+        <div class="layui-card">
+            <div class="layui-card-header"><strong>编辑分区</strong></div>
+            <div class="layui-card-body">
+                <form class="layui-form" action="">
+                    <input class="area-uid" name="uid" value="{{.uid}}" hidden="hidden" />
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">分区名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="areaName" readonly="readonly" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">选择分组</label>
+                        <div class="layui-input-inline">
+                            <select name="groupName" lay-verify="required" id="groupnames">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">选择模板</label>
+                        <div class="layui-input-inline">
+                            <select name="templateName" id="selecttemplates" lay-verify="required">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">通知地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="notifyUrl" required lay-verify="required" autocomplete="on" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">附加参数</label>
+                        <div class="layui-input-block">
+                            <textarea name="attachParams" placeholder="系统会自动发送必带参数，附加参数只为补充，不填也行。填写格式：key1=value1&key2=value2&key3=value3" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo">更新</button>
+                            <button type="reset" class="layui-btn layui-btn-primary" onclick="backPrePage();">返回上级</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 进入页面
+    $(document).ready(function () {
+        $.ajax({
+            url: "/group/list",
+            success: function (res) {
+                $("#groupnames option").remove()
+                let str = '<option value=""></option>'
+                for (let i = 0; i < res.data.length; i++) {
+                    let group = res.data[i]
+                    str = str + '<option value="' + group.GroupName + '">' + group.GroupName + '</option>'
+                }
+                $("#groupnames").append(str)
+                layui.use('form', function () {
+                    let form = layui.form
+                    form.render('select')
+                })
+            }
+        })
+        $.ajax({
+            url: "/template/list",
+            success: function (res) {
+                let str = '<option value=""></option>'
+                for (let i = 0; i < res.data.length; i++) {
+                    let template = res.data[i]
+                    str = str + '<option value="' + template.TemplateName + '">' + template.TemplateName + '</option>'
+                }
+                $("#selecttemplates").append(str)
+                layui.use('form', function () {
+                    let form = layui.form
+                    form.render('select')
+                })
+            }
+        })
+
+        $.ajax({
+            url: "/get/area",
+            data: {"uid":$(".area-uid").val()},
+            success: function (res) {
+                console.log(res)
+                let area = res.Area
+                $('input[name="areaName"]').val(area.AreaName)
+                $("#groupnames").val(area.GroupName);
+                $("#selecttemplates").val(area.TemplateName)
+                $('input[name="notifyUrl"]').val(area.NotifyUrl)
+                $('textarea[name="attachParams"]').val(area.AttachParams)
+                layui.use('form', function () {
+                    let form = layui.form
+                    form.render('select')
+                })
+            }
+        })
+    })
+
+    // 返回上级页面
+    function backPrePage() {
+        window.history.back(-1);
+    }
+
+    layui.use('form', function () {
+        let form = layui.form;
+        form.on('submit(formDemo)', function (data) {
+            console.log(data.field)
+            $.ajax({
+                url: "/edit/area",
+                data: data.field,
+                success: function (res) {
+                    if (res.Code !== 0) {
+                        layer.alert(res.Msg)
+                    } else {
+                        window.history.back(-1);
+                    }
+                }
+            })
+        })
+    })
+</script>
+</body>
+
+</html>

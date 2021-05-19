@@ -13,8 +13,7 @@ type FixMoney struct {
 	GoodsName    string
 	GoodsNo      string
 	BuyTimes     int
-	UpdateTime   string
-	CreateTime   string
+	BaseDao
 }
 
 const FIXMONEY = "legend_fix_money"
