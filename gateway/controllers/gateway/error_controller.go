@@ -10,14 +10,14 @@
 package gateway
 
 import (
-	beego "github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego/v2/server/web"
 )
 
 type ErrorGatewayController struct {
-	beego.Controller
+	web.Controller
 }
 
 func (c *ErrorGatewayController) ErrorParams() {
-	beego.ReadFromRequest(&c.Controller)
+	web.ReadFromRequest(&c.Controller)
 	c.TplName = "err/params.html"
 }

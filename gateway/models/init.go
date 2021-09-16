@@ -12,6 +12,15 @@ package models
 import (
 	"fmt"
 	"gateway/conf"
+	"gateway/models/accounts"
+	"gateway/models/agent"
+	"gateway/models/merchant"
+	"gateway/models/notify"
+	"gateway/models/order"
+	"gateway/models/payfor"
+	"gateway/models/road"
+	"gateway/models/system"
+	"gateway/models/user"
 	"github.com/beego/beego/v2/client/orm"
 	"github.com/beego/beego/v2/core/logs"
 	_ "github.com/go-sql-driver/mysql"
@@ -30,10 +39,23 @@ func init() {
 
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", link)
-	orm.RegisterModel(new(UserInfo), new(MenuInfo), new(SecondMenuInfo),
-		new(PowerInfo), new(RoleInfo), new(BankCardInfo), new(RoadInfo),
-		new(RoadPoolInfo), new(AgentInfo), new(MerchantInfo), new(MerchantDeployInfo),
-		new(AccountInfo), new(AccountHistoryInfo), new(OrderInfo), new(OrderProfitInfo),
-		new(OrderSettleInfo), new(NotifyInfo), new(MerchantLoadInfo),
-		new(PayforInfo))
+	orm.RegisterModel(new(user.UserInfo),
+		new(system.MenuInfo),
+		new(system.SecondMenuInfo),
+		new(system.PowerInfo),
+		new(system.RoleInfo),
+		new(system.BankCardInfo),
+		new(road.RoadInfo),
+		new(road.RoadPoolInfo),
+		new(agent.AgentInfo),
+		new(merchant.MerchantInfo),
+		new(merchant.MerchantDeployInfo),
+		new(accounts.AccountInfo),
+		new(accounts.AccountHistoryInfo),
+		new(order.OrderInfo),
+		new(order.OrderProfitInfo),
+		new(order.OrderSettleInfo),
+		new(notify.NotifyInfo),
+		new(merchant.MerchantLoadInfo),
+		new(payfor.PayforInfo))
 }

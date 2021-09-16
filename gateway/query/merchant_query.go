@@ -7,20 +7,21 @@
  ** @Last Modified time: 2019/11/6 13:59
  ** @Software: GoLand
 ****************************************************/
-package gateway
+package query
 
 import (
 	"encoding/json"
 	"fmt"
-	"gateway/models"
+	"gateway/models/merchant"
+	"gateway/models/order"
 	"gateway/utils"
 	"github.com/beego/beego/v2/core/logs"
-	beego "github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego/v2/server/web"
 	"strings"
 )
 
-type QueryController struct {
-	beego.Controller
+type MerchantQueryController struct {
+	web.Controller
 }
 
 type OrderQueryFailData struct {
@@ -32,7 +33,7 @@ type OrderQueryFailData struct {
 /*
 ** 改接口是为下游商户提供订单查询
  */
-func (c *QueryController) OrderQuery() {
+func (c *MerchantQueryController) OrderQuery() {
 	orderNo := strings.TrimSpace(c.GetString("orderNo"))
 	payKey := strings.TrimSpace(c.GetString("payKey"))
 	sign := strings.TrimSpace(c.GetString("sign"))
@@ -44,11 +45,11 @@ func (c *QueryController) OrderQuery() {
 	failData.StatusCode = "01"
 	failData.PayKey = payKey
 
-	merchantInfo := models.GetMerchantByPaykey(payKey)
+	merchantInfo := merchant.GetMerchantByPaykey(payKey)
 	if merchantInfo.MerchantUid == "" || len(merchantInfo.MerchantUid) == 0 {
 		failData.Msg = "商户不存在，请核对payKey字段"
 	}
-	orderInfo := models.GetOrderByMerchantOrderId(orderNo)
+	orderInfo := order.GetOrderByMerchantOrderId(orderNo)
 	if orderInfo.BankOrderId == "" || len(orderInfo.BankOrderId) == 0 {
 		failData.Msg = "不存在这样的订单，请核对orderNo字段"
 	}
@@ -60,7 +61,7 @@ func (c *QueryController) OrderQuery() {
 	}
 	if failData.Msg != "" {
 		c.Data["json"] = failData
-		c.ServeJSON()
+		_ = c.ServeJSON()
 		return
 	}
 	p := make(map[string]string)

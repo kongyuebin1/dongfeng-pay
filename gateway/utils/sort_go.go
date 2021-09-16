@@ -24,3 +24,16 @@ func SortMap(m map[string]string) []string {
 	sort.Strings(arr)
 	return arr
 }
+
+/**
+** 按照key的ascii值从小到大给map排序
+ */
+func SortMapByKeys(m map[string]string) map[string]string {
+	keys := SortMap(m)
+	tmp := make(map[string]string)
+	for _, key := range keys {
+		tmp[key] = m[key]
+	}
+
+	return tmp
+}

@@ -7,10 +7,13 @@
  ** @Last Modified time: 2019/10/28 9:39
  ** @Software: GoLand
 ****************************************************/
-package controller
+package supplier
 
 import (
-	"gateway/models"
+	"gateway/models/merchant"
+	"gateway/models/order"
+	"gateway/models/payfor"
+	"gateway/models/road"
 )
 
 //定义扫码支付的返回值
@@ -27,15 +30,15 @@ type ScanData struct {
 }
 
 type PayInterface interface {
-	Scan(models.OrderInfo, models.RoadInfo, models.MerchantInfo) ScanData
-	H5(models.OrderInfo, models.RoadInfo, models.MerchantInfo) ScanData
-	Fast(models.OrderInfo, models.RoadInfo, models.MerchantInfo) bool
-	Syt(models.OrderInfo, models.RoadInfo, models.MerchantInfo) ScanData
-	Web(models.OrderInfo, models.RoadInfo, models.MerchantInfo) bool
+	Scan(order.OrderInfo, road.RoadInfo, merchant.MerchantInfo) ScanData
+	H5(order.OrderInfo, road.RoadInfo, merchant.MerchantInfo) ScanData
+	Fast(order.OrderInfo, road.RoadInfo, merchant.MerchantInfo) bool
+	Syt(order.OrderInfo, road.RoadInfo, merchant.MerchantInfo) ScanData
+	Web(order.OrderInfo, road.RoadInfo, merchant.MerchantInfo) bool
 	PayNotify()
-	PayQuery(models.OrderInfo) bool
-	PayFor(models.PayforInfo) string
+	PayQuery(order.OrderInfo) bool
+	PayFor(payfor.PayforInfo) string
 	PayForNotify() string
-	PayForQuery(models.PayforInfo) (string, string)
-	BalanceQuery(models.RoadInfo) float64
+	PayForQuery(payfor.PayforInfo) (string, string)
+	BalanceQuery(road.RoadInfo) float64
 }

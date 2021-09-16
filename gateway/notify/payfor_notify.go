@@ -1,10 +1,10 @@
 /***************************************************
- ** @Desc : 接受上游通道商的订单结果异步回调
- ** @Time : 2019/11/22 23:27
+ ** @Desc : 将代付结果返回给请求方
+ ** @Time : 2019/11/20 1:35
  ** @Author : yuebin
- ** @File : supplier_notify
+ ** @File : payfor_notify
  ** @Last Modified by : yuebin
- ** @Last Modified time: 2019/11/22 23:27
+ ** @Last Modified time: 2019/11/20 1:35
  ** @Software: GoLand
 ****************************************************/
-package gateway
+package notify

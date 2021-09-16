@@ -30,3 +30,18 @@ func GetMD5LOWER(s string) string {
 func GetMD5Upper(s string) string {
 	return strings.ToUpper(GetMD5LOWER(s))
 }
+
+/**
+** 将map数据变成key=value形式的字符串
+ */
+func MapToString(m map[string]string) string {
+
+	res := ""
+	for k, v := range m {
+		res = res + k + "=" + v + "&"
+	}
+
+	suffix := strings.TrimSuffix(res, "&")
+
+	return suffix
+}
