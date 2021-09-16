@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
+	_ "shop/routers"
 )
 
 func main() {
@@ -16,7 +17,7 @@ func main() {
 func RegisterLogs() {
 	logs.SetLogger(logs.AdapterFile,
 		`{
-						"filename":"../logs/legend.log",
+						"filename":"../.../logs/legend.log",
 						"level":4,
 						"maxlines":0,
 						"maxsize":0,

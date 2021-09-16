@@ -51,7 +51,7 @@ func (c *PayController) Pay() {
 			str := "/scan.html?" + "orderNo=" + orderNo + "&orderPrice=" + amount + "&qrCode=" + response.Qrcode + "&payWayCode=" + isScan
 			c.Redirect(str, 302)
 		} else {
-			flash.Error("请求失败，生成二维码失败")
+			flash.Error(response.Msg)
 			flash.Store(&c.Controller)
 			c.Redirect("/error.html", 302)
 		}

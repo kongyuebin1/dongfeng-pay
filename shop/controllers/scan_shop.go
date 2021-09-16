@@ -38,15 +38,15 @@ type ResponseJSON struct {
 }
 
 const (
-	HOST       = "http://localhost:10081"
+	HOST       = "http://localhost:12309"
 	SCAN_HOST  = HOST + "/gateway/scan"
 	H5_HOST    = HOST + "/gateway/h5"
 	SYT_HOST   = HOST + "/gateway/syt"
 	FAST_HOST  = HOST + "/gateway/fast"
 	NOTIFY_URL = HOST + "/shop/notify"
 	RETURN_URL = HOST + "/shop/return"
-	PAY_KEY    = "kkkkbmrb9gijhrt0th4naoag"
-	PAY_SERCET = "ssssbmrb9gijhrt0th4naob0"
+	PAY_KEY    = "kkkkc254gk8isf001cqrj6p0"
+	PAY_SERCET = "ssssc254gk8isf001cqrj6pg"
 )
 
 func (c *ScanShopController) Prepare() {
@@ -77,7 +77,7 @@ func (c *ScanShopController) Shop(requestHost string) *ResponseJSON {
 	if err != nil {
 		logs.Error("扫码请求失败")
 		responseJSON.Code = -1
-		responseJSON.Msg = response + " ;" + err.Error()
+		responseJSON.Msg = response + " ;" + response
 	} else {
 		statusCode := gojson.Json(response).Get("statusCode").Tostring()
 		if statusCode != "00" {
@@ -115,6 +115,12 @@ func (c *ScanShopController) ScanRender() {
 	if strings.Contains(payWayCode, "UNION") {
 		c.Data["payTypeName"] = "云闪付app"
 		c.Data["openApp"] = "云闪付app [扫一扫]"
+	} else if strings.Contains(payWayCode, "WEIXIN") {
+		c.Data["payTypeName"] = "微信APP"
+		c.Data["openApp"] = "打开微信 [扫一扫]"
+	} else if strings.Contains(payWayCode, "ALI") {
+		c.Data["payTypeName"] = "支付宝APP"
+		c.Data["openApp"] = "打开支付宝 [扫一扫]"
 	}
 	c.Data["qrCode"] = qrCode
 	c.Data["orderNo"] = orderNo

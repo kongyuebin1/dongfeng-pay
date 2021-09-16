@@ -41,7 +41,7 @@
             <h1 style="font-size:1.5em;color:red;">2.打开对应的app进行支付</h1>            <div id="openalipay" style="display: none"></div>
         </div>
         <div style="color:blue;font-size:13px; display: block;">
-            方式一：直接打开app进行支付APP扫码支付！<br/>            方式二：截图保存到相册，再打开app扫一扫，从相册选择图片！<br>            温馨提示：请不要重复支付，不要修改金额，否则无法到账 </div>        <div class="qrcode-img-wrapper" data-role="qrPayImgWrapper">
+            方式一：直接<label style="color: red;"> {{.openApp}}</label>进行支付APP扫码支付！<br/>            方式二：截图保存到相册，再<label style="color: red;"> {{.openApp}}</label>，从相册选择图片！<br>            温馨提示：请不要重复支付，不要修改金额，否则无法到账 </div>        <div class="qrcode-img-wrapper" data-role="qrPayImgWrapper">
         <div data-role="qrPayImg" class="qrcode-img-area">
             <div class="ui-loading qrcode-loading" data-role="qrPayImgLoading" style="display: none;"></div>
             <div style="position: relative;display: inline-block;">

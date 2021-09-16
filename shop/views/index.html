@@ -77,19 +77,21 @@
                                     style="width:100px;height: 35px;"><span></span></label>
                                 </li>
                             </ul>
-                            <h4 style="margin-top: 125px">H5支付(只支持手机端,不支持PC端)：</h4>
-                            <ul class="pay-label type">
-                                <li>
-                                    <input value="WEIXIN_H5" name="H5" id="WEIXIN_H5" type="radio">
-                                    <label for="WEIXIN_H5"><img src="../static/img/weixin.jpg" alt="微信H5"
-                                                                     style="height: 35px;"><span></span></label>
-                                </li>
-                                <li>
-                                    <input value="ALI_H5" name="H5" id="ALI_H5" type="radio">
-                                    <label for="ALI_H5"><img src="../static/img/zhifubao.png" alt="支付宝H5"
-                                                                      style="height: 35px;"><span></span></label>
-                                </li>
-                            </ul>
+                            <div id="pcOrPhone">
+                                <h4 style="margin-top: 125px">H5支付(只支持手机端,不支持PC端)：</h4>
+                                <ul class="pay-label type">
+                                    <li>
+                                        <input value="WEIXIN_H5" name="H5" id="WEIXIN_H5" type="radio">
+                                        <label for="WEIXIN_H5"><img src="../static/img/weixin.jpg" alt="微信H5"
+                                                                         style="height: 35px;"><span></span></label>
+                                    </li>
+                                    <li>
+                                        <input value="ALI_H5" name="H5" id="ALI_H5" type="radio">
+                                        <label for="ALI_H5"><img src="../static/img/zhifubao.png" alt="支付宝H5"
+                                                                          style="height: 35px;"><span></span></label>
+                                    </li>
+                                </ul>
+                            </div>
                             <h4 style="margin-top: 120px">快捷支付：</h4>
                             <ul class="pay-label type">
                                 <li>
@@ -150,9 +152,6 @@
             $("#amount").val("");
             return false;
         }
-    });
-    $(function () {
-        window.location = "/";
     });
 </script>
 </body>
