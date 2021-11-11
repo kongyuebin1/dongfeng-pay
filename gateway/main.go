@@ -29,7 +29,7 @@ func main() {
 ** 注册日志信息
  */
 func RegisterLogs() {
-	logs.SetLogger(logs.AdapterFile,
+	_ = logs.SetLogger(logs.AdapterFile,
 		`{
 						"filename":"../logs/legend.log",
 						"level":4,
