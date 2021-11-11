@@ -2,7 +2,8 @@ package controllers
 
 import (
 	"boss/common"
-	"boss/models"
+	"boss/datas"
+	"boss/models/user"
 	"boss/utils"
 	"github.com/beego/beego/v2/adapter/validation"
 	"github.com/beego/beego/v2/core/logs"
@@ -23,7 +24,7 @@ func (c *LoginController) Login() {
 	passWD := c.GetString("passwd")
 	code := c.GetString("Code")
 
-	dataJSON := new(KeyDataJSON)
+	dataJSON := new(datas.KeyDataJSON)
 
 	valid := validation.Validation{}
 
@@ -38,7 +39,7 @@ func (c *LoginController) Login() {
 		dataJSON.Msg = "验证码不正确！"
 	}
 
-	userInfo := models.GetUserInfoByUserID(userID)
+	userInfo := user.GetUserInfoByUserID(userID)
 
 	if userInfo.UserId == "" {
 		dataJSON.Key = "userID"
@@ -54,8 +55,8 @@ func (c *LoginController) Login() {
 		} else if code != codeInterface.(string) {
 			dataJSON.Key = "code"
 			dataJSON.Msg = "验证码不正确！"
-		} else if userInfo.Status == "unactive" {
-			dataJSON.Key = "unactive"
+		} else if userInfo.Status == common.UNACTIVE {
+			dataJSON.Key = common.UNACTIVE
 			dataJSON.Msg = "用户已被冻结！"
 		} else if userInfo.Status == "del" {
 			dataJSON.Key = "del"
@@ -65,16 +66,16 @@ func (c *LoginController) Login() {
 
 	go func() {
 		userInfo.Ip = c.Ctx.Input.IP()
-		models.UpdateUserInfoIP(userInfo)
+		user.UpdateUserInfoIP(userInfo)
 	}()
 
 	if dataJSON.Key == "" {
-		c.SetSession("userID", userID)
-		c.DelSession("verifyCode")
+		_ = c.SetSession("userID", userID)
+		_ = c.DelSession("verifyCode")
 	}
 
 	c.Data["json"] = dataJSON
-	c.ServeJSON()
+	_ = c.ServeJSON()
 }
 
 /*
@@ -82,13 +83,13 @@ func (c *LoginController) Login() {
  */
 
 func (c *LoginController) Logout() {
-	dataJSON := new(BaseDataJSON)
+	dataJSON := new(datas.BaseDataJSON)
 
-	c.DelSession("userID")
+	_ = c.DelSession("userID")
 	dataJSON.Code = 200
 
 	c.Data["json"] = dataJSON
-	c.ServeJSON()
+	_ = c.ServeJSON()
 }
 
 /*
@@ -99,8 +100,12 @@ func (c *LoginController) GetVerifyImg() {
 	if Image == nil || len(verifyCode) != common.VERIFY_CODE_LEN {
 		logs.Error("获取验证码图片失败！")
 	} else {
-		c.SetSession("verifyCode", verifyCode)
+		_ = c.SetSession("verifyCode", verifyCode)
 	}
 	logs.Info("验证码：", verifyCode)
-	Image.WriteTo(c.Ctx.ResponseWriter)
+	if Image == nil {
+		logs.Error("生成验证码失败！")
+	} else {
+		_, _ = Image.WriteTo(c.Ctx.ResponseWriter)
+	}
 }

@@ -364,13 +364,13 @@
                     "solveType":"freeze_amount"
                 },
                 success: function (res) {
-                    if (res.Code == 404) {
+                    if (res.Code === 404) {
                         window.parent.location = "/login.html";
                         return
-                    } else if (res.Code == 200) {
-                        alert("冻结成功");
+                    } else if (res.Msg === "success") {
+                        alert("处理成功");
                     } else {
-                        alert("冻结失败")
+                        alert("可能订单未完成支付，不能进行此项操作！")
                     }
                     AjaxOrderList(getOrderSearchValues());
                 },
@@ -507,10 +507,14 @@
                   "bankOrderId":bankOrderid
                 },
                 success: function (res) {
-                    if (res.Code == 404) {
+                    if (res.Code === 404) {
                         window.parent.location = "/login.html";
                     } else {
-                        alert(res.Msg);
+                        if (res.Msg === "success") {
+                            alert("处理成功！")
+                        } else {
+                            alert("处理失败！")
+                        }
                         AjaxOrderList(getOrderSearchValues());
                     }
                 },

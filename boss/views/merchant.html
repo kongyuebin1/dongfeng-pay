@@ -243,15 +243,15 @@
 					<span>支付类型：</span>
 					<select id="pay-type" style="top: 31px;">
 						<option value="none">请选择</option>
-						<option value="WEIXIN-SCAN">微信扫码</option>
-						<option value="WEIXIN-H5">微信H5</option>
-						<option value="WEIXIN-SYT">微信收银台</option>
-						<option value="ALI-SCAN">支付宝扫码</option>
-						<option value="ALI-H5">支付宝H5</option>
-						<option value="ALI-SYT">支付宝收银台</option>
-						<option value="QQ-SCAN">QQ扫码</option>
-						<option value="QQ-H5">QQ-H5</option>
-						<option value="QQ-SYT">QQ收银台</option>
+						<option value="WEIXIN_SCAN">微信扫码</option>
+						<option value="WEIXIN_H5">微信H5</option>
+						<option value="WEIXIN_SYT">微信收银台</option>
+						<option value="ALI_SCAN">支付宝扫码</option>
+						<option value="ALI_H5">支付宝H5</option>
+						<option value="ALI_SYT">支付宝收银台</option>
+						<option value="QQ_SCAN">QQ扫码</option>
+						<option value="QQ_H5">QQ-H5</option>
+						<option value="QQ_SYT">QQ收银台</option>
 						<option value="UNION_SCAN">银联扫码</option>
 						<option value="UNION_H5">银联H5</option>
 						<option value="UNION_PC_WAP">银联pc-web</option>
@@ -645,7 +645,13 @@
 				let str = "";
 				for (let i = 0; i < res.MerchantList.length; i ++) {
 					let v = res.MerchantList[i];
-					let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+					let t = "";
+					if (v.Status === "unactive") {
+						t = "<tr style=\"color: red;\">";
+					} else {
+						t = "<tr>";
+					}
+					let tmp = t + "<th>" + (res.StartIndex+i+1) + "</th>" +
 						  "<th>" + v.MerchantUid + "</th>" + "<th>" + v.MerchantName + "</th>" + "<th>" + v.MerchantKey + "</th>" +
 						  "<th>" + v.MerchantSecret + "</th>" + "<th>" + v.LoginAccount + "</th>" + "<th>" + v.Status + "</th>";
 
@@ -693,6 +699,7 @@
 						alert("更新失败")
 					} else {
 						showMerchantAjax(getMerchantCutPageValues());
+						alert("操作成功")
 					}
 				},
 

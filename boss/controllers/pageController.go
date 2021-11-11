@@ -10,7 +10,6 @@
 package controllers
 
 import (
-	"fmt"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -19,7 +18,6 @@ type PageController struct {
 }
 
 func (c *PageController) Index() {
-	fmt.Println("dlfjldkjfldjfljljljlj")
 	c.TplName = "index.html"
 }
 

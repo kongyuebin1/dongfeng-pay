@@ -329,7 +329,13 @@
 							let str = "";
 							for (let i = 0; i < res.RoadInfoList.length; i ++) {
 								let v = res.RoadInfoList[i];
-								let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+								let t = "";
+								if (v.Status === "unactive") {
+									t = "<tr style=\"color: red;\">"
+								} else {
+									t = "<tr>";
+								}
+								let tmp = t + "<th>" + (res.StartIndex+i+1) + "</th>" +
 									  "<th>" + v.RoadName + "</th>" + "<th>" + v.ProductName + "</th>" + "<th>" + v.PayType + "</th>" +
 									  "<th>" + v.BasicFee + "</th>" + "<th>" + v.Status + "</th>" + "<th>" + v.TotalLimit + "</th>" +
 									  "<th>" + v.TodayLimit + "</th>" + "<th>" + v.SingleMinLimit + "-" + v.SingleMaxLimit + "</th>" + 

@@ -14,34 +14,9 @@ var supplierCode2Name = map[string]string{
 	"KF":     "快付支付",
 	"WEIXIN": "官方微信",
 	"ALIPAY": "官方支付宝",
+	"DAILI":  "代丽支付",
 }
 
 func GetSupplierMap() map[string]string {
 	return supplierCode2Name
-}
-
-func GetSupplierCodes() []string {
-	var supplierCodes []string
-	for k := range supplierCode2Name {
-		supplierCodes = append(supplierCodes, k)
-	}
-
-	return supplierCodes
-}
-
-func GetSupplierNames() []string {
-	var supplierNames []string
-	for _, v := range supplierCode2Name {
-		supplierNames = append(supplierNames, v)
-	}
-	return supplierNames
-}
-
-func CheckSupplierByCode(code string) string {
-	for k, v := range supplierCode2Name {
-		if k == code {
-			return v + "，注册完毕"
-		}
-	}
-	return "未找到上游名称，注册有问题。"
 }

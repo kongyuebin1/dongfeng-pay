@@ -11,6 +11,15 @@ package models
 
 import (
 	"boss/conf"
+	"boss/models/accounts"
+	"boss/models/agent"
+	"boss/models/merchant"
+	"boss/models/notify"
+	"boss/models/order"
+	"boss/models/payfor"
+	"boss/models/road"
+	"boss/models/system"
+	"boss/models/user"
 	"fmt"
 	"github.com/beego/beego/v2/client/orm"
 	"github.com/beego/beego/v2/core/logs"
@@ -30,10 +39,10 @@ func init() {
 
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", link)
-	orm.RegisterModel(new(UserInfo), new(MenuInfo), new(SecondMenuInfo),
-		new(PowerInfo), new(RoleInfo), new(BankCardInfo), new(RoadInfo),
-		new(RoadPoolInfo), new(AgentInfo), new(MerchantInfo), new(MerchantDeployInfo),
-		new(AccountInfo), new(AccountHistoryInfo), new(OrderInfo), new(OrderProfitInfo),
-		new(OrderSettleInfo), new(NotifyInfo), new(MerchantLoadInfo),
-		new(PayforInfo))
+	orm.RegisterModel(new(user.UserInfo), new(system.MenuInfo), new(system.SecondMenuInfo),
+		new(system.PowerInfo), new(system.RoleInfo), new(system.BankCardInfo), new(road.RoadInfo),
+		new(road.RoadPoolInfo), new(agent.AgentInfo), new(merchant.MerchantInfo), new(merchant.MerchantDeployInfo),
+		new(accounts.AccountInfo), new(accounts.AccountHistoryInfo), new(order.OrderInfo), new(order.OrderProfitInfo),
+		new(order.OrderSettleInfo), new(notify.NotifyInfo), new(merchant.MerchantLoadInfo),
+		new(payfor.PayforInfo))
 }

@@ -11,29 +11,11 @@ package controllers
 
 import (
 	"fmt"
-	beego "github.com/beego/beego/v2/server/web"
-	"github.com/beego/beego/v2/server/web/context"
-	"strings"
+	"github.com/beego/beego/v2/server/web"
 )
 
 type FilterController struct {
-	beego.Controller
-}
-
-var FilterLogin = func(ctx *context.Context) {
-	userID, ok := ctx.Input.Session("userID").(string)
-	if !ok || userID == "" {
-		if !strings.Contains(ctx.Request.RequestURI, "/login.html") &&
-			!strings.Contains(ctx.Request.RequestURI, "/getVerifyImg") &&
-			!strings.Contains(ctx.Request.RequestURI, "/favicon.ico") &&
-			!ctx.Input.IsAjax() {
-			ctx.Redirect(302, "/login.html")
-		}
-	} else {
-		if strings.Contains(ctx.Request.RequestURI, "/login.html") {
-			ctx.Redirect(302, "/")
-		}
-	}
+	web.Controller
 }
 
 //jsonp请求过来的函数
@@ -48,9 +30,9 @@ func (c *FilterController) Filter() {
 		dataJSON.Code = 404
 	} else {
 		dataJSON.Code = 200
-		c.SetSession("userID", userID)
+		_ = c.SetSession("userID", userID)
 	}
 	fmt.Println(dataJSON)
 	c.Data["json"] = dataJSON
-	c.ServeJSON()
+	_ = c.ServeJSON()
 }

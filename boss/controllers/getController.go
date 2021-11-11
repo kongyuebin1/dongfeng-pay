@@ -11,8 +11,16 @@ package controllers
 
 import (
 	"boss/common"
-	"boss/models"
-	controller "boss/supplier"
+	"boss/datas"
+	"boss/models/accounts"
+	"boss/models/agent"
+	"boss/models/merchant"
+	"boss/models/notify"
+	"boss/models/order"
+	"boss/models/payfor"
+	"boss/models/road"
+	"boss/models/system"
+	"boss/models/user"
 	"fmt"
 	"sort"
 	"strconv"
@@ -70,24 +78,24 @@ func (c *GetController) GetMenu() {
 
 	params := make(map[string]string)
 	params["first_menu__icontains"] = firstMenuSearch
-	c.GetCutPage(models.GetMenuLenByMap(params))
+	c.GetCutPage(system.GetMenuLenByMap(params))
 
-	menuDataJSON := new(MenuDataJSON)
+	menuDataJSON := new(datas.MenuDataJSON)
 	menuDataJSON.DisplayCount = c.DisplayCount
 	menuDataJSON.CurrentPage = c.CurrentPage
 	menuDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
 		menuDataJSON.Code = -1
-		menuDataJSON.MenuList = make([]models.MenuInfo, 0)
+		menuDataJSON.MenuList = make([]system.MenuInfo, 0)
 		c.GenerateJSON(menuDataJSON)
 		return
 	}
 
-	menuInfoList := models.GetMenuOffsetByMap(params, c.DisplayCount, c.Offset)
-	sort.Sort(models.MenuInfoSlice(menuInfoList))
+	menuInfoList := system.GetMenuOffsetByMap(params, c.DisplayCount, c.Offset)
+	sort.Sort(system.MenuInfoSlice(menuInfoList))
 	for i, m := range menuInfoList {
-		secondMenuInfoList := models.GetSecondMenuListByFirstMenuUid(m.MenuUid)
+		secondMenuInfoList := system.GetSecondMenuListByFirstMenuUid(m.MenuUid)
 		smenus := ""
 		for j := 0; j < len(secondMenuInfoList); j++ {
 			smenus += secondMenuInfoList[j].SecondMenu
@@ -110,15 +118,15 @@ func (c *GetController) GetMenu() {
 }
 
 func (c *GetController) GetFirstMenu() {
-	menuDataJSON := new(MenuDataJSON)
-	menuList := models.GetMenuAll()
+	menuDataJSON := new(datas.MenuDataJSON)
+	menuList := system.GetMenuAll()
 
 	if len(menuList) == 0 {
 		menuDataJSON.Code = -1
 	} else {
 		menuDataJSON.Code = 200
 	}
-	sort.Sort(models.MenuInfoSlice(menuList))
+	sort.Sort(system.MenuInfoSlice(menuList))
 	menuDataJSON.MenuList = menuList
 	c.GenerateJSON(menuDataJSON)
 }
@@ -134,11 +142,11 @@ func (c *GetController) GetSecondMenu() {
 	params := make(map[string]string)
 	params["first_menu__icontains"] = firstMenuSearch
 	params["second_menu__icontains"] = secondMenuSearch
-	l := models.GetSecondMenuLenByMap(params)
+	l := system.GetSecondMenuLenByMap(params)
 
 	c.GetCutPage(l)
 
-	secondMenuDataJSON := new(SecondMenuDataJSON)
+	secondMenuDataJSON := new(datas.SecondMenuDataJSON)
 	secondMenuDataJSON.DisplayCount = c.DisplayCount
 
 	secondMenuDataJSON.Code = 200
@@ -146,13 +154,13 @@ func (c *GetController) GetSecondMenu() {
 	secondMenuDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		secondMenuDataJSON.SecondMenuList = make([]models.SecondMenuInfo, 0)
+		secondMenuDataJSON.SecondMenuList = make([]system.SecondMenuInfo, 0)
 		c.GenerateJSON(secondMenuDataJSON)
 		return
 	}
 
-	secondMenuList := models.GetSecondMenuByMap(params, c.DisplayCount, c.Offset)
-	sort.Sort(models.SecondMenuSlice(secondMenuList))
+	secondMenuList := system.GetSecondMenuByMap(params, c.DisplayCount, c.Offset)
+	sort.Sort(system.SecondMenuSlice(secondMenuList))
 	secondMenuDataJSON.SecondMenuList = secondMenuList
 	secondMenuDataJSON.StartIndex = c.Offset
 
@@ -166,9 +174,9 @@ func (c *GetController) GetSecondMenu() {
 func (c *GetController) GetSecondMenus() {
 	firstMenuUid := strings.TrimSpace(c.GetString("firMenuUid"))
 
-	secondMenuDataJSON := new(SecondMenuDataJSON)
+	secondMenuDataJSON := new(datas.SecondMenuDataJSON)
 
-	secondMenuList := models.GetSecondMenuListByFirstMenuUid(firstMenuUid)
+	secondMenuList := system.GetSecondMenuListByFirstMenuUid(firstMenuUid)
 
 	secondMenuDataJSON.Code = 200
 	secondMenuDataJSON.SecondMenuList = secondMenuList
@@ -178,18 +186,18 @@ func (c *GetController) GetSecondMenus() {
 func (c *GetController) GetOneMenu() {
 	menuUid := c.GetString("menuUid")
 
-	dataJSON := new(MenuDataJSON)
-	menuInfo := models.GetMenuInfoByMenuUid(menuUid)
+	dataJSON := new(datas.MenuDataJSON)
+	menuInfo := system.GetMenuInfoByMenuUid(menuUid)
 	if menuInfo.MenuUid == "" {
 		dataJSON.Code = -1
 		dataJSON.Msg = "该菜单项不存在"
 	} else {
-		dataJSON.MenuList = make([]models.MenuInfo, 0)
+		dataJSON.MenuList = make([]system.MenuInfo, 0)
 		dataJSON.MenuList = append(dataJSON.MenuList, menuInfo)
 		dataJSON.Code = 200
 	}
 	c.Data["json"] = dataJSON
-	c.ServeJSONP()
+	_ = c.ServeJSONP()
 }
 
 func (c *GetController) GetPowerItem() {
@@ -200,25 +208,25 @@ func (c *GetController) GetPowerItem() {
 	params["power_uid__icontains"] = powerID
 	params["power_item_icontains"] = powerItem
 
-	l := models.GetPowerItemLenByMap(params)
+	l := system.GetPowerItemLenByMap(params)
 
 	c.GetCutPage(l)
 
-	powerItemDataJSON := new(PowerItemDataJSON)
+	powerItemDataJSON := new(datas.PowerItemDataJSON)
 	powerItemDataJSON.DisplayCount = c.DisplayCount
 	powerItemDataJSON.Code = 200
 	powerItemDataJSON.CurrentPage = c.CurrentPage
 	powerItemDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		powerItemDataJSON.PowerItemList = make([]models.PowerInfo, 0)
+		powerItemDataJSON.PowerItemList = make([]system.PowerInfo, 0)
 		c.GenerateJSON(powerItemDataJSON)
 		return
 	}
 
 	powerItemDataJSON.StartIndex = c.Offset
-	powerItemList := models.GetPowerItemByMap(params, c.DisplayCount, c.Offset)
-	sort.Sort(models.PowerInfoSlice(powerItemList))
+	powerItemList := system.GetPowerItemByMap(params, c.DisplayCount, c.Offset)
+	sort.Sort(system.PowerInfoSlice(powerItemList))
 	powerItemDataJSON.PowerItemList = powerItemList
 
 	c.GenerateJSON(powerItemDataJSON)
@@ -230,29 +238,29 @@ func (c *GetController) GetRole() {
 	params := make(map[string]string)
 	params["role_name__icontains"] = roleName
 
-	l := models.GetRoleLenByMap(params)
+	l := system.GetRoleLenByMap(params)
 
 	c.GetCutPage(l)
 
-	roleInfoDataJSON := new(RoleInfoDataJSON)
+	roleInfoDataJSON := new(datas.RoleInfoDataJSON)
 	roleInfoDataJSON.DisplayCount = c.DisplayCount
 	roleInfoDataJSON.Code = 200
 	roleInfoDataJSON.CurrentPage = c.CurrentPage
 	roleInfoDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		roleInfoDataJSON.RoleInfoList = make([]models.RoleInfo, 0)
+		roleInfoDataJSON.RoleInfoList = make([]system.RoleInfo, 0)
 		c.GenerateJSON(roleInfoDataJSON)
 		return
 	}
 	roleInfoDataJSON.StartIndex = c.Offset
-	roleInfoDataJSON.RoleInfoList = models.GetRoleByMap(params, c.DisplayCount, c.Offset)
+	roleInfoDataJSON.RoleInfoList = system.GetRoleByMap(params, c.DisplayCount, c.Offset)
 	c.GenerateJSON(roleInfoDataJSON)
 }
 
 func (c *GetController) GetAllRole() {
-	roleInfoDataJSON := new(RoleInfoDataJSON)
-	roleInfoList := models.GetRole()
+	roleInfoDataJSON := new(datas.RoleInfoDataJSON)
+	roleInfoList := system.GetRole()
 	fmt.Println(roleInfoList)
 	if len(roleInfoList) == 0 {
 		roleInfoDataJSON.Code = -1
@@ -265,15 +273,15 @@ func (c *GetController) GetAllRole() {
 
 func (c *GetController) GetDeployTree() {
 	roleUid := strings.TrimSpace(c.GetString("roleUid"))
-	roleInfo := models.GetRoleByRoleUid(roleUid)
+	roleInfo := system.GetRoleByRoleUid(roleUid)
 
-	allFirstMenu := models.GetMenuAll()
-	sort.Sort(models.MenuInfoSlice(allFirstMenu))
-	allSecondMenu := models.GetSecondMenuList()
-	sort.Sort(models.SecondMenuSlice(allSecondMenu))
-	allPower := models.GetPower()
+	allFirstMenu := system.GetMenuAll()
+	sort.Sort(system.MenuInfoSlice(allFirstMenu))
+	allSecondMenu := system.GetSecondMenuList()
+	sort.Sort(system.SecondMenuSlice(allSecondMenu))
+	allPower := system.GetPower()
 
-	deployTreeJSON := new(DeployTreeJSON)
+	deployTreeJSON := new(datas.DeployTreeJSON)
 	deployTreeJSON.Code = 200
 	deployTreeJSON.AllFirstMenu = allFirstMenu
 	deployTreeJSON.AllSecondMenu = allSecondMenu
@@ -303,32 +311,32 @@ func (c *GetController) GetOperator() {
 	params := make(map[string]string)
 	params["user_id__icontains"] = operatorName
 
-	l := models.GetOperatorLenByMap(params)
+	l := user.GetOperatorLenByMap(params)
 	c.GetCutPage(l)
-	operatorDataJSON := new(OperatorDataJSON)
+	operatorDataJSON := new(datas.OperatorDataJSON)
 	operatorDataJSON.DisplayCount = c.DisplayCount
 	operatorDataJSON.Code = 200
 	operatorDataJSON.CurrentPage = c.CurrentPage
 	operatorDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		operatorDataJSON.OperatorList = make([]models.UserInfo, 0)
+		operatorDataJSON.OperatorList = make([]user.UserInfo, 0)
 		c.GenerateJSON(operatorDataJSON)
 		return
 	}
 
 	operatorDataJSON.StartIndex = c.Offset
-	operatorDataJSON.OperatorList = models.GetOperatorByMap(params, c.DisplayCount, c.Offset)
+	operatorDataJSON.OperatorList = user.GetOperatorByMap(params, c.DisplayCount, c.Offset)
 	c.GenerateJSON(operatorDataJSON)
 }
 
 func (c *GetController) GetOneOperator() {
 	userId := strings.TrimSpace(c.GetString("userId"))
 
-	userInfo := models.GetUserInfoByUserID(userId)
+	userInfo := user.GetUserInfoByUserID(userId)
 
-	operatorDataJSON := new(OperatorDataJSON)
-	operatorDataJSON.OperatorList = make([]models.UserInfo, 0)
+	operatorDataJSON := new(datas.OperatorDataJSON)
+	operatorDataJSON.OperatorList = make([]user.UserInfo, 0)
 	operatorDataJSON.OperatorList = append(operatorDataJSON.OperatorList, userInfo)
 
 	operatorDataJSON.Code = 200
@@ -339,11 +347,11 @@ func (c *GetController) GetOneOperator() {
 func (c *GetController) GetEditOperator() {
 	userId := strings.TrimSpace(c.GetString("userId"))
 
-	editOperatorDataJSON := new(EditOperatorDataJSON)
-	userInfo := models.GetUserInfoByUserID(userId)
+	editOperatorDataJSON := new(datas.EditOperatorDataJSON)
+	userInfo := user.GetUserInfoByUserID(userId)
 	fmt.Println(userInfo)
 	editOperatorDataJSON.OperatorList = append(editOperatorDataJSON.OperatorList, userInfo)
-	editOperatorDataJSON.RoleList = models.GetRole()
+	editOperatorDataJSON.RoleList = system.GetRole()
 	editOperatorDataJSON.Code = 200
 
 	c.GenerateJSON(editOperatorDataJSON)
@@ -354,31 +362,31 @@ func (c *GetController) GetBankCard() {
 	params := make(map[string]string)
 	params["account_name__icontains"] = accountNameSearch
 
-	l := models.GetBankCardLenByMap(params)
+	l := system.GetBankCardLenByMap(params)
 	c.GetCutPage(l)
 
-	bankCardDataJSON := new(BankCardDataJSON)
+	bankCardDataJSON := new(datas.BankCardDataJSON)
 	bankCardDataJSON.DisplayCount = c.DisplayCount
 	bankCardDataJSON.Code = 200
 	bankCardDataJSON.CurrentPage = c.CurrentPage
 	bankCardDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		bankCardDataJSON.BankCardInfoList = make([]models.BankCardInfo, 0)
+		bankCardDataJSON.BankCardInfoList = make([]system.BankCardInfo, 0)
 		c.GenerateJSON(bankCardDataJSON)
 		return
 	}
 
 	bankCardDataJSON.StartIndex = c.Offset
-	bankCardDataJSON.BankCardInfoList = models.GetBankCardByMap(params, c.DisplayCount, c.Offset)
+	bankCardDataJSON.BankCardInfoList = system.GetBankCardByMap(params, c.DisplayCount, c.Offset)
 	c.GenerateJSON(bankCardDataJSON)
 }
 
 func (c *GetController) GetOneBankCard() {
 	uid := strings.TrimSpace(c.GetString("uid"))
-	bankCardInfo := models.GetBankCardByUid(uid)
+	bankCardInfo := system.GetBankCardByUid(uid)
 
-	bankCardDataJSON := new(BankCardDataJSON)
+	bankCardDataJSON := new(datas.BankCardDataJSON)
 	bankCardDataJSON.Code = -1
 
 	if bankCardInfo.Uid != "" {
@@ -405,24 +413,24 @@ func (c *GetController) GetRoad() {
 	params["road_uid"] = roadUid
 	params["pay_type"] = payType
 
-	l := models.GetRoadLenByMap(params)
+	l := road.GetRoadLenByMap(params)
 	c.GetCutPage(l)
 
-	roadDataJSON := new(RoadDataJSON)
+	roadDataJSON := new(datas.RoadDataJSON)
 	roadDataJSON.DisplayCount = c.DisplayCount
 	roadDataJSON.Code = 200
 	roadDataJSON.CurrentPage = c.CurrentPage
 	roadDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		roadDataJSON.RoadInfoList = make([]models.RoadInfo, 0)
+		roadDataJSON.RoadInfoList = make([]road.RoadInfo, 0)
 		c.GenerateJSON(roadDataJSON)
 		return
 	}
 
 	roadDataJSON.StartIndex = c.Offset
-	roadDataJSON.RoadInfoList = models.GetRoadInfoByMap(params, c.DisplayCount, c.Offset)
-	roadDataJSON.RoadPool = models.GetRoadPoolByRoadPoolCode(roadPoolCode)
+	roadDataJSON.RoadInfoList = road.GetRoadInfoByMap(params, c.DisplayCount, c.Offset)
+	roadDataJSON.RoadPool = road.GetRoadPoolByRoadPoolCode(roadPoolCode)
 	c.GenerateJSON(roadDataJSON)
 }
 
@@ -431,8 +439,8 @@ func (c *GetController) GetAllRoad() {
 	params := make(map[string]string)
 	params["road_name__icontains"] = roadName
 
-	roadDataJSON := new(RoadDataJSON)
-	roadInfoList := models.GetAllRoad(params)
+	roadDataJSON := new(datas.RoadDataJSON)
+	roadInfoList := road.GetAllRoad(params)
 
 	roadDataJSON.Code = 200
 	roadDataJSON.RoadInfoList = roadInfoList
@@ -445,15 +453,15 @@ func (c *GetController) GetAllRoad() {
 func (c *GetController) GetOneRoad() {
 	roadUid := strings.TrimSpace(c.GetString("roadUid"))
 
-	roadInfo := models.GetRoadInfoByRoadUid(roadUid)
-	roadDataJSON := new(RoadDataJSON)
+	roadInfo := road.GetRoadInfoByRoadUid(roadUid)
+	roadDataJSON := new(datas.RoadDataJSON)
 	roadDataJSON.Code = -1
 
 	if roadInfo.RoadUid != "" {
 		roadDataJSON.RoadInfoList = append(roadDataJSON.RoadInfoList, roadInfo)
 		roadDataJSON.Code = 200
 	} else {
-		roadDataJSON.RoadInfoList = make([]models.RoadInfo, 0)
+		roadDataJSON.RoadInfoList = make([]road.RoadInfo, 0)
 	}
 
 	c.GenerateJSON(roadDataJSON)
@@ -467,23 +475,23 @@ func (c *GetController) GetRoadPool() {
 	params["road_pool_name__icontains"] = roadPoolName
 	params["road_pool_code__icontains"] = roadPoolCode
 
-	l := models.GetRoadPoolLenByMap(params)
+	l := road.GetRoadPoolLenByMap(params)
 	c.GetCutPage(l)
 
-	roadPoolDataJSON := new(RoadPoolDataJSON)
+	roadPoolDataJSON := new(datas.RoadPoolDataJSON)
 	roadPoolDataJSON.DisplayCount = c.DisplayCount
 	roadPoolDataJSON.Code = 200
 	roadPoolDataJSON.CurrentPage = c.CurrentPage
 	roadPoolDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		roadPoolDataJSON.RoadPoolInfoList = make([]models.RoadPoolInfo, 0)
+		roadPoolDataJSON.RoadPoolInfoList = make([]road.RoadPoolInfo, 0)
 		c.GenerateJSON(roadPoolDataJSON)
 		return
 	}
 
 	roadPoolDataJSON.StartIndex = c.Offset
-	roadPoolDataJSON.RoadPoolInfoList = models.GetRoadPoolByMap(params, c.DisplayCount, c.Offset)
+	roadPoolDataJSON.RoadPoolInfoList = road.GetRoadPoolByMap(params, c.DisplayCount, c.Offset)
 	c.GenerateJSON(roadPoolDataJSON)
 }
 
@@ -492,9 +500,9 @@ func (c *GetController) GetAllRollPool() {
 	params := make(map[string]string)
 	params["road_pool_name__icontains"] = rollPoolName
 
-	roadPoolDataJSON := new(RoadPoolDataJSON)
+	roadPoolDataJSON := new(datas.RoadPoolDataJSON)
 	roadPoolDataJSON.Code = 200
-	roadPoolDataJSON.RoadPoolInfoList = models.GetAllRollPool(params)
+	roadPoolDataJSON.RoadPoolInfoList = road.GetAllRollPool(params)
 	c.GenerateJSON(roadPoolDataJSON)
 }
 
@@ -506,36 +514,36 @@ func (c *GetController) GetMerchant() {
 	params["merchant_name__icontains"] = merchantName
 	params["merchant_uid__icontains"] = merchantNo
 
-	l := models.GetMerchantLenByMap(params)
+	l := merchant.GetMerchantLenByMap(params)
 	c.GetCutPage(l)
 
-	merchantDataJSON := new(MerchantDataJSON)
+	merchantDataJSON := new(datas.MerchantDataJSON)
 	merchantDataJSON.DisplayCount = c.DisplayCount
 	merchantDataJSON.Code = 200
 	merchantDataJSON.CurrentPage = c.CurrentPage
 	merchantDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		merchantDataJSON.MerchantList = make([]models.MerchantInfo, 0)
+		merchantDataJSON.MerchantList = make([]merchant.MerchantInfo, 0)
 		c.GenerateJSON(merchantDataJSON)
 		return
 	}
 
 	merchantDataJSON.StartIndex = c.Offset
-	merchantDataJSON.MerchantList = models.GetMerchantListByMap(params, c.DisplayCount, c.Offset)
+	merchantDataJSON.MerchantList = merchant.GetMerchantListByMap(params, c.DisplayCount, c.Offset)
 	c.GenerateJSON(merchantDataJSON)
 }
 
 func (c *GetController) GetAllMerchant() {
-	merchantDataJSON := new(MerchantDataJSON)
+	merchantDataJSON := new(datas.MerchantDataJSON)
 	merchantDataJSON.Code = 200
-	merchantDataJSON.MerchantList = models.GetAllMerchant()
+	merchantDataJSON.MerchantList = merchant.GetAllMerchant()
 	c.GenerateJSON(merchantDataJSON)
 }
 
 func (c *GetController) GetOneMerchant() {
 	merchantUid := strings.TrimSpace(c.GetString("merchantUid"))
-	merchantDataJSON := new(MerchantDataJSON)
+	merchantDataJSON := new(datas.MerchantDataJSON)
 
 	if merchantUid == "" {
 		merchantDataJSON.Code = -1
@@ -543,7 +551,7 @@ func (c *GetController) GetOneMerchant() {
 		return
 	}
 
-	merchantInfo := models.GetMerchantByUid(merchantUid)
+	merchantInfo := merchant.GetMerchantByUid(merchantUid)
 
 	merchantDataJSON.Code = 200
 	merchantDataJSON.MerchantList = append(merchantDataJSON.MerchantList, merchantInfo)
@@ -554,9 +562,9 @@ func (c *GetController) GetOneMerchantDeploy() {
 	merchantNo := strings.TrimSpace(c.GetString("merchantNo"))
 	payType := strings.TrimSpace(c.GetString("payType"))
 
-	merchantDeployDataJSON := new(MerchantDeployDataJSON)
+	merchantDeployDataJSON := new(datas.MerchantDeployDataJSON)
 
-	merchantDeployInfo := models.GetMerchantDeployByUidAndPayType(merchantNo, payType)
+	merchantDeployInfo := merchant.GetMerchantDeployByUidAndPayType(merchantNo, payType)
 
 	if merchantDeployInfo.Status == "active" {
 		merchantDeployDataJSON.Code = 200
@@ -570,10 +578,10 @@ func (c *GetController) GetOneMerchantDeploy() {
 }
 
 func (c *GetController) GetAllAccount() {
-	accountDataJSON := new(AccountDataJSON)
+	accountDataJSON := new(datas.AccountDataJSON)
 	accountDataJSON.Code = 200
 
-	accountDataJSON.AccountList = models.GetAllAccount()
+	accountDataJSON.AccountList = accounts.GetAllAccount()
 
 	c.GenerateJSON(accountDataJSON)
 }
@@ -586,23 +594,23 @@ func (c *GetController) GetAccount() {
 	params["account_name__icontains"] = accountName
 	params["account_uid_icontains"] = accountUid
 
-	l := models.GetAccountLenByMap(params)
+	l := accounts.GetAccountLenByMap(params)
 	c.GetCutPage(l)
 
-	accountDataJSON := new(AccountDataJSON)
+	accountDataJSON := new(datas.AccountDataJSON)
 	accountDataJSON.DisplayCount = c.DisplayCount
 	accountDataJSON.Code = 200
 	accountDataJSON.CurrentPage = c.CurrentPage
 	accountDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		accountDataJSON.AccountList = make([]models.AccountInfo, 0)
+		accountDataJSON.AccountList = make([]accounts.AccountInfo, 0)
 		c.GenerateJSON(accountDataJSON)
 		return
 	}
 
 	accountDataJSON.StartIndex = c.Offset
-	accountDataJSON.AccountList = models.GetAccountByMap(params, c.DisplayCount, c.Offset)
+	accountDataJSON.AccountList = accounts.GetAccountByMap(params, c.DisplayCount, c.Offset)
 	c.GenerateJSON(accountDataJSON)
 }
 
@@ -610,9 +618,9 @@ func (c *GetController) GetOneAccount() {
 	//从http的body中获取accountUid字段，并且这个字段是string类型
 	accountUid := strings.TrimSpace(c.GetString("accountUid"))
 	//new一个accountDataJSON结构体对象，用来做jsonp返回
-	accountDataJSON := new(AccountDataJSON)
+	accountDataJSON := new(datas.AccountDataJSON)
 	//用accountuid作为过滤字段，从数据库中读取一条信息
-	accountInfo := models.GetAccountByUid(accountUid)
+	accountInfo := accounts.GetAccountByUid(accountUid)
 	//code初始值为200
 	accountDataJSON.Code = 200
 	//将从数据库读出来的数据插入到accountList数组中
@@ -645,23 +653,23 @@ func (c *GetController) GetAccountHistory() {
 	params["create_time__gte"] = startTime
 	params["create_time__lte"] = endTime
 
-	l := models.GetAccountHistoryLenByMap(params)
+	l := accounts.GetAccountHistoryLenByMap(params)
 	c.GetCutPage(l)
 
-	accountHistoryDataJSON := new(AccountHistoryDataJSON)
+	accountHistoryDataJSON := new(datas.AccountHistoryDataJSON)
 	accountHistoryDataJSON.DisplayCount = c.DisplayCount
 	accountHistoryDataJSON.Code = 200
 	accountHistoryDataJSON.CurrentPage = c.CurrentPage
 	accountHistoryDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		accountHistoryDataJSON.AccountHistoryList = make([]models.AccountHistoryInfo, 0)
+		accountHistoryDataJSON.AccountHistoryList = make([]accounts.AccountHistoryInfo, 0)
 		c.GenerateJSON(accountHistoryDataJSON)
 		return
 	}
 
 	accountHistoryDataJSON.StartIndex = c.Offset
-	accountHistoryDataJSON.AccountHistoryList = models.GetAccountHistoryByMap(params, c.DisplayCount, c.Offset)
+	accountHistoryDataJSON.AccountHistoryList = accounts.GetAccountHistoryByMap(params, c.DisplayCount, c.Offset)
 	c.GenerateJSON(accountHistoryDataJSON)
 }
 
@@ -670,23 +678,23 @@ func (c *GetController) GetAgent() {
 	params := make(map[string]string)
 	params["agnet_name__icontains"] = agentName
 
-	l := models.GetAgentInfoLenByMap(params)
+	l := agent.GetAgentInfoLenByMap(params)
 	c.GetCutPage(l)
 
-	agentDataJSON := new(AgentDataJSON)
+	agentDataJSON := new(datas.AgentDataJSON)
 	agentDataJSON.DisplayCount = c.DisplayCount
 	agentDataJSON.Code = 200
 	agentDataJSON.CurrentPage = c.CurrentPage
 	agentDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		agentDataJSON.AgentList = make([]models.AgentInfo, 0)
+		agentDataJSON.AgentList = make([]agent.AgentInfo, 0)
 		c.GenerateJSON(agentDataJSON)
 		return
 	}
 
 	agentDataJSON.StartIndex = c.Offset
-	agentDataJSON.AgentList = models.GetAgentInfoByMap(params, c.DisplayCount, c.Offset)
+	agentDataJSON.AgentList = agent.GetAgentInfoByMap(params, c.DisplayCount, c.Offset)
 	c.GenerateJSON(agentDataJSON)
 }
 
@@ -695,16 +703,16 @@ func (c *GetController) GetAllAgent() {
 	params := make(map[string]string)
 	params["agent_name__icontains"] = agentName
 
-	agentDataJSON := new(AgentDataJSON)
+	agentDataJSON := new(datas.AgentDataJSON)
 	agentDataJSON.Code = 200
-	agentDataJSON.AgentList = models.GetAllAgentByMap(params)
+	agentDataJSON.AgentList = agent.GetAllAgentByMap(params)
 
 	c.GenerateJSON(agentDataJSON)
 }
 
 func (c *GetController) GetProduct() {
 	supplierCode2Name := common.GetSupplierMap()
-	productDataJSON := new(ProductDataJSON)
+	productDataJSON := new(datas.ProductDataJSON)
 	productDataJSON.Code = 200
 	productDataJSON.ProductMap = supplierCode2Name
 	c.GenerateJSON(productDataJSON)
@@ -718,19 +726,19 @@ func (c *GetController) GetAgentToMerchant() {
 	params["belong_agent_uid"] = agentUid
 	params["merchant_uid"] = merchantUid
 
-	l := models.GetMerchantLenByParams(params)
+	l := merchant.GetMerchantLenByParams(params)
 	c.GetCutPage(l)
 
-	merchantDataJSON := new(MerchantDataJSON)
+	merchantDataJSON := new(datas.MerchantDataJSON)
 	merchantDataJSON.DisplayCount = c.DisplayCount
 	merchantDataJSON.Code = 200
 	merchantDataJSON.CurrentPage = c.CurrentPage
 	merchantDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		merchantDataJSON.MerchantList = make([]models.MerchantInfo, 0)
+		merchantDataJSON.MerchantList = make([]merchant.MerchantInfo, 0)
 	} else {
-		merchantDataJSON.MerchantList = models.GetMerchantByParams(params, c.DisplayCount, c.Offset)
+		merchantDataJSON.MerchantList = merchant.GetMerchantByParams(params, c.DisplayCount, c.Offset)
 	}
 
 	c.GenerateJSON(merchantDataJSON)
@@ -768,36 +776,37 @@ func (c *GetController) GetOrder() {
 		params["refund"] = "yes"
 	}
 
-	l := models.GetOrderLenByMap(params)
+	l := order.GetOrderLenByMap(params)
 	c.GetCutPage(l)
 
-	orderDataJSON := new(OrderDataJSON)
+	orderDataJSON := new(datas.OrderDataJSON)
 	orderDataJSON.DisplayCount = c.DisplayCount
 	orderDataJSON.Code = 200
 	orderDataJSON.CurrentPage = c.CurrentPage
 	orderDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		orderDataJSON.OrderList = make([]models.OrderInfo, 0)
+		orderDataJSON.OrderList = make([]order.OrderInfo, 0)
 		c.GenerateJSON(orderDataJSON)
 		return
 	}
 
 	orderDataJSON.StartIndex = c.Offset
-	orderDataJSON.OrderList = models.GetOrderByMap(params, c.DisplayCount, c.Offset)
-	orderDataJSON.SuccessRate = models.GetSuccessRateByMap(params)
-	orderDataJSON.AllAmount = models.GetAllAmountByMap(params)
+	orderDataJSON.OrderList = order.GetOrderByMap(params, c.DisplayCount, c.Offset)
+	orderDataJSON.SuccessRate = order.GetSuccessRateByMap(params)
+	params["status"] = common.SUCCESS
+	orderDataJSON.AllAmount = order.GetAllAmountByMap(params)
 	c.GenerateJSON(orderDataJSON)
 }
 
 func (c *GetController) GetOneOrder() {
 	bankOrderId := strings.TrimSpace(c.GetString("bankOrderId"))
-	orderDataJSON := new(OrderDataJSON)
-	orderInfo := models.GetOneOrder(bankOrderId)
+	orderDataJSON := new(datas.OrderDataJSON)
+	orderInfo := order.GetOneOrder(bankOrderId)
 
 	orderDataJSON.Code = 200
 	orderDataJSON.OrderList = append(orderDataJSON.OrderList, orderInfo)
-	notifyInfo := models.GetNotifyInfoByBankOrderId(bankOrderId)
+	notifyInfo := notify.GetNotifyInfoByBankOrderId(bankOrderId)
 	if notifyInfo.Url == "" || len(notifyInfo.Url) == 0 {
 		orderDataJSON.NotifyUrl = orderInfo.NotifyUrl
 	} else {
@@ -826,23 +835,23 @@ func (c *GetController) GetOrderProfit() {
 	params["pay_product_code"] = supplierUid
 	params["pay_type_code"] = payWayCode
 
-	l := models.GetOrderProfitLenByMap(params)
+	l := order.GetOrderProfitLenByMap(params)
 	c.GetCutPage(l)
 
-	listDataJSON := new(ListDataJSON)
+	listDataJSON := new(datas.ListDataJSON)
 	listDataJSON.DisplayCount = c.DisplayCount
 	listDataJSON.Code = 200
 	listDataJSON.CurrentPage = c.CurrentPage
 	listDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		listDataJSON.List = make([]models.OrderProfitInfo, 0)
+		listDataJSON.List = make([]order.OrderProfitInfo, 0)
 		c.GenerateJSON(listDataJSON)
 		return
 	}
 
 	listDataJSON.StartIndex = c.Offset
-	listDataJSON.List = models.GetOrderProfitByMap(params, c.DisplayCount, c.Offset)
+	listDataJSON.List = order.GetOrderProfitByMap(params, c.DisplayCount, c.Offset)
 	supplierAll := 0.0
 	platformAll := 0.0
 	agentAll := 0.0
@@ -878,23 +887,23 @@ func (c *GetController) GetPayFor() {
 	params["bank_order_id"] = bankOrderId
 	params["status"] = status
 
-	l := models.GetPayForLenByMap(params)
+	l := payfor.GetPayForLenByMap(params)
 	c.GetCutPage(l)
 
-	listDataJSON := new(PayForDataJSON)
+	listDataJSON := new(datas.PayForDataJSON)
 	listDataJSON.DisplayCount = c.DisplayCount
 	listDataJSON.Code = 200
 	listDataJSON.CurrentPage = c.CurrentPage
 	listDataJSON.TotalPage = c.TotalPage
 
 	if c.Offset < 0 {
-		listDataJSON.PayForList = make([]models.PayforInfo, 0)
+		listDataJSON.PayForList = make([]payfor.PayforInfo, 0)
 		c.GenerateJSON(listDataJSON)
 		return
 	}
 
 	listDataJSON.StartIndex = c.Offset
-	listDataJSON.PayForList = models.GetPayForByMap(params, c.DisplayCount, c.Offset)
+	listDataJSON.PayForList = payfor.GetPayForByMap(params, c.DisplayCount, c.Offset)
 	for index, p := range listDataJSON.PayForList {
 		if p.MerchantName == "" {
 			listDataJSON.PayForList[index].MerchantName = "任意下发"
@@ -912,9 +921,9 @@ func (c *GetController) GetPayFor() {
 func (c *GetController) GetOnePayFor() {
 	bankOrderId := strings.TrimSpace(c.GetString("bankOrderId"))
 
-	payForInfo := models.GetPayForByBankOrderId(bankOrderId)
+	payForInfo := payfor.GetPayForByBankOrderId(bankOrderId)
 
-	listDataJSON := new(PayForDataJSON)
+	listDataJSON := new(datas.PayForDataJSON)
 	listDataJSON.Code = 200
 	listDataJSON.PayForList = append(listDataJSON.PayForList, payForInfo)
 
@@ -922,27 +931,29 @@ func (c *GetController) GetOnePayFor() {
 }
 
 func (c *GetController) GetBalance() {
-	roadName := strings.TrimSpace(c.GetString("roadName"))
-	roadUid := strings.TrimSpace(c.GetString("roadUid"))
+	/*roadName := strings.TrimSpace(c.GetString("roadName"))
+	roadUid := strings.TrimSpace(c.GetString("roadUid"))*/
 
-	var roadInfo models.RoadInfo
+	/*var roadInfo road.RoadInfo
 	if roadUid != "" {
-		roadInfo = models.GetRoadInfoByRoadUid(roadUid)
+		roadInfo = road.GetRoadInfoByRoadUid(roadUid)
 	} else {
-		roadInfo = models.GetRoadInfoByName(roadName)
-	}
+		roadInfo = road.GetRoadInfoByName(roadName)
+	}*/
 
-	balanceDataJSON := new(BalanceDataJSON)
+	balanceDataJSON := new(datas.BalanceDataJSON)
 	balanceDataJSON.Code = 200
 
-	supplier := controller.GetPaySupplierByCode(roadInfo.ProductUid)
+	/*supplier := controller.GetPaySupplierByCode(roadInfo.ProductUid)
 	if supplier == nil {
 		balanceDataJSON.Code = -1
 		balanceDataJSON.Balance = -1.00
 	} else {
 		balance := supplier.BalanceQuery(roadInfo)
 		balanceDataJSON.Balance = balance
-	}
+	}*/
+	// TODO 从gateway获取账户余额
+	balanceDataJSON.Balance = 1
 
 	c.GenerateJSON(balanceDataJSON)
 }
@@ -959,9 +970,9 @@ func (c *GetController) GetNotifyBankOrderIdList() {
 	params["merchant_uid"] = merchantUid
 	params["type"] = notifyType
 
-	bankOrderIdListJSON := new(NotifyBankOrderIdListJSON)
+	bankOrderIdListJSON := new(datas.NotifyBankOrderIdListJSON)
 	bankOrderIdListJSON.Code = 200
-	bankOrderIdListJSON.NotifyIdList = models.GetNotifyBankOrderIdListByParams(params)
+	bankOrderIdListJSON.NotifyIdList = notify.GetNotifyBankOrderIdListByParams(params)
 	c.GenerateJSON(bankOrderIdListJSON)
 }
 
@@ -984,9 +995,9 @@ func (c *GetController) GetProfit() {
 	params["create_time__gte"] = startTime
 	params["create_time__lte"] = endTime
 
-	profitListJSON := new(ProfitListJSON)
+	profitListJSON := new(datas.ProfitListJSON)
 	profitListJSON.Code = 200
-	profitListJSON.ProfitList = models.GetPlatformProfitByMap(params)
+	profitListJSON.ProfitList = order.GetPlatformProfitByMap(params)
 
 	profitListJSON.TotalAmount = 0.00
 	profitListJSON.PlatformTotalProfit = 0.00

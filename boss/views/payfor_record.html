@@ -209,7 +209,7 @@
                     "bankOrderId":bankOrderId
                 },
                 success: function (res) {
-                    if (res.Code == 404) {
+                    if (res.Code === 404) {
                         window.parent.location = "/login.html";
                     } else {
                         alert(res.Msg);
@@ -228,7 +228,7 @@
                     "bankOrderId":bankOrderId
                 },
                 success: function (res) {
-                    if (res.Code == 404) {
+                    if (res.Code === 404) {
                         window.parent.location = "/login.html";
                     } else {
                         alert(res.Msg);
@@ -310,9 +310,9 @@
                     "resultType":resultType
                 },
                 success: function (res) {
-                    if (res.Code == 404) {
+                    if (res.Code === 404) {
                         window.parent.location = "/login.html";
-                    } else if (res.Code == -1){
+                    } else if (res.Code === -1){
                         alert(res.Msg);
                     } else {
                         $("#result-cannel").trigger('click');

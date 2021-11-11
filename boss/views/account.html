@@ -1,6 +1,6 @@
 <!doctype html>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta charset="utf-8">
 	<title>管理后台</title>
@@ -36,8 +36,10 @@
 		</div>
 	</div>
 	<div>
-        <span class="explain">账户余额：用户充值成功后立马相加，提款成功后相减的结果。结算金额：用户充值成功过一段时间后相加，出款成功后相减的结果。</span>
-		<span class="explain">可用金额 = （结算金额 - 冻结金额 -  押款金额 - 正在出款金额）</span>
+        <span class="explain" style="color: red;">账户余额：用户充值成功后立马相加，提款成功后相减的结果。</span>
+		<span class="explain" style="color: red;">待结算金额：用户充值后，还没有加到可结算金中。</span>
+		<span class="explain" style="color: red;">结算金额: 可以提现的金额 = （账户余额 - 待结算金额 - 押款金额 - 冻结金额 - 正在出款金额）</span>
+
 	</div>
 	<div class="menu-table">
 		<table>
@@ -52,7 +54,7 @@
 					<th>押款金额</th>
 					<th>冻结金额</th>
 					<th>正在出款的金额</th>
-					<th>可用金额</th>
+{{/*					<th>可用金额</th>*/}}
 					<th>账户状态</th>
 					<th>操作</th>
 				</tr>
@@ -121,13 +123,15 @@
 			let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
 				    "<th>" + v.AccountUid + "</th>" + "<th>" + v.AccountName + "</th>" + "<th>" + v.Balance + "</th>" +
 				    "<th>" + v.SettleAmount + "</th>" + "<th>" + v.WaitAmount + "</th>" + "<th>" + v.LoanAmount + "</th>" +
-                    "<th>" + v.FreezeAmount + "</th>" +"<th>" + v.PayforAmount + "</th>" +
-                    "<th>" + (v.SettleAmount-v.FreezeAmount-v.PayforAmount-v.LoanAmount) + "</th>" + "<th>" + v.Status + "</th>";
+                    "<th>" + v.FreezeAmount + "</th>" +"<th>" + v.PayforAmount + "</th>" + "<th>" + v.Status + "</th>";
 			tmp = tmp.replace("unactive", "冻结").replace("active", "激活");
 			tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' + 
 			'<button type="button" value="' + v.AccountUid +'" class="btn btn-default" onclick="updateAccountStatus(this.value);">'+ "激活|冻结" +'</button>' +
 			'<button type="button" value="' + v.AccountUid +'" class="btn btn-default" onclick="deleteAccount(this.value);"><span class="glyphicon glyphicon-trash"></span></button>' + 
 			'</div>' + "</th>" + "</tr>";
+			if (v.Status === "unactive") {
+				tmp = tmp.replace("<tr>", "<tr style='color: red;'>");
+			}
 			str = str + tmp;
 		}
 		

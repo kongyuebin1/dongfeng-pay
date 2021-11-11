@@ -131,7 +131,26 @@
                     $("#operate-result").html(res.Msg);
                 } else {
                     randResult(res);
-                    alert("操作成功，请仔细检查商户的资金状态");
+                    alert("当前用户的信息如下......");
+                }
+            },
+            error: function () {
+                alert("系统异常，请稍后再试")
+            }
+        });
+    }
+    function getAccount() {
+        let dataJSON = getValues();
+        $.ajax({
+            url:"/get/one/account",
+            data: dataJSON,
+            success: function (res) {
+                if (res.Code == 404) {
+                    window.parent.location = "/login.html";
+                } else if (res.Code == -1) {
+                    $("#operate-result").html(res.Msg);
+                } else {
+                    randResult(res);
                 }
             },
             error: function () {
@@ -141,9 +160,14 @@
     }
     $("#select-self-name").change(function () {
         clearResult();
+        let accountUid = $("#select-self-name").val();
+        if (accountUid === "" || accountUid.length <= 0) {
+            return false;
+        }
+        getAccount();
     });
     $("#select-self-type").click(function () {
-        clearResult();
+        // clearResult();
     });
     function setAccount() {
         $.ajax({

@@ -1,10 +1,10 @@
 /***************************************************
  ** @Desc : This file for ...
- ** @Time : 2019/11/6 14:03
+ ** @Time : 2019/12/8 22:15
  ** @Author : yuebin
- ** @File : query.go
+ ** @File : send_notify_merchant
  ** @Last Modified by : yuebin
- ** @Last Modified time: 2019/11/6 14:03
+ ** @Last Modified time: 2019/12/8 22:15
  ** @Software: GoLand
 ****************************************************/
 package controllers
@@ -15,30 +15,24 @@ import (
 	"strings"
 )
 
-type SupplierQuery struct {
+type SendNotify struct {
 	web.Controller
 }
 
-func (c *SupplierQuery) SupplierOrderQuery() {
-
+func (c *SendNotify) SendNotifyToMerchant() {
 	bankOrderId := strings.TrimSpace(c.GetString("bankOrderId"))
-
-	se := new(service.QueryService)
-	keyDataJSON := se.SupplierOrderQuery(bankOrderId)
+	se := new(service.SendNotifyMerchantService)
+	keyDataJSON := se.SendNotifyToMerchant(bankOrderId)
 
 	c.Data["json"] = keyDataJSON
 	_ = c.ServeJSON()
 }
 
-/*
-* 向上游查询代付结果
- */
-func (c *SupplierQuery) SupplierPayForQuery() {
+func (c *SendNotify) SelfSendNotify() {
 	bankOrderId := strings.TrimSpace(c.GetString("bankOrderId"))
 
-	se := new(service.QueryService)
-	keyDataJSON := se.SupplierPayForQuery(bankOrderId)
-
+	se := new(service.SendNotifyMerchantService)
+	keyDataJSON := se.SelfSendNotify(bankOrderId)
 	c.Data["json"] = keyDataJSON
 	_ = c.ServeJSON()
 }

@@ -302,12 +302,19 @@
 				let str = "";
 				for (let i = 0; i < res.OperatorList.length; i ++) {
 					let v = res.OperatorList[i];
-					let tmp = "<tr>" + "<th>" + (res.StartIndex+i+1) + "</th>" + 
+					let t = "";
+					let h = "";
+					if (v.Status === "unactive") {
+						t = "<tr style=\"color: red;\">";
+					} else {
+						t = "<tr>";
+					}
+					let tmp = t + "<th>" + (res.StartIndex+i+1) + "</th>" +
 						  "<th>" + v.UserId + "</th>" + "<th>" + v.RoleName + "</th>" + "<th>" + v.Nick + "</th>" +
 						  "<th>" + v.Remark + "</th>" + "<th>" + v.Status + "</th>" +
 						  "<th>" + v.CreateTime + "</th>";
 
-					tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' + 
+					tmp = tmp + "<th>" + '<div class="btn-group" role="group" aria-label="...">' +
 					'<button type="button" value="' + v.UserId +'" class="btn btn-default" onclick="editOperator(this.value);"><span class="glyphicon glyphicon-pencil"></span></button>' +
 					'<button type="button" value="' + v.UserId +'" class="btn btn-default" onclick="freezeOperator(this.value);"><span>冻结</span></button>' +
 					'<button type="button" value="' + v.UserId +'" class="btn btn-default" onclick="unfreezeOperator(this.value);"><span>解冻</span></button>' +

@@ -11,6 +11,7 @@ package models
 
 import (
 	"boss/common"
+	"boss/models/accounts"
 	"boss/utils"
 	"context"
 	"errors"
@@ -25,7 +26,7 @@ func OperatorAccount(accountUid, operatorType string, amount float64) (string, b
 	if err := o.DoTx(func(ctx context.Context, txOrm orm.TxOrmer) error {
 
 		//处理事务
-		accountInfo := new(AccountInfo)
+		accountInfo := new(accounts.AccountInfo)
 		if err := txOrm.Raw("select * from account_info where account_uid = ? for update", accountUid).QueryRow(accountInfo); err != nil || accountInfo.AccountUid == "" {
 			logs.Error("operator account get account info for update fail: ", err)
 			return err
@@ -65,7 +66,7 @@ func OperatorAccount(accountUid, operatorType string, amount float64) (string, b
 			return err
 		}
 		//往account_history表中插入一条动账记录
-		accountHistory := AccountHistoryInfo{AccountUid: accountUid, AccountName: accountInfo.AccountName, Type: operatorType,
+		accountHistory := accounts.AccountHistoryInfo{AccountUid: accountUid, AccountName: accountInfo.AccountName, Type: operatorType,
 			Amount: amount, Balance: accountInfo.Balance, CreateTime: utils.GetBasicDateTime(), UpdateTime: utils.GetBasicDateTime()}
 
 		if _, err := txOrm.Insert(&accountHistory); err != nil {
