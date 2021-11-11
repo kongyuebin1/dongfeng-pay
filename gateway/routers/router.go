@@ -16,4 +16,9 @@ func init() {
 	web.Router("/gateway/balance", &gateway.PayForGateway{}, "*:Balance")
 	// 接收银行回调
 	web.Router("/daili/notify", &third_party.DaiLiImpl{}, "*:PayNotify")
+
+	web.Router("/gateway/supplier/order/query", &gateway.OrderController{}, "*:OrderQuery")
+	web.Router("/gateway/update/order", &gateway.OrderController{}, "*:OrderUpdate")
+	web.Router("/gateway/supplier/payfor/query", &gateway.PayForGateway{}, "QuerySupplierPayForResult")
+	web.Router("/solve/payfor/result", &gateway.PayForGateway{}, "SolvePayForResult")
 }

@@ -152,7 +152,6 @@ func SolvePayFail(bankOrderId, transId string) bool {
 	err := o.DoTx(func(ctx context.Context, txOrm orm.TxOrmer) error {
 
 		var orderTmp order.OrderInfo
-		//bankOrderId := orderInfo.BankOrderId
 		if err := txOrm.Raw("select * from order_info where bank_order_id = ?", bankOrderId).QueryRow(&orderTmp); err != nil || orderTmp.BankOrderId == "" {
 			return err
 		}

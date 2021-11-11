@@ -39,22 +39,6 @@ type MerchantDeployInfo struct {
 
 const MERCHANT_DEPLOY_INFO = "merchant_deploy_info"
 
-func InsertMerchantDeployInfo(merchantDeployInfo MerchantDeployInfo) bool {
-	o := orm.NewOrm()
-	_, err := o.Insert(&merchantDeployInfo)
-	if err != nil {
-		logs.Error("insert merchant deploy info fail: ", err)
-		return false
-	}
-	return true
-}
-
-func IsExistByUidAndPayType(uid, payType string) bool {
-	o := orm.NewOrm()
-	isEixst := o.QueryTable(MERCHANT_DEPLOY_INFO).Filter("merchant_uid", uid).Filter("pay_type", payType).Exist()
-	return isEixst
-}
-
 func GetMerchantDeployByUidAndPayType(uid, payType string) MerchantDeployInfo {
 	o := orm.NewOrm()
 	var merchantDeployInfo MerchantDeployInfo
@@ -63,15 +47,6 @@ func GetMerchantDeployByUidAndPayType(uid, payType string) MerchantDeployInfo {
 		logs.Error("get merchant deploy by uid and paytype fail:", err)
 	}
 	return merchantDeployInfo
-}
-
-func GetMerchantDeployByUid(uid string) (ms []MerchantDeployInfo) {
-	o := orm.NewOrm()
-	_, err := o.QueryTable(MERCHANT_DEPLOY_INFO).Filter("merchant_uid", uid).All(&ms)
-	if err != nil {
-		logs.Error("get merchant deploy by uid fail:", err)
-	}
-	return ms
 }
 
 func GetMerchantDeployByHour(hour int) []MerchantDeployInfo {
@@ -83,53 +58,4 @@ func GetMerchantDeployByHour(hour int) []MerchantDeployInfo {
 	}
 
 	return merchantDeployList
-}
-func DeleteMerchantDeployByUidAndPayType(uid, payType string) bool {
-	o := orm.NewOrm()
-	_, err := o.QueryTable(MERCHANT_DEPLOY_INFO).Filter("merchant_uid", uid).Filter("pay_type", payType).Delete()
-	if err != nil {
-		logs.Error("delete merchant deploy by uid and payType fail: ", err)
-		return false
-	}
-	return true
-}
-
-func UpdateMerchantDeploy(merchantDeploy MerchantDeployInfo) bool {
-	o := orm.NewOrm()
-	_, err := o.Update(&merchantDeploy)
-	if err != nil {
-		logs.Error("update merchant deploy fail: ", err)
-		return false
-	}
-	return true
-}
-
-func GetMerchantDeployLenByMap(params map[string]string) int {
-	o := orm.NewOrm()
-	qs := o.QueryTable(MERCHANT_DEPLOY_INFO)
-	for k, v := range params {
-		if len(v) > 0 {
-			qs = qs.Filter(k, v)
-		}
-	}
-	cnt, err := qs.Count()
-	if err != nil {
-		logs.Error("get merchant deploy len by map fail: ", err)
-	}
-	return int(cnt)
-}
-
-func GetMerchantDeployListByMap(params map[string]string, displayCount, offset int) (md []MerchantDeployInfo) {
-	o := orm.NewOrm()
-	qs := o.QueryTable(MERCHANT_DEPLOY_INFO)
-	for k, v := range params {
-		if len(v) > 0 {
-			qs = qs.Filter(k, v)
-		}
-	}
-	_, err := qs.Limit(displayCount, offset).OrderBy("-update_time").All(&md)
-	if err != nil {
-		logs.Error("get merchant deploy list by map fail: ", err)
-	}
-	return md
 }

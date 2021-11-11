@@ -12,8 +12,12 @@ package gateway
 import (
 	"fmt"
 	"gateway/conf"
+	"gateway/models/payfor"
+	"gateway/models/road"
 	"gateway/pay_for"
 	"gateway/response"
+	"gateway/supplier/third_party"
+	"github.com/astaxie/beego/logs"
 	"github.com/beego/beego/v2/server/web"
 	"strings"
 )
@@ -67,6 +71,45 @@ func (c *PayForGateway) PayForQuery() {
 
 	c.Data["json"] = pay_for.PayForResultQuery(params)
 	_ = c.ServeJSON()
+}
+
+/*
+** 查询上游的代付结果
+ */
+func (c *PayForGateway) QuerySupplierPayForResult() {
+	bankOrderId := strings.TrimSpace(c.GetString("bankOrderId"))
+	p := payfor.GetPayForByBankOrderId(bankOrderId)
+	if p.RoadUid == "" {
+		c.Ctx.WriteString("fail")
+	} else {
+		roadInfo := road.GetRoadInfoByRoadUid(p.RoadUid)
+		supplierCode := roadInfo.ProductUid
+		supplier := third_party.GetPaySupplierByCode(supplierCode)
+		res := supplier.PayFor(p)
+		logs.Debug("代付查询结果：", res)
+		c.Ctx.WriteString("success")
+	}
+}
+
+/**
+** 接收boss发送过来的代付手动处理结果
+ */
+func (c *PayForGateway) SolvePayForResult() {
+	resultType := strings.TrimSpace(c.GetString("resultType"))
+	bankOrderId := strings.TrimSpace(c.GetString("bankOrderId"))
+
+	p := payfor.GetPayForByBankOrderId(bankOrderId)
+	if p.BankOrderId == "" {
+		c.Ctx.WriteString(conf.FAIL)
+	}
+
+	if resultType == conf.PAYFOR_FAIL {
+		pay_for.PayForFail(p)
+	} else if resultType == conf.PAYFOR_SUCCESS {
+		pay_for.PayForSuccess(p)
+	}
+
+	c.Ctx.WriteString(conf.SUCCESS)
 }
 
 /*

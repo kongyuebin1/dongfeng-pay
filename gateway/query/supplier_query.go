@@ -32,23 +32,29 @@ const (
 	LimitTimes = 5 //最多查询5次
 )
 
+func SupplierOrderQueryResult(bankOrderId string) bool {
+	orderInfo := order.GetOrderByBankOrderId(bankOrderId)
+	if orderInfo.BankOrderId == "" || len(orderInfo.BankOrderId) == 0 {
+		logs.Error("不存在这样的订单，订单查询结束")
+		return false
+	}
+	if orderInfo.Status != "" && orderInfo.Status != "wait" {
+		logs.Error(fmt.Sprintf("该订单=%s，已经处理完毕，", bankOrderId))
+		return false
+	}
+	supplierCode := orderInfo.PayProductCode
+	supplier := third_party.GetPaySupplierByCode(supplierCode)
+	flag := supplier.PayQuery(orderInfo)
+	return flag
+}
+
 /*
 ** 该接口是查询上游的订单
  */
 func solveSupplierOrderQuery(task OrderQueryTask) {
 	bankOrderId := task.BankOrderId
-	orderInfo := order.GetOrderByBankOrderId(bankOrderId)
-	if orderInfo.BankOrderId == "" || len(orderInfo.BankOrderId) == 0 {
-		logs.Error("不存在这样的订单，订单查询结束")
-		return
-	}
-	if orderInfo.Status != "" && orderInfo.Status != "wait" {
-		logs.Error(fmt.Sprintf("该订单=%s，已经处理完毕，", bankOrderId))
-		return
-	}
-	supplierCode := orderInfo.PayProductCode
-	supplier := third_party.GetPaySupplierByCode(supplierCode)
-	flag := supplier.PayQuery(orderInfo)
+
+	flag := SupplierOrderQueryResult(bankOrderId)
 	if flag {
 		logs.Info("订单查询成功， bankOrderId：", bankOrderId)
 	} else {

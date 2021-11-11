@@ -95,15 +95,15 @@ func settle(orderSettle order.OrderSettleInfo, orderProfit order.OrderProfitInfo
 				}
 			} else {
 				merchantLoad := new(merchant.MerchantLoadInfo)
-				if err := txOrm.Raw("select * from merchant_load_info where merchant_uid=? and road_uid=? and load_date=? for update").
+				if err := txOrm.Raw("select * from merchant_load_info where merchant_uid=? and road_uid=? and load_date=? for update", orderSettle.MerchantUid, orderSettle.RoadUid, date).
 					QueryRow(merchantLoad); err != nil || merchantLoad.UpdateTime == "" {
-					logs.Error(fmt.Sprintf("结算过程，select merchant load info失败，错误信息：#{err}"))
+					logs.Error(fmt.Sprintf("结算过程，select merchant load info失败，错误信息：%s", err))
 					return err
 				} else {
 					merchantLoad.UpdateTime = utils.GetBasicDateTime()
 					merchantLoad.LoadAmount += loadAmount
 					if _, err := txOrm.Update(merchantLoad); err != nil {
-						logs.Error(fmt.Sprintf("结算过程，update merchant load info失败，失败信息：#{err}"))
+						logs.Error(fmt.Sprintf("结算过程，update merchant load info失败，失败信息：%s", err))
 						return err
 					}
 				}
@@ -148,14 +148,15 @@ func MerchantLoadSolve() {
 		params := make(map[string]string)
 		params["status"] = conf.NO
 		params["merchant_uid"] = merchantDeploy.MerchantUid
-		params["load_date"] = loadDate
+		params["load_date__lte"] = loadDate
 
 		merchantLoadList := merchant.GetMerchantLoadInfoByMap(params)
 		for _, merchantLoad := range merchantLoadList {
 			if MerchantAbleAmount(merchantLoad) {
 				logs.Info(fmt.Sprintf("商户uid= %s，押款金额=%f，押款通道= %s, 解款成功", merchantLoad.MerchantUid, merchantLoad.LoadAmount, merchantLoad.RoadUid))
 			} else {
-				logs.Error(fmt.Sprintf("商户uid=%s，押款金额=%f，押款通道=%s, 解款失败", merchantLoad.MerchantUid, merchantLoad.LoadAmount, merchantLoad.RoadUid))
+				logs.Error(fmt.Sprintf("商户uid=%s，押款金额=%f，押款通道=%s, 解款失败",
+					merchantLoad.MerchantUid, merchantLoad.LoadAmount, merchantLoad.RoadUid))
 			}
 		}
 	}

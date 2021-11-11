@@ -170,6 +170,22 @@ func (c *DaiLiImpl) PayNotify() {
 }
 
 func (c *DaiLiImpl) PayQuery(orderInfo order.OrderInfo) bool {
+
+	tradeStatus := "SUCCESS"
+	trxNo := orderInfo.BankOrderId
+	factAmount := 100.00
+	if tradeStatus == "SUCCESS" {
+		//调用支付成功的接口，做加款更新操作，需要把实际支付金额传入
+		if !service.SolvePaySuccess(orderInfo.BankOrderId, factAmount, trxNo) {
+			return false
+		}
+	} else if tradeStatus == "FAILED" {
+		if !service.SolvePayFail(orderInfo.BankOrderId, "") {
+			return false
+		}
+	} else {
+		logs.Info("订单状态处于：" + tradeStatus + "；bankOrderId：" + orderInfo.BankOrderId)
+	}
 	return true
 }
 
