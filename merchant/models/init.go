@@ -13,22 +13,22 @@ import (
 	"fmt"
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
-	"merchant/conf"
+	"github.com/beego/beego/v2/server/web"
 )
 
-func Init() {
-	dbHost := conf.DB_HOST
-	dbUser := conf.DB_USER
-	dbPassword := conf.DB_PASSWORD
-	dbBase := conf.DB_BASE
-	dbPort := conf.DB_PORT
+func init() {
+	dbHost, _ := web.AppConfig.String("mysql::dbhost")
+	dbUser, _ := web.AppConfig.String("mysql::dbuser")
+	dbPassword, _ := web.AppConfig.String("mysql::dbpasswd")
+	dbBase, _ := web.AppConfig.String("mysql::dbbase")
+	dbPort, _ := web.AppConfig.String("mysql::dbport")
 
 	link := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8", dbUser, dbPassword, dbHost, dbPort, dbBase)
 
 	logs.Info("mysql init.....", link)
 
-	orm.RegisterDriver("mysql", orm.DRMySQL)
-	orm.RegisterDataBase("default", "mysql", link, 30, 30)
+	_ = orm.RegisterDriver("mysql", orm.DRMySQL)
+	_ = orm.RegisterDataBase("default", "mysql", link, 30, 30)
 	orm.RegisterModel(new(UserInfo), new(MenuInfo), new(SecondMenuInfo),
 		new(PowerInfo), new(RoleInfo), new(BankCardInfo), new(RoadInfo),
 		new(RoadPoolInfo), new(AgentInfo), new(MerchantInfo), new(MerchantDeployInfo),

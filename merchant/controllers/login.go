@@ -98,7 +98,7 @@ func (c *Login) UserLogin() {
 
 stopRun:
 	c.Data["json"] = pubMethod.JsonFormat(flag, "", msg, url)
-	c.ServeJSON()
+	_ = c.ServeJSON()
 	c.StopRun()
 }
 

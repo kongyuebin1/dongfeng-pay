@@ -28,7 +28,7 @@ func (c *History) ShowHistoryListUI() {
 	ranMd5 := encrypt.EncodeMd5([]byte(pubMethod.RandomString(46)))
 	c.Ctx.SetCookie(enum.UserCookie, ranMd5, enum.CookieExpireTime)
 	c.Ctx.SetSecureCookie(ranMd5, enum.UserCookie, ranMd5, enum.CookieExpireTime)
-	c.SetSession(enum.UserCookie, ranMd5)
+	_ = c.SetSession(enum.UserCookie, ranMd5)
 
 	c.Data["payType"] = enum.GetHistoryStatus()
 	c.Data["userName"] = u.MerchantName

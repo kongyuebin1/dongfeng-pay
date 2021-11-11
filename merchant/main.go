@@ -6,15 +6,14 @@ import (
 	_ "merchant/models"
 	_ "merchant/routers"
 	"merchant/sys"
+	"merchant/utils"
 )
 
 func init() {
 
-	// 初始化数据库
-
 	// 初始化Session
 	sys.InitSession()
-
+	utils.InitLogs()
 	// 如果是开发模式，则显示命令信息
 	s, _ := beego.AppConfig.String("runmode")
 	isDev := !(s != "dev")
