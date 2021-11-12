@@ -7,7 +7,7 @@
  ** @Last Modified time: 2019/11/25 14:14
  ** @Software: GoLand
 ****************************************************/
-package common
+package conf
 
 const (
 	ACTIVE          = "active"

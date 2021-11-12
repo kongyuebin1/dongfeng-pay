@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"github.com/rs/xid"
 	"github.com/tealeg/xlsx"
-	"merchant/common"
+	"merchant/conf"
 	"merchant/models"
 	"merchant/sys/enum"
 	"merchant/utils"
@@ -273,18 +273,18 @@ func handleFileContent(name string, u models.MerchantInfo, c *Withdraw) (bool, s
 				PhoneNo:            u.LoginAccount,
 				MerchantOrderId:    xid.New().String(),
 				BankOrderId:        "4444" + xid.New().String(),
-				PayforFee:          common.PAYFOR_FEE,
-				Type:               common.SELF_MERCHANT,
+				PayforFee:          conf.PAYFOR_FEE,
+				Type:               conf.SELF_MERCHANT,
 				PayforAmount:       money,
-				PayforTotalAmount:  money + common.PAYFOR_FEE,
+				PayforTotalAmount:  money + conf.PAYFOR_FEE,
 				BankCode:           "C",
 				BankName:           row.Cells[2].String(),
-				IsSend:             common.NO,
+				IsSend:             conf.NO,
 				BankAccountName:    row.Cells[0].String(),
 				BankAccountNo:      row.Cells[1].String(),
 				BankAccountType:    bankAccountType,
 				BankAccountAddress: row.Cells[2].String(),
-				Status:             common.PAYFOR_COMFRIM,
+				Status:             conf.PAYFOR_COMFRIM,
 				CreateTime:         pubMethod.GetNowTime(),
 				UpdateTime:         pubMethod.GetNowTime(),
 			}

@@ -30,7 +30,7 @@ func (c *DealExcel) DownloadExcelModel() {
 	ranMd5 := encrypt.EncodeMd5([]byte(pubMethod.RandomString(46)))
 	c.Ctx.SetCookie(enum.UserCookie, ranMd5, enum.CookieExpireTime)
 	c.Ctx.SetSecureCookie(ranMd5, enum.UserCookie, ranMd5, enum.CookieExpireTime)
-	c.SetSession(enum.UserCookie, ranMd5)
+	_ = c.SetSession(enum.UserCookie, ranMd5)
 
 	c.Ctx.Output.Download(enum.ExcelModelPath, enum.ExcelModelName)
 }
@@ -152,7 +152,7 @@ func (c *DealExcel) MakeOrderExcel() {
 
 stopRun:
 	c.Data["json"] = pubMethod.JsonFormat(flag, "", msg, "")
-	c.ServeJSON()
+	_ = c.ServeJSON()
 	c.StopRun()
 }
 
@@ -163,7 +163,7 @@ func (c *DealExcel) DownloadRecordExcel() {
 
 	defer func() {
 		if r := recover(); r != nil {
-			logs.Error(fmt.Sprintf("%s此文件不存在",file))
+			logs.Error(fmt.Sprintf("%s此文件不存在", file))
 			time.Sleep(3 * time.Second)
 		}
 	}()

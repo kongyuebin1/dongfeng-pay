@@ -15,7 +15,7 @@ import (
 	"fmt"
 	"github.com/beego/beego/v2/client/orm"
 	"github.com/beego/beego/v2/core/logs"
-	"merchant/common"
+	"merchant/conf"
 	"merchant/utils"
 )
 
@@ -172,13 +172,13 @@ func ForUpdatePayFor(payFor PayforInfo) bool {
 			return err
 		}
 
-		if tmp.Status == common.PAYFOR_FAIL || tmp.Status == common.PAYFOR_SUCCESS {
+		if tmp.Status == conf.PAYFOR_FAIL || tmp.Status == conf.PAYFOR_SUCCESS {
 			return errors.New("")
 		}
 
 		//如果是手动打款，并且是需要处理商户金额
-		if payFor.Status == common.PAYFOR_SOLVING && tmp.Status == common.PAYFOR_COMFRIM &&
-			payFor.GiveType == common.PAYFOR_HAND && payFor.Type != common.SELF_HELP {
+		if payFor.Status == conf.PAYFOR_SOLVING && tmp.Status == conf.PAYFOR_COMFRIM &&
+			payFor.GiveType == conf.PAYFOR_HAND && payFor.Type != conf.SELF_HELP {
 
 			var account AccountInfo
 			if err := txOrm.Raw("select * from account_info where account_uid = ? for update", payFor.MerchantUid).QueryRow(&account); err != nil || account.AccountUid == "" {
@@ -197,7 +197,7 @@ func ForUpdatePayFor(payFor PayforInfo) bool {
 			} else {
 				logs.Error(fmt.Sprintf("商户uid=%s，可用金额不够", payFor.MerchantUid))
 				payFor.ResponseContext = "商户可用余额不足"
-				payFor.Status = common.PAYFOR_FAIL
+				payFor.Status = conf.PAYFOR_FAIL
 			}
 		}
 
@@ -205,7 +205,6 @@ func ForUpdatePayFor(payFor PayforInfo) bool {
 			logs.Error("for update payfor fail: ", err)
 			return err
 		}
-
 
 		return nil
 	}); err != nil {

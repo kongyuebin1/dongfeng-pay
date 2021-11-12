@@ -12,7 +12,7 @@ package controllers
 import (
 	"fmt"
 	"github.com/rs/xid"
-	"merchant/common"
+	"merchant/conf"
 	"merchant/models"
 	"merchant/sys/enum"
 	"merchant/utils"
@@ -257,18 +257,18 @@ func (c *Withdraw) LaunchSingleWithdraw() {
 		PhoneNo:            u.LoginAccount,
 		MerchantOrderId:    xid.New().String(),
 		BankOrderId:        "4444" + xid.New().String(),
-		PayforFee:          common.PAYFOR_FEE,
-		Type:               common.SELF_MERCHANT,
+		PayforFee:          conf.PAYFOR_FEE,
+		Type:               conf.SELF_MERCHANT,
 		PayforAmount:       amount,
-		PayforTotalAmount:  amount + common.PAYFOR_FEE,
+		PayforTotalAmount:  amount + conf.PAYFOR_FEE,
 		BankCode:           bankCode,
 		BankName:           enum.GetBankInfo()[bankCode],
-		IsSend:             common.NO,
+		IsSend:             conf.NO,
 		BankAccountName:    accountName,
 		BankAccountNo:      cardNo,
 		BankAccountType:    bankAccountType,
 		BankAccountAddress: province + city + bankAccountAddress,
-		Status:             common.PAYFOR_COMFRIM,
+		Status:             conf.PAYFOR_COMFRIM,
 		CreateTime:         pubMethod.GetNowTime(),
 		UpdateTime:         pubMethod.GetNowTime(),
 	}

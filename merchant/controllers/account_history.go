@@ -83,6 +83,6 @@ func (c *History) HistoryQueryAndListPage() {
 	out["root"] = list // 显示数据
 
 	c.Data["json"] = out
-	c.ServeJSON()
+	_ = c.ServeJSON()
 	c.StopRun()
 }
