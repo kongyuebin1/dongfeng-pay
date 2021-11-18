@@ -5,24 +5,21 @@
 # 安装
 详细的安装文档在doc文件夹中。
 使用IntelliJ IDEA 导入项目后，若出现了：cannot resolve directory....，删除.idea目录，重新导入即可。
-# 部分截图
-boss管理后台示意图
-![Image_text](http://139.196.82.110/doc/boss1.png)
-![Image text](http://139.196.82.110/doc/boss2.png)
-![Image text](http://139.196.82.110/doc/boss3.png)
-![Image text](http://139.196.82.110/doc/boss4.png)
-![Image text](http://139.196.82.110/doc/boss5.png)
-![Image text](http://139.196.82.110/doc/boss6.png)
+# 功能介绍
+boss管理后台
+0、商户信息管理、账户资金管理等。
+1、添加银行或者三方支付系统的通道信息。
+2、管理支付订单，可以手动查询支付结果、手动回调支付结果给下游。
+3、管理代付订单，可以手动查询代付结果。
+4、银行卡管理，体现等功能。
 
-商户后台部分截图
-![Image_text](http://139.196.82.110/doc/merchant1.png)
-![Image text](http://139.196.82.110/doc/merchant2.png)
+商户后台
+0、商户自己的订单管理
+1、提现功能
 
-代理后台部分截图
-![Image_text](http://139.196.82.110/doc/agent1.png)
-![Image text](http://139.196.82.110/doc/agent2.png)
-![Image text](http://139.196.82.110/doc/agent3.png)
+网关
+0、对接银行、第三方系统。
+1、处理支付订单逻辑，接收上游的回调信息。
+2、处理代付逻辑，接收上游的回调信息。
+3、接收下游订单查询、结算处理。
 
-# 后话
-1：因为是模拟了三方的支付系统，所有很多功能都是实现了，但是该系统截图上面的资金都是模拟的。
-2：还有一部分功能没有写上去，有需要的可以在上面进行二次开发。
