@@ -12,7 +12,7 @@ package controllers
 import (
 	"github.com/beego/beego/v2/client/httplib"
 	"github.com/beego/beego/v2/core/logs"
-	beego "github.com/beego/beego/v2/server/web"
+	 "github.com/beego/beego/v2/server/web"
 	"github.com/skip2/go-qrcode"
 	"github.com/widuu/gojson"
 	"shop/utils"
@@ -20,7 +20,7 @@ import (
 )
 
 type ScanShopController struct {
-	beego.Controller
+	web.Controller
 	Params map[string]string
 }
 

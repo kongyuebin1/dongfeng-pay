@@ -10,18 +10,18 @@
 package controllers
 
 import (
-	beego "github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego/v2/server/web"
 	"github.com/rs/xid"
 )
 
 type HomeAction struct {
-	beego.Controller
+	web.Controller
 }
 
 /*加载首页及数据*/
 func (c *HomeAction) ShowHome() {
 	//取值
-	siteName, _ := beego.AppConfig.String("siteName")
+	siteName, _ := web.AppConfig.String("siteName")
 	orderNo := xid.New().String()
 	productName := "测试应用-支付功能体验(非商品消费)"
 
@@ -33,8 +33,8 @@ func (c *HomeAction) ShowHome() {
 }
 
 func (c *HomeAction) ErrorPage() {
-	flash := beego.ReadFromRequest(&c.Controller)
-	error := flash.Data["error"]
-	c.Data["error"] = error
+	flash := web.ReadFromRequest(&c.Controller)
+	e := flash.Data["error"]
+	c.Data["error"] = e
 	c.TplName = "error.html"
 }
