@@ -19,6 +19,6 @@ func init() {
 
 	web.Router("/gateway/supplier/order/query", &gateway.OrderController{}, "*:OrderQuery")
 	web.Router("/gateway/update/order", &gateway.OrderController{}, "*:OrderUpdate")
-	web.Router("/gateway/supplier/payfor/query", &gateway.PayForGateway{}, "QuerySupplierPayForResult")
-	web.Router("/solve/payfor/result", &gateway.PayForGateway{}, "SolvePayForResult")
+	web.Router("/gateway/supplier/payfor/query", &gateway.PayForGateway{}, "*:QuerySupplierPayForResult")
+	web.Router("/solve/payfor/result", &gateway.PayForGateway{}, "*:SolvePayForResult")
 }

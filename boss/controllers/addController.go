@@ -18,10 +18,11 @@ import (
 	"boss/models/system"
 	"boss/service"
 	"boss/utils"
-	"github.com/beego/beego/v2/core/logs"
-	"github.com/rs/xid"
 	"strconv"
 	"strings"
+
+	"github.com/beego/beego/v2/core/logs"
+	"github.com/rs/xid"
 )
 
 type AddController struct {

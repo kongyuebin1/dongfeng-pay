@@ -420,7 +420,7 @@ func (c *UpdateService) ResultPayFor(resultType, bankOrderId string) *datas.KeyD
 		return keyDataJSON
 	}
 
-	u, _ := web.AppConfig.String("host")
+	u, _ := web.AppConfig.String("gateway::host")
 	u = u + "/solve/payfor/result?" + "resultType=" + resultType + "&bankOrderId=" + bankOrderId
 	s, err := httplib.Get(u).String()
 	if err != nil || s == common.FAIL {
