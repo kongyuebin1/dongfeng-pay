@@ -894,6 +894,7 @@ func (c *AddService) AddPayFor(merchantUid, bankUid, payForAmount, bankNo, accou
 		BankAccountType:    bankInfo.BankAccountType,
 		BankAccountAddress: bankAddress,
 		Status:             common.PAYFOR_COMFRIM,
+		RequestTime:        utils.GetBasicDateTime(),
 		CreateTime:         utils.GetBasicDateTime(),
 		UpdateTime:         utils.GetBasicDateTime(),
 	}
