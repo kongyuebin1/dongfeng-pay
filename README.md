@@ -5,26 +5,9 @@
 # 安装
 详细的安装文档在doc文件夹中。
 使用IntelliJ IDEA 导入项目后，若出现了：cannot resolve directory....，删除.idea目录，重新导入即可。
-# 部分截图
-boss管理后台示意图
-![Image_text](http://139.196.82.110/doc/boss1.png)
-![Image text](http://139.196.82.110/doc/boss2.png)
-![Image text](http://139.196.82.110/doc/boss3.png)
-![Image text](http://139.196.82.110/doc/boss4.png)
-![Image text](http://139.196.82.110/doc/boss5.png)
-![Image text](http://139.196.82.110/doc/boss6.png)
-
-商户后台部分截图
-![Image_text](http://139.196.82.110/doc/merchant1.png)
-![Image text](http://139.196.82.110/doc/merchant2.png)
-
-代理后台部分截图
-![Image_text](http://139.196.82.110/doc/agent1.png)
-![Image text](http://139.196.82.110/doc/agent2.png)
-![Image text](http://139.196.82.110/doc/agent3.png)
 
 # 关于mysql文件
-1：sql文件已经上传
+1：sql文件已经上传。
 2：测试超级管理员账号：10086，密码：123456
 
 # 后话
