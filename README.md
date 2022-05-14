@@ -7,7 +7,7 @@
 使用IntelliJ IDEA 导入项目后，若出现了：cannot resolve directory....，删除.idea目录，重新导入即可。
 
 # 关于mysql文件
-1：sql文件已经上传。
+1：sql文件已经上传。</br>
 2：测试超级管理员账号：10086，密码：123456
 
 # 后话
