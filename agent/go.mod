@@ -2,7 +2,7 @@ module agent
 
 go 1.13
 
-require github.com/beego/beego/v2 v2.0.2
+require github.com/beego/beego/v2 v2.0.3
 
 require (
 	github.com/dchest/captcha v0.0.0-20200903113550-03f5f0333e1f
