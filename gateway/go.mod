@@ -2,7 +2,7 @@ module gateway
 
 go 1.13
 
-require github.com/beego/beego/v2 v2.0.2
+require github.com/beego/beego/v2 v2.0.4
 
 require (
 	github.com/astaxie/beego v1.12.3
