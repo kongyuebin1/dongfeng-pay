@@ -2,7 +2,7 @@ module shop
 
 go 1.13
 
-require github.com/beego/beego/v2 v2.0.2
+require github.com/beego/beego/v2 v2.0.3
 
 require (
 	github.com/rs/xid v1.3.0
